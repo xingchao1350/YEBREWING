@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>野鹅微醺 - 酒单生成器</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="mobile-tabs">
+            <button class="tab-btn active" data-tab="input">编辑</button>
+            <button class="tab-btn" data-tab="preview">预览</button>
+        </div>
+        
+        <div class="input-section active">
+            <div class="control-panel">
+                <!-- 1. 文件操作 -->
+                <div class="panel-section">
+                    <h3>文件操作</h3>
+                    <div class="file-operations">
+                        <button onclick="saveMenuData()" class="operation-btn">保存菜单(.bm)</button>
+                        <button onclick="loadMenuData()" class="operation-btn">加载菜单</button>
+                        <input type="file" id="fileInput" accept=".bm" style="display: none;" onchange="handleFileSelect(this)">
+                    </div>
+                </div>
+
+                <!-- 2. 背景设置 -->
+                <div class="panel-section">
+                    <h3>背景设置</h3>
+                    <div class="control-group">
+                        <div class="input-group">
+                            <label>选择背景：</label>
+                            <input type="file" id="bgImageInput" accept="image/*" onchange="handleBgImageSelect(this)">
+                        </div>
+                        <div class="button-group">
+                            <button onclick="resetBgImage()" class="small-btn">重置背景</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 标题设置 -->
+                <div class="panel-section">
+                    <h3>标题设置</h3>
+                    <div class="control-group">
+                        <div class="input-row">
+                            <label>中文标题：</label>
+                            <input type="text" id="titleCn" value="野鹅微醺" onchange="updateTitle()">
+                        </div>
+                        <div class="input-row">
+                            <label>英文标题：</label>
+                            <input type="text" id="titleEn" value="YE BREWING" onchange="updateTitle()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 样式设置 -->
+                <div class="panel-section">
+                    <h3>样式设置</h3>
+                    <div class="control-group">
+                        <div class="input-group">
+                            <label>中文字体：</label>
+                            <select id="fontSelect" onchange="updatePreviewRealtime()">
+                                <option value="'Microsoft YaHei'">微软雅黑</option>
+                                <option value="'SimHei'">黑体</option>
+                                <option value="'SimSun'">宋体</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>英文字体：</label>
+                            <select id="enFontSelect" onchange="updatePreviewRealtime()">
+                                <option value="Arial">Arial</option>
+                                <option value="'Times New Roman'">Times New Roman</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Helvetica">Helvetica</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                        </div>
+                        <div class="size-controls">
+                            <div class="input-group">
+                                <label>标题大小：</label>
+                                <input type="number" id="titleSize" value="36" min="12" max="72" onchange="updateFontSizes()">
+                            </div>
+                            <div class="input-group">
+                                <label>内容大小：</label>
+                                <input type="number" id="contentSize" value="20" min="12" max="48" onchange="updateFontSizes()">
+                            </div>
+                        </div>
+                        <div class="color-controls">
+                            <div class="input-group">
+                                <label>主要文字：</label>
+                                <input type="color" id="mainColor" value="#ffffff" onchange="updateColors()">
+                            </div>
+                            <div class="input-group">
+                                <label>次要文字：</label>
+                                <input type="color" id="subColor" value="#d3cbcb" onchange="updateColors()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. 内容编辑 -->
+                <div class="panel-section">
+                    <h3>内容编辑</h3>
+                    <div class="input-form">
+                        <div class="input-group">
+                            <label>序号：</label>
+                            <input type="text" id="number" placeholder="序号" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label>中文酒名：</label>
+                            <input type="text" id="name" placeholder="中文酒名" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label>英文酒名：</label>
+                            <input type="text" id="nameEn" placeholder="英文酒名" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label>价格(RMB)：</label>
+                            <input type="number" id="price" placeholder="RMB" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label>酒精度(ABV)：</label>
+                            <input type="number" id="abv" placeholder="ABV" step="0.1" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label>容量(ml)：</label>
+                            <input type="number" id="volume" placeholder="ml" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="button-group">
+                            <button onclick="addRow()" id="addButton">添加</button>
+                            <button onclick="updateSelectedItem()" id="updateButton" disabled>更新</button>
+                            <button onclick="cancelEdit()" id="cancelButton" disabled>取消</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. 生成图片 -->
+                <div class="panel-section">
+                    <button onclick="generateImage()" class="generate-btn">生成图片</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="preview-section">
+            <div id="menu-preview" class="menu-preview">
+                <img src="bg.png" id="bgImage" class="background-image" alt="background">
+                <div class="menu-content">
+                    <div class="menu-header">
+                        <h1 id="mainTitle">野鹅微醺</h1>
+                        <h2 id="subTitle">YE BREWING</h2>
+                        <div class="header-labels">
+                            <div class="spacer"></div>
+                            <div class="right-labels">
+                                <span class="label-rmb">RMB</span>
+                                <span class="label-abv">ABV</span>
+                                <span class="label-ml">ml</span>
+                            </div>
+                        </div>
+                        <div class="header-divider"></div>
+                    </div>
+                    <div id="menu-items" class="menu-items">
+                        <!-- Items will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
