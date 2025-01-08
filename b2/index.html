@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>野鹅微醺 - 酒单生成器</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -22,6 +22,7 @@
                     <div class="file-operations">
                         <button onclick="saveMenuData()" class="operation-btn">保存菜单(.bm)</button>
                         <button onclick="loadMenuData()" class="operation-btn">加载菜单</button>
+                        <button onclick="loadLastMenu()" class="operation-btn">加载上次菜单</button>
                         <input type="file" id="fileInput" accept=".bm" style="display: none;" onchange="handleFileSelect(this)">
                     </div>
                 </div>
@@ -36,21 +37,6 @@
                         </div>
                         <div class="button-group">
                             <button onclick="resetBgImage()" class="small-btn">重置背景</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. 标题设置 -->
-                <div class="panel-section">
-                    <h3>标题设置</h3>
-                    <div class="control-group">
-                        <div class="input-row">
-                            <label>中文标题：</label>
-                            <input type="text" id="titleCn" value="野鹅微醺" onchange="updateTitle()">
-                        </div>
-                        <div class="input-row">
-                            <label>英文标题：</label>
-                            <input type="text" id="titleEn" value="YE BREWING" onchange="updateTitle()">
                         </div>
                     </div>
                 </div>
@@ -80,11 +66,23 @@
                         <div class="size-controls">
                             <div class="input-group">
                                 <label>标题大小：</label>
-                                <input type="number" id="titleSize" value="36" min="12" max="72" onchange="updateFontSizes()">
+                                <input type="number" 
+                                       id="titleSize" 
+                                       value="36" 
+                                       min="12" 
+                                       max="72" 
+                                       onchange="updateFontSizes()" 
+                                       oninput="updateFontSizes()">
                             </div>
                             <div class="input-group">
                                 <label>内容大小：</label>
-                                <input type="number" id="contentSize" value="20" min="12" max="48" onchange="updateFontSizes()">
+                                <input type="number" 
+                                       id="contentSize" 
+                                       value="20" 
+                                       min="12" 
+                                       max="48" 
+                                       onchange="updateFontSizes()" 
+                                       oninput="updateFontSizes()">
                             </div>
                         </div>
                         <div class="color-controls">
@@ -94,7 +92,7 @@
                             </div>
                             <div class="input-group">
                                 <label>次要文字：</label>
-                                <input type="color" id="subColor" value="#888888" onchange="updateColors()">
+                                <input type="color" id="subColor" value="#d3cbcb" onchange="updateColors()">
                             </div>
                         </div>
                     </div>
@@ -105,8 +103,30 @@
                     <h3>内容编辑</h3>
                     <div class="input-form">
                         <div class="input-group">
-                            <label>序号：</label>
-                            <input type="text" id="number" placeholder="序号" oninput="updatePreviewRealtime()" />
+                            <label>编号：</label>
+                            <select id="number" onchange="onNumberSelect()">
+                                <option value="">选择编号</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                            </select>
                         </div>
                         <div class="input-group">
                             <label>中文酒名：</label>
@@ -166,6 +186,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="loading-indicator" class="loading-indicator">
+        <div class="spinner"></div>
+        <p>正在生成图片...</p>
     </div>
     <script src="script.js"></script>
 </body>

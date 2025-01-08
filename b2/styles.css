@@ -1,21 +1,24 @@
+/* 全局变量定义 */
 :root {
-    --title-size: 36px;
-    --content-size: 20px;
-    --main-color: #ffffff;
-    --sub-color: #888888;
-    --cn-font: 'Microsoft YaHei';
-    --en-font: Arial;
-    --primary-color: #ff6b1a;
-    --primary-hover: #ff8642;
-    --primary-active: #e55400;
+    --title-size: 36px;      /* 标题字体大小 */
+    --content-size: 20px;    /* 内容字体大小 */
+    --main-color: #ffffff;   /* 主要文字颜色 */
+    --sub-color: #d3cbcb;    /* 次要文字颜色 */
+    --cn-font: 'Microsoft YaHei';  /* 中文字体 */
+    --en-font: Arial;        /* 英文字体 */
+    --primary-color: #ff6b1a;    /* 主题色 */
+    --primary-hover: #ff8642;    /* 鼠标悬停颜色 */
+    --primary-active: #e55400;   /* 点击时的颜色 */
 }
 
+/* 全局样式重置 */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* 页面基础样式 */
 body {
     margin: 0;
     padding: 20px;
@@ -23,6 +26,7 @@ body {
     font-family: var(--cn-font);
 }
 
+/* 主容器布局 */
 .container {
     display: flex;
     gap: 20px;
@@ -32,6 +36,7 @@ body {
     margin: 0 auto;
 }
 
+/* 移动端标签栏 */
 .mobile-tabs {
     display: none;
     position: fixed;
@@ -44,6 +49,7 @@ body {
     z-index: 1000;
 }
 
+/* 标签按钮样式 */
 .tab-btn {
     padding: 8px 20px;
     border: none;
@@ -64,6 +70,7 @@ body {
     border-bottom: 2px solid var(--primary-color);
 }
 
+/* 输入区域样式 */
 .input-section {
     width: 400px;
     flex-shrink: 0;
@@ -73,29 +80,34 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* 输入表单样式 */
 .input-form {
     display: grid;
     gap: 10px;
     margin-bottom: 20px;
 }
 
+/* 输入框和选择框基础样式 */
 input, select {
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
 
+/* 字体选择器样式 */
 .font-selector {
     display: grid;
     gap: 5px;
 }
 
+/* 按钮组样式 */
 .button-group {
     display: flex;
     gap: 8px;
     margin-top: 16px;
 }
 
+/* 按钮基础样式 */
 .button-group button {
     flex: 1;
     padding: 8px;
@@ -121,6 +133,7 @@ input, select {
     cursor: not-allowed;
 }
 
+/* 操作按钮样式 */
 .operation-btn {
     flex: 1;
     padding: 8px 16px;
@@ -141,6 +154,7 @@ input, select {
     background: var(--primary-active);
 }
 
+/* 小型按钮样式 */
 .small-btn {
     padding: 6px 12px;
     border: none;
@@ -160,6 +174,7 @@ input, select {
     background: var(--primary-active);
 }
 
+/* 生成按钮样式 */
 .generate-btn {
     display: block;
     width: 100%;
@@ -182,6 +197,7 @@ input, select {
     background: var(--primary-active);
 }
 
+/* 预览区域基础样式 */
 .preview-section {
     flex: 1;
     overflow: auto;
@@ -190,6 +206,7 @@ input, select {
     padding: 20px;
 }
 
+/* 菜单预览样式 */
 .menu-preview {
     width: 1080px;
     height: 1920px;
@@ -198,6 +215,7 @@ input, select {
     transform-origin: top center;
 }
 
+/* 背景图片样式 */
 .background-image {
     position: absolute;
     top: 0;
@@ -207,49 +225,56 @@ input, select {
     object-fit: cover;
 }
 
+/* 菜单内容样式 */
 .menu-content {
     position: relative;
     z-index: 1;
     color: white;
-    padding: 40px;
+    padding: 10px;
     box-sizing: border-box;
     height: 100%;
 }
 
+/* 菜单标题样式 */
 .menu-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .menu-header h1 {
     margin: 0;
-    font-size: var(--title-size);
+    font-size: var(--title-size, 36px);
     letter-spacing: 2px;
     color: var(--main-color);
     font-family: var(--cn-font);
+    pointer-events: none;
 }
 
 .menu-header h2 {
-    margin: 5px 0 40px;
-    font-size: calc(var(--title-size) * 0.7);
+    margin: 5px 0 10px;
+    font-size: calc(var(--title-size, 36px) * 0.7);
     color: var(--sub-color);
     font-family: var(--en-font);
+    pointer-events: none;
 }
 
+/* 标题标签样式 */
 .header-labels {
     display: flex;
     justify-content: flex-end;
     padding: 0 20px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;  /* 从10px减少到5px */
     font-size: calc(var(--content-size) * 0.9);
     color: var(--main-color);
 }
 
+/* 标题分隔线样式 */
 .header-divider {
     border-bottom: 1px solid var(--main-color);
-    margin: 0 20px 20px 20px;
+    margin: 0 10px 5px 10px;
 }
 
+/* 右侧标签样式 */
 .right-labels {
     display: grid;
     grid-template-columns: 80px 80px 80px;
@@ -260,10 +285,11 @@ input, select {
     padding-right: 10px;
 }
 
+/* 菜单项样式 */
 .menu-item {
     display: grid;
     grid-template-columns: 60px 1fr 80px 80px 80px;
-    padding: 15px 20px;
+    padding: 8px 10px;
     border-bottom: 1px solid white;
     align-items: center;
     cursor: pointer;
@@ -278,27 +304,30 @@ input, select {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* 菜单项编号样式 */
 .menu-item .number {
-    font-size: var(--content-size);
+    font-size: calc(var(--content-size, 20px) * 1.3);
     font-weight: bold;
     color: var(--main-color);
     font-family: var(--en-font);
 }
 
+/* 菜单项名称样式 */
 .menu-item .name {
     padding-left: 20px;
-    font-size: var(--content-size);
+    font-size: var(--content-size, 20px);
     color: var(--main-color);
     font-family: var(--cn-font);
 }
 
 .menu-item .name .english {
-    font-size: calc(var(--content-size) * 0.7);
+    font-size: calc(var(--content-size, 20px) * 0.85);
     color: var(--sub-color);
     margin-top: 6px;
     font-family: var(--en-font);
 }
 
+/* 菜单项价格、酒精度、容量样式 */
 .menu-item .price,
 .menu-item .abv,
 .menu-item .volume {
@@ -309,16 +338,19 @@ input, select {
     font-family: var(--en-font);
 }
 
+/* 预览项样式 */
 .preview-item {
     opacity: 0.5;
 }
 
+/* 控制面板样式 */
 .control-panel {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* 面板部分样式 */
 .panel-section {
     padding: 15px;
     border-bottom: 1px solid #eee;
@@ -334,6 +366,7 @@ input, select {
     color: #333;
 }
 
+/* 输入组样式 */
 .input-group {
     margin-bottom: 12px;
 }
@@ -360,12 +393,14 @@ input, select {
     border-color: #666;
 }
 
+/* 文件操作样式 */
 .file-operations {
     margin: 20px 0;
     display: flex;
     gap: 10px;
 }
 
+/* 样式控制样式 */
 .style-controls {
     background: white;
     padding: 15px;
@@ -373,6 +408,7 @@ input, select {
     margin-bottom: 20px;
 }
 
+/* 控制组样式 */
 .control-group {
     margin-bottom: 15px;
 }
@@ -387,6 +423,7 @@ input, select {
     font-weight: bold;
 }
 
+/* 尺寸控制样式 */
 .size-controls, .color-controls {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -397,16 +434,19 @@ input, select {
     width: 60px;
 }
 
+/* 背景图片输入样式 */
 #bgImageInput {
     max-width: 200px;
 }
 
-/* 响应式样式 */
+/* 响应式样式 - 移动端适配 */
 @media (max-width: 768px) {
+    /* 移动端页面基础样式 */
     body {
         padding: 0;
     }
 
+    /* 移动端容器布局 */
     .container {
         flex-direction: column;
         padding: 0;
@@ -414,12 +454,14 @@ input, select {
         gap: 0;
     }
 
+    /* 移动端标签栏显示 */
     .mobile-tabs {
         display: flex;
         justify-content: center;
         gap: 20px;
     }
 
+    /* 移动端输入和预览区域 */
     .input-section,
     .preview-section {
         display: none;
@@ -429,35 +471,42 @@ input, select {
         border-radius: 0;
     }
 
+    /* 移动端激活区域显示 */
     .input-section.active,
     .preview-section.active {
         display: block;
     }
 
+    /* 移动端预览区域调整 */
     .preview-section {
         padding: 10px;
     }
 
+    /* 移动端菜单预览调整 */
     .menu-preview {
         width: 100%;
         height: auto;
         aspect-ratio: 9/16;
     }
 
+    /* 移动端面板样式调整 */
     .panel-section {
         padding: 12px;
     }
 
+    /* 移动端输入组样式调整 */
     .input-group {
         margin-bottom: 10px;
     }
 
+    /* 移动端输入框样式调整 */
     .input-group input,
     .input-group select {
         padding: 10px;
         font-size: 16px; /* 防止iOS自动缩放 */
     }
 
+    /* 移动端按钮组样式调整 */
     .button-group {
         margin-top: 12px;
     }
@@ -494,4 +543,74 @@ input, select {
     .mobile-tabs {
         display: none;
     }
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0;
+    }
+
+    .input-section,
+    .preview-section {
+        display: none;
+        width: 100%;
+        height: calc(100vh - 56px);
+        margin-top: 56px;
+        padding: 10px;
+        border-radius: 0;
+    }
+    
+    .input-section.active,
+    .preview-section.active {
+        display: block;
+    }
+
+    .preview-section {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .menu-preview {
+        transform-origin: top center;
+    }
+}
+
+/* 加载指示器样式 */
+.loading-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 1000;
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 确保内容在生成图片时完整显示 */
+.menu-preview.generating {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: none !important;
+    z-index: 1000;
 }
