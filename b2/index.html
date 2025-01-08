@@ -20,8 +20,8 @@
                 <div class="panel-section">
                     <h3>文件操作</h3>
                     <div class="file-operations">
-                        <button onclick="saveMenuData()" class="operation-btn">导出菜单(.bm)</button>
-                        <button onclick="loadMenuData()" class="operation-btn">导入菜单</button>
+                        <button onclick="saveMenuData()" class="operation-btn">保存菜单(.bm)</button>
+                        <button onclick="loadMenuData()" class="operation-btn">加载菜单</button>
                         <input type="file" id="fileInput" accept=".bm" style="display: none;" onchange="handleFileSelect(this)">
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="input-group">
                                 <label>次要文字：</label>
-                                <input type="color" id="subColor" value="#d3cbcb" onchange="updateColors()">
+                                <input type="color" id="subColor" value="#888888" onchange="updateColors()">
                             </div>
                         </div>
                     </div>
@@ -105,30 +105,8 @@
                     <h3>内容编辑</h3>
                     <div class="input-form">
                         <div class="input-group">
-                            <label>编号：</label>
-                            <select id="number" onchange="onNumberSelect()">
-                                <option value="">选择编号</option>
-                                <option value="01">01</option>
-                                <option value="02">02</option>
-                                <option value="03">03</option>
-                                <option value="04">04</option>
-                                <option value="05">05</option>
-                                <option value="06">06</option>
-                                <option value="07">07</option>
-                                <option value="08">08</option>
-                                <option value="09">09</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                            </select>
+                            <label>序号：</label>
+                            <input type="text" id="number" placeholder="序号" oninput="updatePreviewRealtime()" />
                         </div>
                         <div class="input-group">
                             <label>中文酒名：</label>
