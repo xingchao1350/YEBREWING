@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>蜂蜜酒酿造计算器</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 20px auto; 
+            padding: 20px;
+            background-color: #f5f6fa;
+        }
+        .section { 
+            border: 1px solid #dcdde1; 
+            padding: 25px; 
+            margin-bottom: 25px; 
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 { 
+            color: #2c3e50; 
+            border-bottom: 2px solid #3498db; 
+            padding-bottom: 8px;
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+        .input-group { 
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        label { 
+            width: 160px;
+            font-weight: 500;
+            color: #2c3e50;
+            flex-shrink: 0;
+        }
+        input, select, textarea {
+            padding: 8px 12px;
+            border: 1px solid #dcdde1;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+            outline: none;
+        }
+        input[type="number"] { 
+            width: 120px;
+        }
+        select {
+            width: 140px;
+            background: white;
+        }
+        textarea {
+            width: 100%;
+            min-height: 80px;
+        }
+        .result {
+            background-color: #f8f9fa; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-top: 20px;
+        }
+        #ingredient-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #ingredient-table th,
+        #ingredient-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        #ingredient-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        #ingredient-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        .warning {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+        .result-value {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        .help-icon {
+            vertical-align: middle;
+        }
+        .help-icon {
+            cursor: help;
+            color: #3498db;
+            margin-left: 5px;
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip {
+            visibility: hidden;
+            width: 200px;
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: left;
+            border-radius: 4px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .help-icon:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+     <div class="section" style="text-align: right; margin-bottom: 5px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style="color: #2c3e50; margin: 0; font-size: 24px; font-weight: bold;">
+                🏺 野鹅微醺学院|MEAD 设计系统
+            </h1>
+            <button id="unit-toggle" onclick="toggleGravityScale()" style="padding: 8px 15px;">
+                当前单位：比重 (SG)
+            </button>
+        </div>
+    </div>
+    <div class="section">
+        <h2>总体设计</h2>
+        <div class="input-group">
+            <label>酿酒师姓名:</label>
+            <input type="text" id="brewer-name" style="width:200px">
+        </div>
+        <div class="input-group">
+            <label>酿造日期:</label>
+            <input type="date" id="brew-date" style="width:200px">
+        </div>
+        <div class="input-group">
+            <label>酒款名称:</label>
+            <input type="text" id="mead-name" style="width:300px">
+        </div>
+        <div class="input-group">
+            <label>酿造理念:</label>
+            <textarea id="concept" rows="3" style="width:400px"></textarea>
+        </div>
+    </div>
+
+   
+
+    <div class="section">
+        <h2>基础参数设计</h2>
+        <div class="input-group">
+            <label>目标酒精度 (%ABV):
+                <span class="help-icon">tips
+                    <span class="tooltip">根据酵母耐受度选择合适范围（典型值12-18%）<br>计算公式：ABV = (OG - FG) × 131.25</span>
+                </span>
+            </label>
+            <input type="number" id="abv" min="5" max="20" step="0.5" value="12">
+            <span>% (5-20%)</span>
+        </div>
+        <div class="input-group">
+            <label id="fg-label">残糖比重 (FG):
+                <span class="help-icon">tips
+                    <span class="tooltip">发酵结束时的液体密度（比重）<br>干型：1.000-1.005<br>半甜：1.015-1.025<br>甜型：＞1.030</span>
+                </span>
+            </label>
+            <input type="number" id="fg-input" min="1.000" max="1.050" step="0.001" value="1.020">
+            <span id="sweetness-type"></span>
+        </div>
+        <div class="input-group">
+            <label>目标体积 (升):
+                <span class="help-icon">?
+                    <span class="tooltip">初始发酵液体积（进罐体积）<br>建议为容器容量的80%</span>
+                </span>
+            </label>
+            <input type="number" id="volume" min="1" value="5" style="width:150px">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>原料计算</h2>
+        <div class="input-group">
+            <label>蜂蜜含糖量:
+                <span class="help-icon">tips
+                    <span class="tooltip">不同蜜源的典型含糖量：<br>• 洋槐蜜：82-84%<br>• 百花蜜：78-80%<br>• 荞麦蜜：72-75%</span>
+                </span>
+            </label>
+            <input type="number" id="honey-sugar" min="0" max="100" step="0.1" value="80" style="width:100px">
+            <span>%</span>
+        </div>
+        <div class="input-group">
+            <label>增味贡献:
+                <span class="help-icon">tips
+                    <span class="tooltip">添加水果/果汁的糖分贡献<br>• 果汁：按体积计算（升）<br>• 鲜果：按重量计算（公斤）</span>
+                </span>
+            </label>
+            <select id="adjunct-type" style="width:100px">
+                <option value="none">无</option>
+                <option value="juice">果汁</option>
+                <option value="fruit">鲜果</option>
+            </select>
+            <input type="number" id="adjunct-amount" min="0" step="0.1" style="width:80px" placeholder="量">
+            <input type="number" id="adjunct-sugar" min="0" max="100" step="1" style="width:80px" placeholder="含糖量%">
+        </div>
+        <div class="input-group">
+            <label>营养盐方案:
+                <span class="help-icon">tips
+                    <span class="tooltip">标准方案：<br>• 低强度：低营养需求<br>• 中强度：常规酿造<br>• 高强度：高酒精度/低温发酵</span>
+                </span>
+            </label>
+            <select id="nutrient-level">
+                <option value="1">低强度</option>
+                <option value="2" selected>中强度</option>
+                <option value="3">高强度</option>
+            </select>
+        </div>
+        <div class="result">
+            <h3>计算结果</h3>
+            <table id="ingredient-table">
+                <tr><th>参数</th><th>值</th></tr>
+                <tr><td>所需蜂蜜量</td><td id="honey-amount">-</td></tr>
+                <tr><td>加水量</td><td id="water-amount">-</td></tr>
+                <tr><td>初始糖度 (OG)</td><td id="og">-</td></tr>
+                <tr><td>最终糖度 (FG)</td><td id="fg">-</td></tr>
+                <tr><td>酵母类型</td><td>EC-1118</td></tr>
+                <tr><td>EC-1118酵母用量</td><td id="yeast-amount">-</td></tr>
+                <tr><td>Go-Ferm用量</td><td id="goferm-amount">-</td></tr>
+                <tr><td>营养盐方案</td><td id="nutrient-scheme">-</td></tr>
+                <tr><td>Fermaid K总量</td><td id="fermaidk-amount">-</td></tr>
+                <tr><td>Fermaid O总量</td><td id="fermaido-amount">-</td></tr>
+            </table>
+            <p id="yeast-warning" class="warning"></p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button onclick="generateRecipe()" style="padding: 12px 25px; background: #3498db; color: white; border: none; border-radius: 5px;">
+            生成配方单
+        </button>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        let isBrix = false;
+
+        function toggleGravityScale() {
+            isBrix = !isBrix;
+            const toggleBtn = document.getElementById('unit-toggle');
+            const fgInput = document.getElementById('fg-input');
+            const ogDisplay = document.getElementById('og');
+            const fgDisplay = document.getElementById('fg');
+
+            // 单位转换函数
+            const convert = (value) => isBrix ? 
+                (-616.868 + 1111.14*value - 630.272*value**2 + 135.997*value**3).toFixed(1) :
+                (1 + (value / (258.6 - (value/258.2)*227.1))).toFixed(3);
+
+            // 转换所有相关值
+            [fgInput, ogDisplay, fgDisplay].forEach(element => {
+                const currentValue = parseFloat(element.value || element.textContent);
+                if (!isNaN(currentValue)) {
+                    const converted = convert(currentValue);
+                    if (element === fgInput) {
+                        element.value = converted;
+                    } else {
+                        element.textContent = converted;
+                    }
+                }
+            });
+
+            // 更新界面元素
+            toggleBtn.textContent = `当前单位：${isBrix ? '柏拉图 (°P)' : '比重 (SG)'}`;
+            document.getElementById('fg-label').textContent = 
+                isBrix ? '残糖柏拉图 (°P):' : '残糖比重 (FG):';
+            
+            // 调整输入限制
+            if (isBrix) {
+                fgInput.step = "0.1";
+                fgInput.min = "0";
+                fgInput.max = "35";
+            } else {
+                fgInput.step = "0.001";
+                fgInput.min = "1.000";
+                fgInput.max = "1.050";
+            }
+
+            calculate();
+        }
+
+        function getSweetnessType(fg) {
+            if (fg < 1.005) return '干型';
+            if (fg < 1.015) return '半干';
+            if (fg < 1.025) return '半甜';
+            return '甜型';
+        }
+
+        function calculate() {
+            // 获取残糖值并判断类型
+            const abv = parseFloat(document.getElementById('abv').value);
+            let fg = parseFloat(document.getElementById('fg-input').value);
+            let ogValue;
+            
+            if (isBrix) {
+                // 当使用柏拉图单位时，fg是°P值，需要先转换为比重
+                const actualFG = 1 + (fg / (258.6 - (fg/258.2)*227.1));
+                ogValue = abv / 131.25 + actualFG;
+            } else {
+                ogValue = abv / 131.25 + fg;
+            }
+            
+            let displayOG = ogValue.toFixed(isBrix ? 1 : 3);
+            
+            if (isBrix) {
+                // 转换OG到柏拉图单位
+                const ogBrix = (-616.868 + 1111.14*ogValue - 630.272*ogValue**2 + 135.997*ogValue**3).toFixed(1);
+                displayOG = ogBrix;
+            } else {
+                fg = fg.toFixed(3); // 保持FG显示3位小数
+            }
+            
+            const sweetnessType = getSweetnessType(parseFloat(fg));
+            document.getElementById('sweetness-type').textContent = `(${sweetnessType})`;
+
+            const honeySugarInput = parseFloat(document.getElementById('honey-sugar').value);
+            const honeySugar = honeySugarInput / 100;
+
+            // 获取增味参数
+            const adjunctType = document.getElementById('adjunct-type').value;
+            const adjunctAmount = parseFloat(document.getElementById('adjunct-amount').value) || 0;
+            const adjunctSugar = (parseFloat(document.getElementById('adjunct-sugar').value) || 0) / 100;
+
+            // 计算增味糖分贡献
+            let adjunctSugarKg = 0;
+            let adjunctVolume = 0;
+            if (adjunctType === 'juice' && adjunctAmount > 0 && adjunctSugar > 0) {
+                adjunctSugarKg = adjunctAmount * adjunctSugar;  // 升 × 糖分比例
+                adjunctVolume = adjunctAmount;  // 果汁体积直接扣除
+            } else if (adjunctType === 'fruit' && adjunctAmount > 0 && adjunctSugar > 0) {
+                adjunctSugarKg = adjunctAmount * adjunctSugar;  // 公斤 × 糖分比例
+                adjunctVolume = adjunctAmount * 0.2;  // 假设水果体积按重量20%计算
+            }
+
+            if (honeySugar < 0.7 || honeySugar > 0.9) {
+                document.getElementById('honey-amount').innerHTML = 
+                    `<span class="warning">含糖量建议70-90%</span>`;
+                return;
+            }
+
+            // 调整后的蜂蜜计算（总糖需求 - 增味糖分）
+            const volume = parseFloat(document.getElementById('volume').value);
+            const totalSugarNeeded = volume * (ogValue - 1);
+            const honeyKg = Math.max((totalSugarNeeded - adjunctSugarKg) * 4.275 * honeySugar, 0);
+            
+            // 调整后的加水量计算
+            const water = Math.max(volume - (honeyKg / 1.42) - adjunctVolume, 0);
+            
+            document.getElementById('og').innerHTML = 
+                `<span class="result-value">${displayOG}${isBrix ? '°P' : ''}</span>`;
+            document.getElementById('fg').innerHTML = 
+                `<span class="result-value">${fg}${isBrix ? '°P' : ''}</span>`;
+            document.getElementById('honey-amount').innerHTML = 
+                `<span class="result-value">${Math.max(honeyKg, 0).toFixed(3)} kg</span>`;
+            document.getElementById('water-amount').innerHTML = 
+                `<span class="result-value">${Math.max(water, 0).toFixed(2)} 升</span>`;
+
+            if (water < 0.5) {
+                document.getElementById('water-amount').innerHTML = 
+                    `<span class="warning">${water.toFixed(2)} 升 (水量过少!)</span>`;
+            }
+
+            if (honeyKg > volume * 2) {
+                document.getElementById('honey-amount').innerHTML = 
+                    `<span class="warning">${honeyKg.toFixed(3)} kg (数值异常!)</span>`;
+            }
+
+            // 新增营养盐计算
+            const nutrientLevel = parseInt(document.getElementById('nutrient-level').value);
+            const nutrientSchemes = ['低强度', '中强度', '高强度'];
+            
+            // EC-1118酵母用量 (0.8g/L)
+            const yeastG = volume * 0.8;
+            
+            // Go-Ferm用量 (1.25倍酵母重量)
+            const goFermG = yeastG * 1.25;
+            
+            // Fermaid K (根据强度级别)
+            const fermaidKLevels = [0.3, 0.6, 0.8];
+            const fermaidKG = volume * fermaidKLevels[nutrientLevel - 1];
+            
+            // Fermaid O (根据强度级别)
+            const fermaidOLevels = [0.2, 0.5, 0.7];
+            const fermaidOG = volume * fermaidOLevels[nutrientLevel - 1];
+
+            // 更新显示
+            document.getElementById('nutrient-scheme').textContent = nutrientSchemes[nutrientLevel - 1];
+            
+            document.getElementById('yeast-amount').innerHTML = 
+                `<span class="result-value">${yeastG.toFixed(1)} 克</span>`;
+            document.getElementById('goferm-amount').innerHTML = 
+                `<span class="result-value">${goFermG.toFixed(1)} 克</span>`;
+            document.getElementById('fermaidk-amount').innerHTML = 
+                `<span class="result-value">${fermaidKG.toFixed(1)} 克</span>`;
+            document.getElementById('fermaido-amount').innerHTML = 
+                `<span class="result-value">${fermaidOG.toFixed(1)} 克</span>`;
+        }
+
+        calculate();
+        document.querySelectorAll('input, select').forEach(e => 
+            e.addEventListener('input', calculate));
+
+        function generateRecipe() {
+            console.log('开始生成配方单...');
+            const recipeContent = document.createElement('div');
+            recipeContent.id = 'recipe-print';
+            recipeContent.style.backgroundColor = 'white';
+            recipeContent.style.padding = '30px';
+            recipeContent.style.maxWidth = '800px';
+            recipeContent.style.margin = 'auto';
+            document.body.appendChild(recipeContent); // 必须添加到DOM树
+
+            recipeContent.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h1 style="color: #2c3e50; border-bottom: 3px solid #3498db; display: inline-block; padding-bottom: 10px;">
+                        🍯📜 ${document.getElementById('mead-name').value || '蜂蜜酒配方单'}
+                    </h1>
+                    <p style="color: #7f8c8d; margin-top: 5px;">
+                        酿酒师：${document.getElementById('brewer-name').value || '未命名'} · 
+                        日期：${document.getElementById('brew-date').value || new Date().toLocaleDateString()}
+                    </p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+                    <div>
+                        <h3 style="color: #3498db; border-left: 4px solid #3498db; padding-left: 10px;">基础参数</h3>
+                        <p>目标酒精度：${document.getElementById('abv').value}%</p>
+                        <p>目标体积：${document.getElementById('volume').value}升</p>
+                        <p>初始糖度：${document.getElementById('og').textContent}</p>
+                        <p>最终糖度：${document.getElementById('fg').textContent}</p>
+                        <p>营养盐方案：${document.getElementById('nutrient-scheme').textContent}</p>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: #3498db; border-left: 4px solid #3498db; padding-left: 10px;">原料清单</h3>
+                        <p>蜂蜜用量：${document.getElementById('honey-amount').textContent}</p>
+                        <p>加水量：${document.getElementById('water-amount').textContent}</p>
+                        <p>酵母类型：EC-1118</p>
+                        <p>酵母用量：${document.getElementById('yeast-amount').textContent}</p>
+                        <p>Go-Ferm用量：${document.getElementById('goferm-amount').textContent}</p>
+                        <p>Fermaid K总量：${document.getElementById('fermaidk-amount').textContent}</p>
+                        <p>Fermaid O总量：${document.getElementById('fermaido-amount').textContent}</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #3498db; border-left: 4px solid #3498db; padding-left: 10px;">增味详情</h3>
+                    <p>${getAdjunctDetails()}</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                    <h3 style="color: #3498db; margin-top: 0;">酿造理念</h3>
+                    <p style="white-space: pre-wrap; line-height: 1.6;">
+                        ${document.getElementById('concept').value || '暂无说明'}
+                    </p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px; color: #7f8c8d; font-size: 0.9em;">
+                    Generated by 野鹅-微醺学院 - ${new Date().getFullYear()}
+                </div>
+            `;
+
+            console.log('配方内容已创建，开始渲染...');
+            html2canvas(recipeContent, {
+                logging: false,
+                allowTaint: true,
+                useCORS: true,
+                onclone: (clonedDoc) => {
+                    console.log('DOM克隆完成');
+                }
+            }).then(canvas => {
+                console.log('画布渲染成功，准备下载');
+                const link = document.createElement('a');
+                link.download = '蜂蜜酒配方单.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                document.body.removeChild(recipeContent); // 清理临时元素
+            }).catch(err => {
+                console.error('生成失败:', err);
+                alert('生成失败，请刷新页面重试');
+            });
+        }
+
+        function getAdjunctDetails() {
+            const adjunctType = document.getElementById('adjunct-type').value;
+            const amount = document.getElementById('adjunct-amount').value || 0;
+            const sugar = document.getElementById('adjunct-sugar').value || 0;
+            
+            if (adjunctType === 'none' || amount <= 0) {
+                return '无增味原料';
+            }
+            
+            const unit = adjunctType === 'juice' ? '升' : '公斤';
+            return `${adjunctType === 'juice' ? '果汁' : '鲜果'}：${amount}${unit}（含糖量${sugar}%）`;
+        }
+    </script>
+</body>
+</html>
