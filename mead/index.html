@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>蜂蜜酒酿造计算器</title>
     <style>
         body { 
@@ -31,6 +32,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
         label { 
             width: 160px;
@@ -44,6 +46,8 @@
             border-radius: 6px;
             font-size: 14px;
             transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
         }
         input:focus, select:focus, textarea:focus {
             border-color: #3498db;
@@ -51,10 +55,10 @@
             outline: none;
         }
         input[type="number"] { 
-            width: 120px;
+            max-width: 120px;
         }
         select {
-            width: 140px;
+            max-width: 140px;
             background: white;
         }
         textarea {
@@ -135,6 +139,28 @@
         .help-icon:hover .tooltip {
             visibility: visible;
             opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .section {
+                padding: 15px;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            label {
+                width: 100%;
+            }
+            input, select, textarea {
+                max-width: 100%;
+            }
+            button {
+                width: 100%;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -223,7 +249,7 @@
                 <option value="juice">果汁</option>
                 <option value="fruit">鲜果</option>
             </select>
-            <input type="number" id="adjunct-amount" min="0" step="0.1" style="width:80px" placeholder="量">
+            <input type="number" id="adjunct-amount" min="0" step="0.1" style="width:80px" placeholder="L">
             <input type="number" id="adjunct-sugar" min="0" max="100" step="1" style="width:80px" placeholder="含糖量%">
         </div>
         <div class="input-group">
@@ -445,7 +471,7 @@
             recipeContent.innerHTML = `
                 <div style="text-align: center; margin-bottom: 20px;">
                     <h1 style="color: #2c3e50; border-bottom: 3px solid #3498db; display: inline-block; padding-bottom: 10px;">
-                        🍯📜 ${document.getElementById('mead-name').value || '蜂蜜酒配方单'}
+                        ${document.getElementById('mead-name').value || '蜂蜜酒配方单'}
                     </h1>
                     <p style="color: #7f8c8d; margin-top: 5px;">
                         酿酒师：${document.getElementById('brewer-name').value || '未命名'} · 
