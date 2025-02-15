@@ -171,7 +171,7 @@
 <body>
      <div class="section" style="text-align: right; margin-bottom: 5px;">
         <div class="header">
-            <h3>🏺 野鹅微醺学院|MEAD 设计系统</h3>
+            <h3>野鹅微醺学院|MEAD 设计系统</h3>
             <button id="unit-toggle" onclick="toggleGravityScale()" style="padding: 8px 15px;">
                 当前单位：比重 (SG)
             </button>
@@ -487,15 +487,17 @@
             document.body.appendChild(recipeContent); // 必须添加到DOM树
 
             recipeContent.innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px; position: relative;">
-                    ${avatarDataUrl ? `<img src="${avatarDataUrl}" style="position: absolute; top: 0; left: 0; width: 80px; height: 80px; border-radius: 50%;">` : ''}
-                    <h1 style="color: #2c3e50; border-bottom: 3px solid #3498db; display: inline-block; padding-bottom: 10px;">
-                        ${document.getElementById('mead-name').value || '蜂蜜酒配方单'}
-                    </h1>
-                    <p style="color: #7f8c8d; margin-top: 5px;">
-                        酿酒师：${document.getElementById('brewer-name').value || '未命名'} · 
-                        日期：${document.getElementById('brew-date').value || new Date().toLocaleDateString()}
-                    </p>
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; position: relative;">
+                    ${avatarDataUrl ? `<img src="${avatarDataUrl}" style="width: 80px; height: 80px; border-radius: 50%; margin-right: 15px;">` : ''}
+                    <div style="text-align: center;">
+                        <h1 style="color: #2c3e50; border-bottom: 3px solid #3498db; display: inline-block; padding-bottom: 10px;">
+                            ${document.getElementById('mead-name').value || '蜂蜜酒配方单'}
+                        </h1>
+                        <p style="color: #7f8c8d; margin-top: 5px;">
+                            酿酒师：${document.getElementById('brewer-name').value || '未命名'} · 
+                            日期：${document.getElementById('brew-date').value || new Date().toLocaleDateString()}
+                        </p>
+                    </div>
                 </div>
                 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px;">

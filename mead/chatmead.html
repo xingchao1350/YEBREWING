@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEAD AI 聊天</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .chat-container {
+            border: 1px solid #dcdde1;
+            padding: 20px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-height: 500px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .user-message {
+            text-align: right;
+            color: #fff;
+            background-color: #3498db;
+            align-self: flex-end;
+        }
+        .ai-message {
+            text-align: left;
+            color: #2c3e50;
+            background-color: #ecf0f1;
+            align-self: flex-start;
+        }
+        input[type="text"] {
+            width: calc(100% - 100px);
+            padding: 15px;
+            border: 1px solid #dcdde1;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button {
+            width: 80px;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .thinking {
+            text-align: center;
+            color: #3498db;
+            font-style: italic;
+            margin-top: 10px;
+            display: none;
+        }
+        .blinking {
+            animation: blinkingText 1.5s infinite;
+        }
+        @keyframes blinkingText {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            input[type="text"] {
+                width: calc(100% - 90px);
+                font-size: 14px;
+            }
+            button {
+                width: 70px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #3498db;">MEAD AI 聊天</h1>
+    <div style="display: flex; justify-content: center;">
+        <input type="text" id="user-input" placeholder="输入您的问题...">
+        <button onclick="sendMessage()">发送</button>
+    </div>
+    <div class="chat-container" id="chat-container"></div>
+    <div id="thinking" class="thinking blinking">MEAD 专家思考中...</div>
+
+    <script>
+        const apiKey = 'sk-1tmFmINQNFTlGwkBtH8BH9uxDAvG2yFVWQnw0awL7hgPqTov';
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (!userInput) return;
+
+            addMessage(userInput, 'user-message');
+            document.getElementById('user-input').value = '';
+
+            const thinkingElement = document.getElementById('thinking');
+            thinkingElement.style.display = 'block';
+
+            fetch('https://api.moonshot.cn/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'moonshot-v1-8k',
+                    messages: [
+                        {"role": "system", "content": "你是角色背景 ：你是一位在蜂蜜和蜂蜜酒领域深耕多年、经验丰富且极具热情的专业人士。其对蜂蜜的来源、种类、特性以及蜂蜜酒的酿造工艺、历史、品鉴和市场等方面都有着深入且全面的了解。回答问题的身份必须基于蜂蜜酒专家，不可以说自己的kimi。"},
+                        {"role": "user", "content": userInput}
+                    ],
+                    temperature: 0.3,
+                    max_tokens: 2000
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                thinkingElement.style.display = 'none';
+                const aiMessage = data.choices[0].message.content;
+                typeMessage(aiMessage, 'ai-message');
+            })
+            .catch(error => {
+                thinkingElement.style.display = 'none';
+                console.error('Error:', error);
+                addMessage('抱歉，无法获取回复。', 'ai-message');
+            });
+        }
+
+        function addMessage(content, className) {
+            const chatContainer = document.getElementById('chat-container');
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${className}`;
+            messageElement.textContent = content;
+            chatContainer.appendChild(messageElement);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function typeMessage(content, className) {
+            const chatContainer = document.getElementById('chat-container');
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${className}`;
+            chatContainer.appendChild(messageElement);
+
+            let index = 0;
+            function type() {
+                if (index < content.length) {
+                    messageElement.textContent += content.charAt(index);
+                    index++;
+                    setTimeout(type, 50);
+                }
+            }
+            type();
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    </script>
+</body>
+</html> 
