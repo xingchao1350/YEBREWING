@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>蜂蜜酒酿造计算器</title>
+    <title>MEAD DESIGNER</title>
     <style>
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
@@ -161,15 +161,17 @@
                 width: 100%;
                 padding: 10px;
             }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
      <div class="section" style="text-align: right; margin-bottom: 5px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h1 style="color: #2c3e50; margin: 0; font-size: 24px; font-weight: bold;">
-                🏺 野鹅微醺学院|MEAD 设计系统
-            </h1>
+        <div class="header">
+            <h1>🏺 野鹅微醺学院|MEAD 设计系统</h1>
             <button id="unit-toggle" onclick="toggleGravityScale()" style="padding: 8px 15px;">
                 当前单位：比重 (SG)
             </button>
