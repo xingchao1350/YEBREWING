@@ -171,7 +171,7 @@
 <body>
      <div class="section" style="text-align: right; margin-bottom: 5px;">
         <div class="header">
-            <h1>🏺 野鹅微醺学院|MEAD 设计系统</h1>
+            <h3>🏺 野鹅微醺学院|MEAD 设计系统</h3>
             <button id="unit-toggle" onclick="toggleGravityScale()" style="padding: 8px 15px;">
                 当前单位：比重 (SG)
             </button>
@@ -195,6 +195,10 @@
             <label>酿造理念:</label>
             <textarea id="concept" rows="3" style="width:400px"></textarea>
         </div>
+        <div class="input-group">
+            <label>上传头像:</label>
+            <input type="file" id="avatar-upload" accept="image/*">
+        </div>
     </div>
 
    
@@ -203,8 +207,8 @@
         <h2>基础参数设计</h2>
         <div class="input-group">
             <label>目标酒精度 (%ABV):
-                <span class="help-icon">tips
-                    <span class="tooltip">根据酵母耐受度选择合适范围（典型值12-18%）<br>计算公式：ABV = (OG - FG) × 131.25</span>
+                <span class="help-icon">TIP
+                    <span class="tooltip">根据酵母耐受度选择合适范围（典型值12-18%）</span>
                 </span>
             </label>
             <input type="number" id="abv" min="5" max="20" step="0.5" value="12">
@@ -212,7 +216,7 @@
         </div>
         <div class="input-group">
             <label id="fg-label">残糖比重 (FG):
-                <span class="help-icon">tips
+                <span class="help-icon">TIP
                     <span class="tooltip">发酵结束时的液体密度（比重）<br>干型：1.000-1.005<br>半甜：1.015-1.025<br>甜型：＞1.030</span>
                 </span>
             </label>
@@ -221,7 +225,7 @@
         </div>
         <div class="input-group">
             <label>目标体积 (升):
-                <span class="help-icon">?
+                <span class="help-icon">TIP
                     <span class="tooltip">初始发酵液体积（进罐体积）<br>建议为容器容量的80%</span>
                 </span>
             </label>
@@ -233,7 +237,7 @@
         <h2>原料计算</h2>
         <div class="input-group">
             <label>蜂蜜含糖量:
-                <span class="help-icon">tips
+                <span class="help-icon">TIP
                     <span class="tooltip">不同蜜源的典型含糖量：<br>• 洋槐蜜：82-84%<br>• 百花蜜：78-80%<br>• 荞麦蜜：72-75%</span>
                 </span>
             </label>
@@ -242,7 +246,7 @@
         </div>
         <div class="input-group">
             <label>增味贡献:
-                <span class="help-icon">tips
+                <span class="help-icon">TIP
                     <span class="tooltip">添加水果/果汁的糖分贡献<br>• 果汁：按体积计算（升）<br>• 鲜果：按重量计算（公斤）</span>
                 </span>
             </label>
@@ -256,7 +260,7 @@
         </div>
         <div class="input-group">
             <label>营养盐方案:
-                <span class="help-icon">tips
+                <span class="help-icon">TIP
                     <span class="tooltip">标准方案：<br>• 低强度：低营养需求<br>• 中强度：常规酿造<br>• 高强度：高酒精度/低温发酵</span>
                 </span>
             </label>
@@ -294,6 +298,7 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
         let isBrix = false;
+        let avatarDataUrl = '';
 
         function toggleGravityScale() {
             isBrix = !isBrix;
@@ -460,6 +465,17 @@
         document.querySelectorAll('input, select').forEach(e => 
             e.addEventListener('input', calculate));
 
+        document.getElementById('avatar-upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    avatarDataUrl = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
         function generateRecipe() {
             console.log('开始生成配方单...');
             const recipeContent = document.createElement('div');
@@ -471,7 +487,8 @@
             document.body.appendChild(recipeContent); // 必须添加到DOM树
 
             recipeContent.innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
+                <div style="text-align: center; margin-bottom: 20px; position: relative;">
+                    ${avatarDataUrl ? `<img src="${avatarDataUrl}" style="position: absolute; top: 0; left: 0; width: 80px; height: 80px; border-radius: 50%;">` : ''}
                     <h1 style="color: #2c3e50; border-bottom: 3px solid #3498db; display: inline-block; padding-bottom: 10px;">
                         ${document.getElementById('mead-name').value || '蜂蜜酒配方单'}
                     </h1>
@@ -481,38 +498,36 @@
                     </p>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
-                    <div>
-                        <h3 style="color: #3498db; border-left: 4px solid #3498db; padding-left: 10px;">基础参数</h3>
-                        <p>目标酒精度：${document.getElementById('abv').value}%</p>
-                        <p>目标体积：${document.getElementById('volume').value}升</p>
-                        <p>初始糖度：${document.getElementById('og').textContent}</p>
-                        <p>最终糖度：${document.getElementById('fg').textContent}</p>
-                        <p>营养盐方案：${document.getElementById('nutrient-scheme').textContent}</p>
-                    </div>
-                    
-                    <div>
-                        <h3 style="color: #3498db; border-left: 4px solid #3498db; padding-left: 10px;">原料清单</h3>
-                        <p>蜂蜜用量：${document.getElementById('honey-amount').textContent}</p>
-                        <p>加水量：${document.getElementById('water-amount').textContent}</p>
-                        <p>酵母类型：EC-1118</p>
-                        <p>酵母用量：${document.getElementById('yeast-amount').textContent}</p>
-                        <p>Go-Ferm用量：${document.getElementById('goferm-amount').textContent}</p>
-                        <p>Fermaid K总量：${document.getElementById('fermaidk-amount').textContent}</p>
-                        <p>Fermaid O总量：${document.getElementById('fermaido-amount').textContent}</p>
-                    </div>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                    <h3 style="color: #3498db; margin-top: 0;">酿造理念</h3>
+                    <p style="white-space: pre-wrap; line-height: 1.6;">
+                        ${document.getElementById('concept').value || '暂无说明'}
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #3498db; border-left: 4px solid #3498db; padding-left: 10px;">基础参数</h3>
+                    <p>目标酒精度：${document.getElementById('abv').value}%</p>
+                    <p>目标体积：${document.getElementById('volume').value}升</p>
+                    <p>初始糖度：${document.getElementById('og').textContent}</p>
+                    <p>最终糖度：${document.getElementById('fg').textContent}</p>
+                    <p>营养盐方案：${document.getElementById('nutrient-scheme').textContent}</p>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <h3 style="color: #3498db; border-left: 4px solid #3498db; padding-left: 10px;">原料清单</h3>
+                    <p>蜂蜜用量：${document.getElementById('honey-amount').textContent}</p>
+                    <p>加水量：${document.getElementById('water-amount').textContent}</p>
+                    <p>酵母类型：EC-1118</p>
+                    <p>酵母用量：${document.getElementById('yeast-amount').textContent}</p>
+                    <p>Go-Ferm用量：${document.getElementById('goferm-amount').textContent}</p>
+                    <p>Fermaid K总量：${document.getElementById('fermaidk-amount').textContent}</p>
+                    <p>Fermaid O总量：${document.getElementById('fermaido-amount').textContent}</p>
                 </div>
 
                 <div style="margin-bottom: 30px;">
                     <h3 style="color: #3498db; border-left: 4px solid #3498db; padding-left: 10px;">增味详情</h3>
                     <p>${getAdjunctDetails()}</p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
-                    <h3 style="color: #3498db; margin-top: 0;">酿造理念</h3>
-                    <p style="white-space: pre-wrap; line-height: 1.6;">
-                        ${document.getElementById('concept').value || '暂无说明'}
-                    </p>
                 </div>
                 
                 <div style="text-align: center; margin-top: 30px; color: #7f8c8d; font-size: 0.9em;">
