@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>酒吧名单生成器</title>
+    <style>
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; }
+        .preview { border: 1px solid #ccc; padding: 15px; margin: 20px 0; }
+        #copyBtn { display: none; padding: 10px 20px; background: #2196F3; color: white; border: none; cursor: pointer; }
+        .preview ul { list-style: none; padding-left: 20px; }
+        .preview details { margin: 10px 0; border: 1px solid #eee; padding: 10px; }
+        .preview summary { cursor: pointer; font-weight: bold; padding: 5px; }
+        .preview details[open] summary { border-bottom: 1px solid #ddd; margin-bottom: 10px; }
+        .province { background-color: #f8f9fa; }
+        .city { background-color: #f1f3f5; }
+        .bar-item { padding: 3px 0; color: #495057; }
+        .stats { font-weight: bold; color: #1864ab; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>酒吧名单生成器</h2>
+        <input type="file" id="excelFile" accept=".xlsx, .xls" />
+        <div id="preview" class="preview"></div>
+        <button id="copyBtn" style="display: none; margin-left: 10px;">复制到公众号</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script>
+        document.getElementById('excelFile').addEventListener('change', handleFile);
+        document.getElementById('copyBtn').addEventListener('click', copyWechatContent);
+
+        let groupedData = [];
+
+        async function handleFile(e) {
+            const file = e.target.files[0];
+            const data = await file.arrayBuffer();
+            const workbook = XLSX.read(data);
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+            // 按省市分组
+            groupedData = jsonData.reduce((acc, item) => {
+                const province = item.省 || item.省份 || item.Province;
+                const city = item.市 || item.城市 || item.City;
+                if (!province || !city) return acc;
+                
+                let provinceEntry = acc.find(p => p.province === province);
+                if (!provinceEntry) {
+                    provinceEntry = { province, cities: [] };
+                    acc.push(provinceEntry);
+                }
+                
+                let cityEntry = provinceEntry.cities.find(c => c.city === city);
+                if (!cityEntry) {
+                    cityEntry = { city, bars: [] };
+                    provinceEntry.cities.push(cityEntry);
+                }
+                
+                cityEntry.bars.push(item.酒吧名称 || item.名称 || item.Name);
+                return acc;
+            }, []);
+
+            // 排序省市和酒吧
+            const directCities = ['北京', '上海', '天津', '重庆'];
+            const provincialCapitals = ['石家庄', '哈尔滨', '长春', '沈阳', '南京', '杭州', '合肥', '福州', '南昌', '济南', '郑州', '武汉', '长沙', '广州', '南宁', '海口', '成都', '贵阳', '昆明', '拉萨', '西安', '兰州', '西宁', '银川', '乌鲁木齐'];
+            
+            groupedData.sort((a, b) => {
+                if (directCities.includes(a.province) && !directCities.includes(b.province)) return -1;
+                if (!directCities.includes(a.province) && directCities.includes(b.province)) return 1;
+                return a.province.localeCompare(b.province, 'zh');
+            });
+
+            groupedData.forEach(province => {
+                province.cities.sort((a, b) => {
+                    if (provincialCapitals.includes(a.city) && !provincialCapitals.includes(b.city)) return -1;
+                    if (!provincialCapitals.includes(a.city) && provincialCapitals.includes(b.city)) return 1;
+                    return a.city.localeCompare(b.city, 'zh');
+                });
+                province.cities.forEach(city => {
+                    city.bars.sort((a, b) => {
+                        if (a.startsWith('野鹅微醺') && !b.startsWith('野鹅微醺')) return -1;
+                        if (!a.startsWith('野鹅微醺') && b.startsWith('野鹅微醺')) return 1;
+                        return a.localeCompare(b, 'zh');
+                    });
+                });
+            });
+
+            // 生成结构化预览
+            const previewHTML = `
+                <div class="stats">
+                    参加本次首发的共有 ${groupedData.length} 个省份，
+                    ${groupedData.reduce((sum, p) => sum + p.cities.length, 0)} 个城市，
+                    ${jsonData.length} 家酒吧
+                </div>
+                ${groupedData.map(province => `
+                    <details class="province">
+                        <summary>${province.province}</summary>
+                        <ul>
+                            ${province.cities.map(city => `
+                                <details class="city">
+                                    <summary>${city.city}（${city.bars.length}家）</summary>
+                                    <ul>
+                                        ${city.bars.map(bar => `
+                                            <li class="bar-item">${bar}</li>
+                                        `).join('')}
+                                    </ul>
+                                </details>
+                            `).join('')}
+                        </ul>
+                    </details>
+                `).join('')}
+            `;
+            
+            document.getElementById('preview').innerHTML = previewHTML;
+            document.getElementById('copyBtn').style.display = 'block';
+        }
+
+        function copyWechatContent() {
+            // 创建临时容器
+            const tempDiv = document.createElement('div');
+            tempDiv.style.position = 'fixed';
+            tempDiv.style.left = '-9999px';
+            
+            // 生成公众号格式内容
+            tempDiv.innerHTML = `
+                <div id="wechat-content">
+                    <h3 style="color: #333; border-left: 4px solid #2196F3; padding-left: 10px; margin: 20px 0;">
+                        首发酒吧名单（共${groupedData.length}省${groupedData.reduce((sum, p) => sum + p.cities.length, 0)}市）
+                    </h3>
+                    ${groupedData.map(province => `
+                        <div style="margin: 15px 0; border-left: 4px solid #2196F3; padding-left: 10px;">
+                            <h4 style="color: #666; margin: 10px 0;">${province.province}</h4>
+                            ${province.cities.map(city => `
+                                <div style="margin-left: 20px;">
+                                    <p style="color: #888; margin: 8px 0;">${city.city}（${city.bars.length}家）</p>
+                                    <ul style="list-style: none; padding-left: 30px;">
+                                        ${city.bars.map(bar => `
+                                            <li style="margin: 5px 0; color: #444;">${bar}</li>
+                                        `).join('')}
+                                    </ul>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            document.body.appendChild(tempDiv);
+            
+            // 执行复制
+            const range = document.createRange();
+            range.selectNode(tempDiv.querySelector('#wechat-content'));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            
+            // 清理临时元素
+            document.body.removeChild(tempDiv);
+            alert('内容已复制到剪贴板，可直接粘贴到公众号编辑器！');
+        }
+    </script>
+</body>
+</html> 
