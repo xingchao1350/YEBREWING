@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>酒精度计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .calculate-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .calculate-btn:hover {
+            background-color: darkorange;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        @media (max-width: 480px) {
+            body {
+                margin: 10px;
+            }
+            .container {
+                padding: 5px;
+            }
+            .calculate-btn {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-group">
+            <label for="startValue">发酵初始比重 OG</label>
+            <input type="number" id="startValue" placeholder="请输入初始比重">
+        </div>
+        <div class="input-group">
+            <label for="endValue">发酵终点比重 FG</label>
+            <input type="number" id="endValue" placeholder="请输入终点比重">
+        </div>
+        <button class="calculate-btn" onclick="calculate()">计算</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const startValue = parseFloat(document.getElementById('startValue').value) || 0;
+            const endValue = parseFloat(document.getElementById('endValue').value) || 0;
+            const alcoholContent = (startValue - endValue) * 131.25;
+
+            document.getElementById('result').innerText = `酒精度（ABV）: ${alcoholContent.toFixed(2)}%`;
+        }
+    </script>
+</body>
+</html>
