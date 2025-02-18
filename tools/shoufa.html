@@ -19,7 +19,7 @@
 <body>
     <div class="container">
         <h2>酒吧名单生成器</h2>
-        <input type="file" id="excelFile" accept=".xlsx, .xls" />
+        <input type="file" id="excelFiles" webkitdirectory multiple accept=".xlsx, .xls" />
         <div id="preview" class="preview"></div>
         <button id="copyBtn" style="display: none; margin-left: 10px;">复制到公众号</button>
     </div>
@@ -27,20 +27,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <script>
-        document.getElementById('excelFile').addEventListener('change', handleFile);
+        document.getElementById('excelFiles').addEventListener('change', handleFiles);
         document.getElementById('copyBtn').addEventListener('click', copyWechatContent);
 
         let groupedData = [];
 
-        async function handleFile(e) {
-            const file = e.target.files[0];
-            const data = await file.arrayBuffer();
-            const workbook = XLSX.read(data);
-            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+        async function handleFiles(e) {
+            const files = Array.from(e.target.files);
+            let allData = [];
+
+            for (const file of files) {
+                const data = await file.arrayBuffer();
+                const workbook = XLSX.read(data);
+                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+                allData = allData.concat(jsonData);
+            }
 
             // 按省市分组
-            groupedData = jsonData.reduce((acc, item) => {
+            groupedData = allData.reduce((acc, item) => {
                 const province = item.省 || item.省份 || item.Province;
                 const city = item.市 || item.城市 || item.City;
                 if (!province || !city) return acc;
@@ -91,7 +96,7 @@
                 <div class="stats">
                     参加本次首发的共有 ${groupedData.length} 个省份，
                     ${groupedData.reduce((sum, p) => sum + p.cities.length, 0)} 个城市，
-                    ${jsonData.length} 家酒吧
+                    ${allData.length} 家酒吧
                 </div>
                 ${groupedData.map(province => `
                     <details class="province">
