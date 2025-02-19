@@ -31,6 +31,7 @@
         document.getElementById('copyBtn').addEventListener('click', copyWechatContent);
 
         let groupedData = [];
+        let flattenedBars = [];
 
         async function handleFile(e) {
             const file = e.target.files[0];
@@ -43,7 +44,9 @@
             groupedData = jsonData.reduce((acc, item) => {
                 const province = item.省 || item.省份 || item.Province;
                 const city = item.市 || item.城市 || item.City;
-                if (!province || !city) return acc;
+                const barName = item.酒吧名称 || item.名称 || item.Name || item.BarName;
+                
+                if (!province || !city || !barName) return acc;
                 
                 let provinceEntry = acc.find(p => p.province === province);
                 if (!provinceEntry) {
@@ -57,7 +60,7 @@
                     provinceEntry.cities.push(cityEntry);
                 }
                 
-                cityEntry.bars.push(item.酒吧名称 || item.名称 || item.Name);
+                cityEntry.bars.push(barName);
                 return acc;
             }, []);
 
@@ -79,26 +82,49 @@
                 });
                 province.cities.forEach(city => {
                     city.bars.sort((a, b) => {
-                        if (a.startsWith('野鹅微醺') && !b.startsWith('野鹅微醺')) return -1;
-                        if (!a.startsWith('野鹅微醺') && b.startsWith('野鹅微醺')) return 1;
-                        return a.localeCompare(b, 'zh');
+                        // 确保 a 和 b 是字符串
+                        const strA = String(a);
+                        const strB = String(b);
+                        if (strA.startsWith('野鹅微醺') && !strB.startsWith('野鹅微醺')) return -1;
+                        if (!strA.startsWith('野鹅微醺') && strB.startsWith('野鹅微醺')) return 1;
+                        return strA.localeCompare(strB, 'zh');
                     });
                 });
             });
 
-            // 生成结构化预览
+            // 将所有数据扁平化处理
+            flattenedBars = [];
+            groupedData.forEach(province => {
+                province.cities.forEach(city => {
+                    city.bars.forEach(bar => {
+                        flattenedBars.push({
+                            province: province.province,
+                            city: city.city,
+                            bar: bar
+                        });
+                    });
+                });
+            });
+
+            // 移除分页相关代码，直接渲染所有数据
+            renderAllData();
+        }
+
+        function renderAllData() {
+            const totalBars = flattenedBars.length;
+            const totalCities = new Set(flattenedBars.map(item => item.city)).size;
+            const totalProvinces = new Set(flattenedBars.map(item => item.province)).size;
+
             const previewHTML = `
                 <div class="stats">
-                    参加本次首发的共有 ${groupedData.length} 个省份，
-                    ${groupedData.reduce((sum, p) => sum + p.cities.length, 0)} 个城市，
-                    ${jsonData.length} 家酒吧
+                    共 ${totalProvinces} 个省份，${totalCities} 个城市，${totalBars} 家酒吧
                 </div>
                 ${groupedData.map(province => `
-                    <details class="province">
+                    <details class="province" open>
                         <summary>${province.province}</summary>
                         <ul>
                             ${province.cities.map(city => `
-                                <details class="city">
+                                <details class="city" open>
                                     <summary>${city.city}（${city.bars.length}家）</summary>
                                     <ul>
                                         ${city.bars.map(bar => `
@@ -111,7 +137,7 @@
                     </details>
                 `).join('')}
             `;
-            
+
             document.getElementById('preview').innerHTML = previewHTML;
             document.getElementById('copyBtn').style.display = 'block';
         }
@@ -122,13 +148,36 @@
             tempDiv.style.position = 'fixed';
             tempDiv.style.left = '-9999px';
             
+            // 计算总数据
+            const totalBars = flattenedBars.length;
+            const totalCities = new Set(flattenedBars.map(item => item.city)).size;
+            const totalProvinces = new Set(flattenedBars.map(item => item.province)).size;
+            
+            // 生成完整的数据结构
+            const fullData = [];
+            flattenedBars.forEach(item => {
+                let provinceEntry = fullData.find(p => p.province === item.province);
+                if (!provinceEntry) {
+                    provinceEntry = { province: item.province, cities: [] };
+                    fullData.push(provinceEntry);
+                }
+
+                let cityEntry = provinceEntry.cities.find(c => c.city === item.city);
+                if (!cityEntry) {
+                    cityEntry = { city: item.city, bars: [] };
+                    provinceEntry.cities.push(cityEntry);
+                }
+
+                cityEntry.bars.push(item.bar);
+            });
+            
             // 生成公众号格式内容
             tempDiv.innerHTML = `
                 <div id="wechat-content">
                     <h3 style="color: #333; border-left: 4px solid #2196F3; padding-left: 10px; margin: 20px 0;">
-                        首发酒吧名单（共${groupedData.length}省${groupedData.reduce((sum, p) => sum + p.cities.length, 0)}市）
+                        首发酒吧名单（共${totalProvinces}省${totalCities}市${totalBars}家）
                     </h3>
-                    ${groupedData.map(province => `
+                    ${fullData.map(province => `
                         <div style="margin: 15px 0; border-left: 4px solid #2196F3; padding-left: 10px;">
                             <h4 style="color: #666; margin: 10px 0;">${province.province}</h4>
                             ${province.cities.map(city => `
