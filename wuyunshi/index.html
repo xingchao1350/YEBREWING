@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无韵诗与野鹅微醺合作计算器</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f5ff;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #673ab7;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1c4e9;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #673ab7;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #5e35b1;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f3e5f5;
+            border-radius: 4px;
+            border-left: 4px solid #9c27b0;
+        }
+        .result-item {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .result-item.highlight {
+            font-weight: bold;
+            color: #9c27b0;
+            font-size: 18px;
+            padding-top: 10px;
+            margin-top: 10px;
+            border-top: 1px dashed #d1c4e9;
+        }
+        .notes {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ede7f6;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .notes h3 {
+            margin-top: 0;
+            color: #7b1fa2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>无韵诗与野鹅微醺合作计算器</h1>
+        
+        <div class="form-group">
+            <label for="posRevenue">当月咖啡收银系统营业额（酒吧代收）：</label>
+            <input type="number" id="posRevenue" placeholder="请输入金额（元）" min="0" step="0.01">
+        </div>
+        
+        <div class="form-group">
+            <label for="selfRevenue">当月咖啡点评自收营业额：</label>
+            <input type="number" id="selfRevenue" placeholder="请输入金额（元）" min="0" step="0.01">
+        </div>
+        
+        <button onclick="calculate()">计算结算金额</button>
+        
+        <div class="result" id="result" style="display: none;">
+            <h2>结算明细</h2>
+            <div class="result-item">
+                <span>咖啡总营业额：</span>
+                <span id="totalRevenue">0.00 元</span>
+            </div>
+            <div class="result-item">
+                <span>收银系统提现手续费（0.38%）：</span>
+                <span id="withdrawalFee">0.00 元</span>
+            </div>
+            <div class="result-item">
+                <span>营业额的15%：</span>
+                <span id="revenuePercentage">0.00 元</span>
+            </div>
+            <div class="result-item">
+                <span>保底租金：</span>
+                <span>8,000.00 元</span>
+            </div>
+            <div class="result-item">
+                <span>实际租金（取较高值）：</span>
+                <span id="actualRent">0.00 元</span>
+            </div>
+            <div class="result-item">
+                <span>固定水电费：</span>
+                <span>1,000.00 元</span>
+            </div>
+            <div class="result-item">
+                <span>咖啡应交给酒吧的总金额：</span>
+                <span id="totalPayment">0.00 元</span>
+            </div>
+            <div class="result-item highlight">
+                <span>酒吧应付给咖啡的金额：</span>
+                <span id="finalAmount">0.00 元</span>
+            </div>
+        </div>
+        
+        <div class="notes">
+            <h3>计算说明</h3>
+            <ol>
+                <li>收银系统提现手续费 = 收银系统营业额 × 0.38%</li>
+                <li>咖啡总营业额 = 收银系统营业额 + 点评自收营业额</li>
+                <li>实际租金 = max(总营业额的15%, 8000元)</li>
+                <li>咖啡应交给酒吧的总金额 = 实际租金 + 水电费(1000元) + 提现手续费</li>
+                <li>酒吧应付给咖啡的金额 = 收银系统营业额(酒吧代收) - 咖啡应交给酒吧的总金额</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            // 获取输入值
+            const posRevenue = parseFloat(document.getElementById('posRevenue').value) || 0;
+            const selfRevenue = parseFloat(document.getElementById('selfRevenue').value) || 0;
+            
+            // 常量
+            const WITHDRAWAL_FEE_RATE = 0.0038; // 0.38%
+            const MIN_RENT = 8000;
+            const UTILITY_FEE = 1000;
+            const REVENUE_PERCENTAGE_RATE = 0.15; // 15%
+            
+            // 计算
+            const totalRevenue = posRevenue + selfRevenue;
+            const withdrawalFee = posRevenue * WITHDRAWAL_FEE_RATE;
+            const revenuePercentage = totalRevenue * REVENUE_PERCENTAGE_RATE;
+            const actualRent = Math.max(revenuePercentage, MIN_RENT);
+            const totalPayment = actualRent + UTILITY_FEE + withdrawalFee;
+            const finalAmount = posRevenue - totalPayment;
+            
+            // 显示结果
+            document.getElementById('totalRevenue').textContent = formatCurrency(totalRevenue);
+            document.getElementById('withdrawalFee').textContent = formatCurrency(withdrawalFee);
+            document.getElementById('revenuePercentage').textContent = formatCurrency(revenuePercentage);
+            document.getElementById('actualRent').textContent = formatCurrency(actualRent);
+            document.getElementById('totalPayment').textContent = formatCurrency(totalPayment);
+            document.getElementById('finalAmount').textContent = formatCurrency(finalAmount);
+            
+            // 显示结果区域
+            document.getElementById('result').style.display = 'block';
+        }
+        
+        function formatCurrency(value) {
+            return value.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' 元';
+        }
+    </script>
+</body>
+</html> 
