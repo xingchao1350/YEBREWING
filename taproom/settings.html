@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统设置 - TAPROOM管理系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <link rel="stylesheet" href="css/module-manager.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/user-manager.css">
+    <style>
+        /* 设置页面特定样式 */
+        .settings-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+        }
+        
+        .settings-tabs {
+            border-bottom: 1px solid #E5E7EB;
+            padding: 0 15px;
+        }
+        
+        .tabs {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            overflow-x: auto;
+        }
+        
+        .tab-item {
+            margin-right: 5px;
+        }
+        
+        .tab-item a {
+            display: block;
+            padding: 15px 20px;
+            color: #64748B;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .tab-item a:hover {
+            color: #6366F1;
+        }
+        
+        .tab-item a.active {
+            color: #6366F1;
+            border-bottom-color: #6366F1;
+        }
+        
+        .tab-content {
+            padding: 20px;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+        
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1F2937;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #6366F1;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #4F46E5;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #1F2937;
+        }
+        
+        .section-description {
+            color: #64748B;
+            margin-bottom: 20px;
+        }
+
+        /* 用户管理相关样式 */
+        .user-list tr:hover {
+            background-color: #F9FAFB;
+        }
+
+        .user-list td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .user-list tr:last-child td {
+            border-bottom: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .action-button {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+
+        .action-button.edit {
+            background-color: #6366F1;
+            color: white;
+        }
+
+        .action-button.permission {
+            background-color: #10B981;
+            color: white;
+        }
+
+        .action-button.delete {
+            background-color: #EF4444;
+            color: white;
+        }
+
+        .action-button:hover {
+            opacity: 0.9;
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .role-badge.super-admin {
+            background-color: #818CF8;
+            color: white;
+        }
+
+        .role-badge.store-admin {
+            background-color: #10B981;
+            color: white;
+        }
+
+        .role-badge.employee {
+            background-color: #6B7280;
+            color: white;
+        }
+
+        #user-search:focus {
+            outline: none;
+            border-color: #6366F1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+    </style>
+</head>
+<script src="js/logout.js"></script>
+<body>
+    <div class="container">
+        <!-- 添加菜单按钮 -->
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+        
+        <!-- 侧边栏 -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="assets/logo.png" alt="YE-TAPROOM Logo" class="logo-img">
+                <span>YE-TAPROOM</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="index.html#dashboard"><i class="fas fa-tachometer-alt"></i> <span>门店总览</span></a>
+                </li>
+                <li>
+                    <a href="index.html#inventory"><i class="fas fa-boxes"></i> <span>库存</span></a>
+                </li>
+                <li>
+                    <a href="index.html#finance"><i class="fas fa-money-bill-alt"></i> <span>财务</span></a>
+                </li>
+                <li>
+                    <a href="index.html#tools"><i class="fas fa-tools"></i> <span>工具</span></a>
+                </li>
+                <li>
+                    <a href="index.html#resources"><i class="fas fa-folder"></i> <span>资源</span></a>
+                </li>
+                <li class="active">
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        <span>设置</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- 用户信息移到侧边栏底部 -->
+            <div class="user-info">
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                
+                <div class="user">
+                    <div class="avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div>
+                        <div class="name">张三</div>
+                        <div class="role">超级管理员</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <a href="#logout"><i class="fas fa-sign-out-alt"></i> <span>退出</span></a>
+            </div>
+        </nav>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 内容 -->
+            <div class="content">
+                <h2 class="section-title">系统设置</h2>
+                <p class="section-description">管理系统设置和用户权限</p>
+                          
+                <div class="settings-container">
+                    <div class="settings-tabs">
+                        <ul class="tabs">
+                            <li class="tab-item"><a href="#users" class="active">用户管理</a></li>
+                            <li class="tab-item"><a href="#security">安全设置</a></li>
+                            <li class="tab-item"><a href="#notifications">通知设置</a></li>
+                            <li class="tab-item"><a href="#module-management">功能设置</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <!-- 用户管理标签页 -->
+                        <div id="users" class="tab-pane active">
+                          
+                                <div class="card-body" style="padding: 20px;">
+                                                                       <!-- 用户列表 -->
+                                    <div class="user-list-wrapper" style="background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                        <table class="user-list" style="width: 100%; border-collapse: separate; border-spacing: 0;">
+                                            <thead>
+                                                <tr style="background-color: #F9FAFB;">
+                                                    <th style="padding: 14px 20px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #E5E7EB;">
+                                                        用户名
+                                                    </th>
+                                                    <th style="padding: 14px 20px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #E5E7EB;">
+                                                        邮箱
+                                                    </th>
+                                                    <th style="padding: 14px 20px; text-align: left; font-weight: 600; color: #374151; border-bottom: 1px solid #E5E7EB;">
+                                                        角色
+                                                    </th>
+                                                    <th style="padding: 14px 20px; text-align: right; font-weight: 600; color: #374151; border-bottom: 1px solid #E5E7EB;">
+                                                        操作
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="user-list-body">
+                                                <!-- 用户列表将由JavaScript动态生成 -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="security" class="tab-pane">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>安全设置</h2>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">密码策略</label>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="minLength" checked>
+                                                <label for="minLength">最小长度要求（8个字符）</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="uppercase" checked>
+                                                <label for="uppercase">必须包含大写字母</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="number" checked>
+                                                <label for="number">必须包含数字</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="special">
+                                                <label for="special">必须包含特殊字符</label>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">登录安全</label>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="twoFactor">
+                                                <label for="twoFactor">启用两步验证</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="loginAttempts" checked>
+                                                <label for="loginAttempts">限制登录尝试次数（5次）</label>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">会话设置</label>
+                                            <div style="margin-bottom: 10px;">
+                                                <label>会话超时时间</label>
+                                                <select style="width: 100%; padding: 8px; border: 1px solid #E5E7EB; border-radius: 4px; margin-top: 5px;">
+                                                    <option>15分钟</option>
+                                                    <option selected>30分钟</option>
+                                                    <option>1小时</option>
+                                                    <option>2小时</option>
+                                                    <option>4小时</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button class="btn" style="margin-top: 10px;">保存设置</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="notifications" class="tab-pane">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>通知设置</h2>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">系统通知</label>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="systemUpdates" checked>
+                                                <label for="systemUpdates">系统更新通知</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="securityAlerts" checked>
+                                                <label for="securityAlerts">安全警报</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="maintenanceNotices" checked>
+                                                <label for="maintenanceNotices">维护通知</label>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">业务通知</label>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="inventoryAlerts" checked>
+                                                <label for="inventoryAlerts">库存警报</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="orderNotifications" checked>
+                                                <label for="orderNotifications">订单通知</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="financialReports" checked>
+                                                <label for="financialReports">财务报告</label>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">通知方式</label>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="emailNotifications" checked>
+                                                <label for="emailNotifications">电子邮件</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="smsNotifications">
+                                                <label for="smsNotifications">短信</label>
+                                            </div>
+                                            <div style="margin-bottom: 10px;">
+                                                <input type="checkbox" id="inAppNotifications" checked>
+                                                <label for="inAppNotifications">应用内通知</label>
+                                            </div>
+                                        </div>
+                                        <button class="btn" style="margin-top: 10px;">保存设置</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="module-management" class="tab-pane">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>功能模块管理</h3>
+                                    <button class="btn btn-primary" id="add-new-module"><i class="fas fa-plus"></i> 新建模块</button>
+                                </div>
+                                <div class="card-body">
+                                    <!-- 模块列表 -->
+                                    <div class="module-list">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>模块名称</th>
+                                                    <th>显示顺序</th>
+                                                    <th>状态</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="module-list-body">
+                                                <!-- 模块列表将通过JavaScript动态生成 -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 工具模块 -->
+            <div id="tools" class="dashboard-section" style="display: none;">
+                <div class="dashboard-tabs-container">
+                    <div class="settings-tabs">
+                        <ul class="tabs">
+                            <li class="tab-item"><a href="#drink-menu" class="active">酒单设计</a></li>
+                            <li class="tab-item"><a href="#food-menu">餐单设计</a></li>
+                            <li class="tab-item"><a href="#card-design">卡片设计</a></li>
+                            <li class="tab-item"><a href="#poster-design">海报设计</a></li>
+                            <li class="tab-item"><a href="#other-tools">其他工具</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <!-- 酒单设计标签页 -->
+                        <div id="drink-menu" class="tab-pane active">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>酒单设计</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tools-container">
+                                        <div class="tools-header">
+                                            <div class="tools-actions">
+                                                <button class="btn"><i class="fas fa-plus"></i> 新建酒单</button>
+                                                <select class="tools-filter">
+                                                    <option>全部模板</option>
+                                                    <option>简约风格</option>
+                                                    <option>复古风格</option>
+                                                    <option>现代风格</option>
+                                                    <option>自定义</option>
+                                                </select>
+                                            </div>
+                                            <div class="tools-search">
+                                                <input type="text" placeholder="搜索酒单..." class="search-input">
+                                                <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="tools-templates">
+                                            <div class="template-grid">
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/drink-menu-1.jpg" alt="酒单模板1">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>简约风格酒单</h3>
+                                                        <p>简洁大方的设计，适合各类酒吧</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/drink-menu-2.jpg" alt="酒单模板2">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>复古风格酒单</h3>
+                                                        <p>怀旧复古设计，适合特色酒吧</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/drink-menu-3.jpg" alt="酒单模板3">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>现代风格酒单</h3>
+                                                        <p>时尚现代设计，适合高端酒吧</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 餐单设计标签页 -->
+                        <div id="food-menu" class="tab-pane">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>餐单设计</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tools-container">
+                                        <div class="tools-header">
+                                            <div class="tools-actions">
+                                                <button class="btn"><i class="fas fa-plus"></i> 新建餐单</button>
+                                                <select class="tools-filter">
+                                                    <option>全部模板</option>
+                                                    <option>简约风格</option>
+                                                    <option>复古风格</option>
+                                                    <option>现代风格</option>
+                                                    <option>自定义</option>
+                                                </select>
+                                            </div>
+                                            <div class="tools-search">
+                                                <input type="text" placeholder="搜索餐单..." class="search-input">
+                                                <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="tools-templates">
+                                            <div class="template-grid">
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/food-menu-1.jpg" alt="餐单模板1">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>简约风格餐单</h3>
+                                                        <p>简洁大方的设计，适合各类餐厅</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/food-menu-2.jpg" alt="餐单模板2">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>复古风格餐单</h3>
+                                                        <p>怀旧复古设计，适合特色餐厅</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/food-menu-3.jpg" alt="餐单模板3">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>现代风格餐单</h3>
+                                                        <p>时尚现代设计，适合高端餐厅</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 卡片设计标签页 -->
+                        <div id="card-design" class="tab-pane">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>卡片设计</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tools-container">
+                                        <div class="tools-header">
+                                            <div class="tools-actions">
+                                                <button class="btn"><i class="fas fa-plus"></i> 新建卡片</button>
+                                                <select class="tools-filter">
+                                                    <option>全部类型</option>
+                                                    <option>会员卡</option>
+                                                    <option>优惠券</option>
+                                                    <option>活动卡</option>
+                                                    <option>其他</option>
+                                                </select>
+                                            </div>
+                                            <div class="tools-search">
+                                                <input type="text" placeholder="搜索卡片..." class="search-input">
+                                                <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="tools-templates">
+                                            <div class="template-grid">
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/card-1.jpg" alt="会员卡模板">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>高级会员卡</h3>
+                                                        <p>适合VIP会员的精美卡片设计</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/card-2.jpg" alt="优惠券模板">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>节日优惠券</h3>
+                                                        <p>适合节日促销的优惠券设计</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/card-3.jpg" alt="活动卡模板">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>品鉴会邀请卡</h3>
+                                                        <p>适合高端品鉴活动的邀请卡设计</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 海报设计标签页 -->
+                        <div id="poster-design" class="tab-pane">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>海报设计</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tools-container">
+                                        <div class="tools-header">
+                                            <div class="tools-actions">
+                                                <button class="btn"><i class="fas fa-plus"></i> 新建海报</button>
+                                                <select class="tools-filter">
+                                                    <option>全部类型</option>
+                                                    <option>促销海报</option>
+                                                    <option>活动海报</option>
+                                                    <option>节日海报</option>
+                                                    <option>其他</option>
+                                                </select>
+                                            </div>
+                                            <div class="tools-search">
+                                                <input type="text" placeholder="搜索海报..." class="search-input">
+                                                <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="tools-templates">
+                                            <div class="template-grid">
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/poster-1.jpg" alt="促销海报模板">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>限时促销海报</h3>
+                                                        <p>适合限时促销活动的海报设计</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/poster-2.jpg" alt="活动海报模板">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>音乐之夜海报</h3>
+                                                        <p>适合音乐表演活动的海报设计</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="template-card">
+                                                    <div class="template-preview">
+                                                        <img src="assets/templates/poster-3.jpg" alt="节日海报模板">
+                                                    </div>
+                                                    <div class="template-info">
+                                                        <h3>节日特惠海报</h3>
+                                                        <p>适合节日庆祝活动的海报设计</p>
+                                                        <div class="template-actions">
+                                                            <button class="btn btn-sm">使用模板</button>
+                                                            <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 其他工具标签页 -->
+                        <div id="other-tools" class="tab-pane">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>其他工具</h2>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tools-container">
+                                        <div class="tools-grid">
+                                            <div class="tool-card">
+                                                <div class="tool-icon">
+                                                    <i class="fas fa-calculator"></i>
+                                                </div>
+                                                <div class="tool-info">
+                                                    <h3>成本计算器</h3>
+                                                    <p>计算菜品和酒水的成本和利润</p>
+                                                    <button class="btn btn-sm">使用工具</button>
+                                                </div>
+                                            </div>
+                                            <div class="tool-card">
+                                                <div class="tool-icon">
+                                                    <i class="fas fa-qrcode"></i>
+                                                </div>
+                                                <div class="tool-info">
+                                                    <h3>二维码生成器</h3>
+                                                    <p>生成菜单、支付等二维码</p>
+                                                    <button class="btn btn-sm">使用工具</button>
+                                                </div>
+                                            </div>
+                                            <div class="tool-card">
+                                                <div class="tool-icon">
+                                                    <i class="fas fa-calendar-check"></i>
+                                                </div>
+                                                <div class="tool-info">
+                                                    <h3>预订管理</h3>
+                                                    <p>管理客户预订和座位安排</p>
+                                                    <button class="btn btn-sm">使用工具</button>
+                                                </div>
+                                            </div>
+                                            <div class="tool-card">
+                                                <div class="tool-icon">
+                                                    <i class="fas fa-chart-pie"></i>
+                                                </div>
+                                                <div class="tool-info">
+                                                    <h3>数据分析</h3>
+                                                    <p>分析销售数据和客户偏好</p>
+                                                    <button class="btn btn-sm">使用工具</button>
+                                                </div>
+                                            </div>
+                                            <div class="tool-card">
+                                                <div class="tool-icon">
+                                                    <i class="fas fa-envelope"></i>
+                                                </div>
+                                                <div class="tool-info">
+                                                    <h3>邮件营销</h3>
+                                                    <p>创建和发送营销邮件</p>
+                                                    <button class="btn btn-sm">使用工具</button>
+                                                </div>
+                                            </div>
+                                            <div class="tool-card">
+                                                <div class="tool-icon">
+                                                    <i class="fas fa-comment-alt"></i>
+                                                </div>
+                                                <div class="tool-info">
+                                                    <h3>短信通知</h3>
+                                                    <p>发送活动和促销短信</p>
+                                                    <button class="btn btn-sm">使用工具</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="js/module-manager.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化显示设置容器
+            document.querySelector('.settings-container').style.display = 'block';
+            
+            // 设置标签页切换
+            const tabLinks = document.querySelectorAll('.tab-item a');
+            
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 获取当前标签页所在的容器
+                    const tabContainer = this.closest('.settings-tabs').nextElementSibling;
+                    const tabItems = this.closest('.tabs').querySelectorAll('a');
+                    const tabContents = tabContainer.querySelectorAll('.tab-pane');
+                    
+                    // 移除所有active类
+                    tabItems.forEach(item => item.classList.remove('active'));
+                    tabContents.forEach(pane => pane.classList.remove('active'));
+                    
+                    // 添加active类到当前点击的链接
+                    this.classList.add('active');
+                    
+                    // 显示对应的内容
+                    const target = this.getAttribute('href').substring(1);
+                    tabContainer.querySelector('#' + target).classList.add('active');
+                });
+            });
+            
+            // 导航链接点击事件
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // 如果是外部链接（如index.html），不阻止默认行为
+                    if(!this.getAttribute('href').startsWith('#')) {
+                        return; // 允许正常导航到外部页面
+                    }
+                    
+                    e.preventDefault();
+                    
+                    // 隐藏所有内容区域
+                    document.querySelector('.settings-container').style.display = 'none';
+                    const sections = document.querySelectorAll('.dashboard-section');
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // 显示目标内容区域
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.style.display = 'block';
+                    }
+                });
+            });
+            
+            // 工具模块标签页切换
+            const toolsTabs = document.querySelectorAll('#tools .tabs a');
+            toolsTabs.forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有活动标签样式
+                    toolsTabs.forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    
+                    // 隐藏所有标签内容
+                    const toolsPanes = document.querySelectorAll('#tools .tab-pane');
+                    toolsPanes.forEach(pane => {
+                        pane.classList.remove('active');
+                    });
+                    
+                    // 添加当前标签活动样式
+                    this.classList.add('active');
+                    
+                    // 显示目标内容
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetPane = document.getElementById(targetId);
+                    if (targetPane) {
+                        targetPane.classList.add('active');
+                    }
+                });
+            });
+            
+            // 初始化功能设置标签页
+            const moduleManagementTab = document.querySelector('#module-management');
+            if (moduleManagementTab) {
+                // 确保模块管理器已经初始化
+                if (window.moduleManager) {
+                    console.log('模块管理器已初始化');
+                } else {
+                    console.error('模块管理器未初始化');
+                }
+            }
+        });
+    </script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/user-manager.js"></script>
+    <script>
+      // 初始化Supabase客户端
+      const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+    </script>
+</body>
+</html> 

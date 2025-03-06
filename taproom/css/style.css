@@ -1,0 +1,33 @@
+/* 子菜单样式 */
+.sub-menu {
+    list-style: none;
+    margin-left: 30px;
+    margin-top: 5px;
+    display: none;
+}
+
+.nav-links li.active .sub-menu {
+    display: block;
+}
+
+.sub-menu li {
+    margin: 5px 0;
+}
+
+.sub-menu li a {
+    padding: 8px 12px;
+    font-size: 14px;
+    display: block;
+    border-radius: var(--radius-md);
+    transition: all 0.3s;
+}
+
+.sub-menu li a:hover {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+}
+
+.sub-menu li.active a {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+} 

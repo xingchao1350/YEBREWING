@@ -1,0 +1,89 @@
+<h2 class="section-title">实时数据</h2>
+
+<div class="stats-cards">
+    <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <div class="stat-info">
+            <div class="stat-value">2,540</div>
+            <div class="stat-label">总用户数</div>
+        </div>
+        <div class="stat-change positive">+12.5%</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+        <div class="stat-info">
+            <div class="stat-value">1,259</div>
+            <div class="stat-label">订单数</div>
+        </div>
+        <div class="stat-change positive">+8.3%</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-yen-sign"></i></div>
+        <div class="stat-info">
+            <div class="stat-value">¥45,260</div>
+            <div class="stat-label">总收入</div>
+        </div>
+        <div class="stat-change positive">+5.7%</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-store"></i></div>
+        <div class="stat-info">
+            <div class="stat-value">8</div>
+            <div class="stat-label">门店数量</div>
+        </div>
+        <div class="stat-change neutral">0%</div>
+    </div>
+</div>
+
+<div class="charts-container">
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>销售趋势</h3>
+            <div class="chart-actions">
+                <select>
+                    <option>本周</option>
+                    <option>本月</option>
+                    <option>本季度</option>
+                    <option>本年</option>
+                </select>
+            </div>
+        </div>
+        <div class="chart-placeholder">
+            <!-- 图表将通过JavaScript渲染 -->
+            <div class="placeholder-text">销售趋势图表</div>
+        </div>
+    </div>
+    
+    <div class="chart-card">
+        <div class="chart-header">
+            <h3>热门产品</h3>
+            <div class="chart-actions">
+                <button class="refresh-btn"><i class="fas fa-sync-alt"></i></button>
+            </div>
+        </div>
+        <div class="chart-placeholder">
+            <!-- 图表将通过JavaScript渲染 -->
+            <div class="placeholder-text">热门产品图表</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Dashboard Overview 子模块加载完成');
+    
+    // 这里可以添加子模块特定的初始化代码
+    // 例如初始化图表等
+    
+    // 模拟初始化图表
+    setTimeout(function() {
+        console.log('初始化销售趋势图表');
+        document.querySelector('.chart-placeholder:first-child .placeholder-text').textContent = '销售趋势图表已初始化';
+        
+        console.log('初始化热门产品图表');
+        document.querySelector('.chart-placeholder:last-child .placeholder-text').textContent = '热门产品图表已初始化';
+    }, 1000);
+</script> 

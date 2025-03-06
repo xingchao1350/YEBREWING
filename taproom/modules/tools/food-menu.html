@@ -1,0 +1,328 @@
+<div class="card">
+    <div class="card-header">
+        <h2>餐单设计</h2>
+    </div>
+    <div class="card-body">
+        <div class="tools-container">
+            <div class="tools-header">
+                <div class="tools-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 新建餐单</button>
+                    <select class="tools-filter">
+                        <option>全部模板</option>
+                        <option>简约风格</option>
+                        <option>复古风格</option>
+                        <option>现代风格</option>
+                        <option>自定义</option>
+                    </select>
+                </div>
+                <div class="tools-search">
+                    <input type="text" placeholder="搜索餐单..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="tools-templates">
+                <div class="template-grid">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/food-menu-1.jpg" alt="餐单模板1">
+                        </div>
+                        <div class="template-info">
+                            <h3>简约风格餐单</h3>
+                            <p>简洁大方的设计，适合各类餐厅</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/food-menu-2.jpg" alt="餐单模板2">
+                        </div>
+                        <div class="template-info">
+                            <h3>复古风格餐单</h3>
+                            <p>怀旧复古设计，适合特色餐厅</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/food-menu-3.jpg" alt="餐单模板3">
+                        </div>
+                        <div class="template-info">
+                            <h3>现代风格餐单</h3>
+                            <p>时尚现代设计，适合高端餐厅</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-designs">
+                <h3>最近设计</h3>
+                <div class="recent-grid">
+                    <div class="recent-card">
+                        <div class="recent-preview">
+                            <img src="assets/templates/recent-food-1.jpg" alt="最近设计1">
+                        </div>
+                        <div class="recent-info">
+                            <h4>夏季特饮餐单</h4>
+                            <p>最后编辑: 2023-06-15</p>
+                            <div class="recent-actions">
+                                <button class="btn btn-sm">编辑</button>
+                                <button class="btn btn-sm btn-outline">导出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent-card">
+                        <div class="recent-preview">
+                            <img src="assets/templates/recent-food-2.jpg" alt="最近设计2">
+                        </div>
+                        <div class="recent-info">
+                            <h4>周末早餐餐单</h4>
+                            <p>最后编辑: 2023-06-10</p>
+                            <div class="recent-actions">
+                                <button class="btn btn-sm">编辑</button>
+                                <button class="btn btn-sm btn-outline">导出</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Tools Food Menu 子模块加载完成');
+    
+    // 为新建餐单按钮添加事件
+    document.querySelector('.tools-actions .btn').addEventListener('click', function() {
+        console.log('点击新建餐单按钮');
+        alert('新建餐单');
+    });
+    
+    // 为使用模板按钮添加事件
+    document.querySelectorAll('.template-actions .btn-sm:first-child').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.template-card');
+            const title = card.querySelector('h3').textContent;
+            console.log('使用模板:', title);
+            alert('使用模板: ' + title);
+        });
+    });
+    
+    // 为收藏按钮添加事件
+    document.querySelectorAll('.template-actions .btn-outline').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.template-card');
+            const title = card.querySelector('h3').textContent;
+            console.log('收藏模板:', title);
+            
+            // 切换收藏状态
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                alert('已收藏: ' + title);
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                alert('取消收藏: ' + title);
+            }
+        });
+    });
+    
+    // 为编辑按钮添加事件
+    document.querySelectorAll('.recent-actions .btn:first-child').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.recent-card');
+            const title = card.querySelector('h4').textContent;
+            console.log('编辑餐单:', title);
+            alert('编辑餐单: ' + title);
+        });
+    });
+    
+    // 为导出按钮添加事件
+    document.querySelectorAll('.recent-actions .btn-outline').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.recent-card');
+            const title = card.querySelector('h4').textContent;
+            console.log('导出餐单:', title);
+            alert('导出餐单: ' + title);
+        });
+    });
+    
+    // 为搜索按钮添加事件
+    document.querySelector('.tools-search .btn-icon').addEventListener('click', function() {
+        const searchInput = document.querySelector('.tools-search .search-input');
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm) {
+            console.log('搜索餐单:', searchTerm);
+            alert('搜索: ' + searchTerm);
+        } else {
+            alert('请输入搜索关键词');
+        }
+    });
+</script>
+
+<style>
+    .tools-container {
+        padding: 0;
+    }
+    
+    .tools-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    
+    .tools-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .tools-search {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .search-input {
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        width: 200px;
+    }
+    
+    .template-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .template-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .template-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .template-preview {
+        height: 180px;
+        overflow: hidden;
+        background-color: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .template-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .template-info {
+        padding: 15px;
+    }
+    
+    .template-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+        color: #1f2937;
+    }
+    
+    .template-info p {
+        margin: 0 0 15px 0;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    
+    .template-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .recent-designs {
+        margin-top: 30px;
+    }
+    
+    .recent-designs h3 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        color: #1f2937;
+    }
+    
+    .recent-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .recent-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .recent-preview {
+        height: 150px;
+        overflow: hidden;
+        background-color: #f3f4f6;
+    }
+    
+    .recent-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .recent-info {
+        padding: 15px;
+    }
+    
+    .recent-info h4 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+        color: #1f2937;
+    }
+    
+    .recent-info p {
+        margin: 0 0 15px 0;
+        font-size: 12px;
+        color: #6b7280;
+    }
+    
+    .recent-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    @media (max-width: 768px) {
+        .tools-header {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .tools-search {
+            width: 100%;
+        }
+        
+        .search-input {
+            flex: 1;
+        }
+    }
+</style> 

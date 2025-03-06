@@ -1,0 +1,271 @@
+<div class="card">
+    <div class="card-header">
+        <h2>物料库存</h2>
+    </div>
+    <div class="card-body">
+        <div class="inventory-container">
+            <div class="inventory-header">
+                <div class="inventory-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 添加库存</button>
+                    <select class="inventory-filter">
+                        <option>全部门店</option>
+                        <option>东四咖啡</option>
+                        <option>白塔寺店</option>
+                    </select>
+                    <select class="category-filter">
+                        <option>全部类别</option>
+                        <option>杯具</option>
+                        <option>餐具</option>
+                        <option>清洁用品</option>
+                        <option>包装材料</option>
+                        <option>装饰物</option>
+                        <option>其他</option>
+                    </select>
+                </div>
+                <div class="inventory-search">
+                    <input type="text" placeholder="搜索物料..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="inventory-table">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>物料名称</th>
+                            <th>类别</th>
+                            <th>规格</th>
+                            <th>单位</th>
+                            <th>当前库存</th>
+                            <th>最低库存</th>
+                            <th>状态</th>
+                            <th>最后更新</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>啤酒杯</td>
+                            <td>杯具</td>
+                            <td>500ml</td>
+                            <td>个</td>
+                            <td>120</td>
+                            <td>50</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-15</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>品鉴杯</td>
+                            <td>杯具</td>
+                            <td>200ml</td>
+                            <td>个</td>
+                            <td>80</td>
+                            <td>40</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-14</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>餐盘</td>
+                            <td>餐具</td>
+                            <td>8寸</td>
+                            <td>个</td>
+                            <td>60</td>
+                            <td>30</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-13</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>纸巾</td>
+                            <td>清洁用品</td>
+                            <td>抽取式</td>
+                            <td>包</td>
+                            <td>15</td>
+                            <td>20</td>
+                            <td><span class="status-badge warning">警告</span></td>
+                            <td>2023-06-12</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>洗洁精</td>
+                            <td>清洁用品</td>
+                            <td>1L</td>
+                            <td>瓶</td>
+                            <td>5</td>
+                            <td>10</td>
+                            <td><span class="status-badge danger">紧急</span></td>
+                            <td>2023-06-11</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>外卖盒</td>
+                            <td>包装材料</td>
+                            <td>中号</td>
+                            <td>个</td>
+                            <td>200</td>
+                            <td>100</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-10</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>桌面装饰花</td>
+                            <td>装饰物</td>
+                            <td>小型</td>
+                            <td>个</td>
+                            <td>12</td>
+                            <td>8</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-09</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="inventory-pagination">
+                <button class="btn-icon small"><i class="fas fa-chevron-left"></i></button>
+                <span class="page-info">第1页，共2页</span>
+                <button class="btn-icon small"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Inventory Materials 子模块加载完成');
+    
+    // 为添加库存按钮添加事件
+    document.querySelector('.inventory-actions .btn').addEventListener('click', function() {
+        console.log('点击添加库存按钮');
+        alert('添加物料库存');
+    });
+    
+    // 为编辑按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-edit').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const name = row.cells[0].textContent;
+            const category = row.cells[1].textContent;
+            console.log('编辑库存:', name, category);
+            alert('编辑库存: ' + name + ' (' + category + ')');
+        });
+    });
+    
+    // 为删除按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-trash').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const name = row.cells[0].textContent;
+            const category = row.cells[1].textContent;
+            console.log('删除库存:', name, category);
+            if (confirm('确定要删除 ' + name + ' (' + category + ') 吗？')) {
+                console.log('确认删除:', name, category);
+                row.remove();
+            }
+        });
+    });
+    
+    // 为类别筛选器添加事件
+    document.querySelector('.category-filter').addEventListener('change', function() {
+        const category = this.value;
+        console.log('筛选类别:', category);
+        
+        if (category === '全部类别') {
+            // 显示所有行
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                row.style.display = '';
+            });
+        } else {
+            // 只显示匹配类别的行
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                const rowCategory = row.cells[1].textContent;
+                if (rowCategory === category) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    });
+    
+    // 为搜索按钮添加事件
+    document.querySelector('.inventory-search .btn-icon').addEventListener('click', function() {
+        performSearch();
+    });
+    
+    // 为搜索输入框添加回车事件
+    document.querySelector('.inventory-search .search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+    
+    // 搜索功能
+    function performSearch() {
+        const searchInput = document.querySelector('.inventory-search .search-input');
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        if (searchTerm) {
+            console.log('搜索物料:', searchTerm);
+            
+            // 简单的客户端搜索实现
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                const category = row.cells[1].textContent.toLowerCase();
+                const spec = row.cells[2].textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || category.includes(searchTerm) || spec.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        } else {
+            // 如果搜索词为空，显示所有行
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                row.style.display = '';
+            });
+            alert('请输入搜索关键词');
+        }
+    }
+    
+    // 添加库存状态颜色指示
+    document.querySelectorAll('.data-table tbody tr').forEach(row => {
+        const currentStock = parseInt(row.cells[4].textContent);
+        const minStock = parseInt(row.cells[5].textContent);
+        const statusCell = row.cells[6].querySelector('.status-badge');
+        
+        if (currentStock <= minStock * 0.5) {
+            statusCell.className = 'status-badge danger';
+            statusCell.textContent = '紧急';
+        } else if (currentStock <= minStock) {
+            statusCell.className = 'status-badge warning';
+            statusCell.textContent = '警告';
+        } else {
+            statusCell.className = 'status-badge normal';
+            statusCell.textContent = '正常';
+        }
+    });
+</script> 

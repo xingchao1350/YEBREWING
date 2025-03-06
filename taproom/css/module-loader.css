@@ -1,0 +1,132 @@
+/* 模块加载器样式 */
+
+/* 加载指示器 */
+.loading-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+    color: #6B7280;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #4F46E5;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 子模块加载器 */
+.sub-module-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    color: #6B7280;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+}
+
+/* 错误容器 */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+    background-color: #FEF2F2;
+    border: 1px solid #FCA5A5;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.error-icon {
+    font-size: 48px;
+    color: #EF4444;
+    margin-bottom: 20px;
+}
+
+.error-container h2 {
+    color: #B91C1C;
+    margin-bottom: 10px;
+}
+
+.error-container p {
+    color: #7F1D1D;
+    margin-bottom: 20px;
+}
+
+.error-container .btn {
+    background-color: #EF4444;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.error-container .btn:hover {
+    background-color: #DC2626;
+}
+
+/* 标签页样式 */
+.tab-pane {
+    display: none;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* 标签页导航 */
+.tabs {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #E5E7EB;
+    background-color: #F9FAFB;
+    border-radius: 8px 8px 0 0;
+}
+
+.tab-item {
+    margin: 0;
+}
+
+.tab-item a {
+    display: block;
+    padding: 12px 20px;
+    color: #6B7280;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.tab-item a:hover {
+    color: #4F46E5;
+    background-color: #F3F4F6;
+}
+
+.tab-item a.active {
+    color: #4F46E5;
+    border-bottom-color: #4F46E5;
+    background-color: #fff;
+} 

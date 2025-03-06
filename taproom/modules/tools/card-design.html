@@ -1,0 +1,605 @@
+<div class="card">
+    <div class="card-header">
+        <h2>卡片设计</h2>
+    </div>
+    <div class="card-body">
+        <div class="tools-container">
+            <div class="tools-header">
+                <div class="tools-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 新建卡片</button>
+                    <select class="tools-filter">
+                        <option>全部类型</option>
+                        <option>会员卡</option>
+                        <option>优惠券</option>
+                        <option>活动卡</option>
+                        <option>礼品卡</option>
+                    </select>
+                </div>
+                <div class="tools-search">
+                    <input type="text" placeholder="搜索卡片..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="tools-templates">
+                <div class="template-grid">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/card-1.jpg" alt="会员卡模板">
+                        </div>
+                        <div class="template-info">
+                            <h3>高级会员卡</h3>
+                            <p>适合VIP会员，包含金色元素</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/card-2.jpg" alt="优惠券模板">
+                        </div>
+                        <div class="template-info">
+                            <h3>节日优惠券</h3>
+                            <p>适合各类节日促销活动</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/card-3.jpg" alt="活动卡模板">
+                        </div>
+                        <div class="template-info">
+                            <h3>品鉴会邀请卡</h3>
+                            <p>适合高端品鉴活动</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/card-4.jpg" alt="礼品卡模板">
+                        </div>
+                        <div class="template-info">
+                            <h3>生日礼品卡</h3>
+                            <p>适合会员生日赠送</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="design-editor">
+                <h3>卡片编辑器</h3>
+                <div class="editor-container">
+                    <div class="editor-sidebar">
+                        <div class="editor-section">
+                            <h4>卡片类型</h4>
+                            <div class="editor-options">
+                                <label class="radio-option">
+                                    <input type="radio" name="card-type" value="member" checked>
+                                    <span>会员卡</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="card-type" value="coupon">
+                                    <span>优惠券</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="card-type" value="event">
+                                    <span>活动卡</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="card-type" value="gift">
+                                    <span>礼品卡</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-section">
+                            <h4>卡片尺寸</h4>
+                            <div class="editor-options">
+                                <select class="editor-select">
+                                    <option>标准尺寸 (85.6mm × 54mm)</option>
+                                    <option>方形尺寸 (85mm × 85mm)</option>
+                                    <option>迷你尺寸 (60mm × 40mm)</option>
+                                    <option>自定义尺寸</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-section">
+                            <h4>背景颜色</h4>
+                            <div class="editor-options">
+                                <div class="color-picker">
+                                    <div class="color-option" style="background-color: #4f46e5;"></div>
+                                    <div class="color-option" style="background-color: #10b981;"></div>
+                                    <div class="color-option" style="background-color: #f59e0b;"></div>
+                                    <div class="color-option" style="background-color: #ef4444;"></div>
+                                    <div class="color-option" style="background-color: #6b7280;"></div>
+                                    <div class="color-option custom-color">+</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-section">
+                            <h4>文本内容</h4>
+                            <div class="editor-options">
+                                <div class="form-group">
+                                    <label>标题</label>
+                                    <input type="text" class="editor-input" value="VIP会员卡">
+                                </div>
+                                <div class="form-group">
+                                    <label>副标题</label>
+                                    <input type="text" class="editor-input" value="尊享优质服务">
+                                </div>
+                                <div class="form-group">
+                                    <label>说明文字</label>
+                                    <textarea class="editor-textarea">持卡可享受全场9折优惠及积分奖励</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-actions">
+                            <button class="btn btn-primary">保存设计</button>
+                            <button class="btn">预览</button>
+                        </div>
+                    </div>
+                    
+                    <div class="editor-preview">
+                        <div class="card-preview">
+                            <div class="card-preview-content">
+                                <h3>VIP会员卡</h3>
+                                <h4>尊享优质服务</h4>
+                                <p>持卡可享受全场9折优惠及积分奖励</p>
+                                <div class="card-logo">
+                                    <i class="fas fa-glass-martini-alt"></i>
+                                </div>
+                                <div class="card-footer">
+                                    <span>有效期: 永久有效</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Tools Card Design 子模块加载完成');
+    
+    // 为新建卡片按钮添加事件
+    document.querySelector('.tools-actions .btn').addEventListener('click', function() {
+        console.log('点击新建卡片按钮');
+        alert('新建卡片');
+    });
+    
+    // 为使用模板按钮添加事件
+    document.querySelectorAll('.template-actions .btn-sm:first-child').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.template-card');
+            const title = card.querySelector('h3').textContent;
+            console.log('使用模板:', title);
+            alert('使用模板: ' + title);
+        });
+    });
+    
+    // 为收藏按钮添加事件
+    document.querySelectorAll('.template-actions .btn-outline').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.template-card');
+            const title = card.querySelector('h3').textContent;
+            console.log('收藏模板:', title);
+            
+            // 切换收藏状态
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                alert('已收藏: ' + title);
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                alert('取消收藏: ' + title);
+            }
+        });
+    });
+    
+    // 为卡片类型单选按钮添加事件
+    document.querySelectorAll('input[name="card-type"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            console.log('选择卡片类型:', this.value);
+            
+            // 更新预览卡片的样式
+            const cardPreview = document.querySelector('.card-preview');
+            
+            // 移除所有类型类
+            cardPreview.classList.remove('member-card', 'coupon-card', 'event-card', 'gift-card');
+            
+            // 添加选中的类型类
+            cardPreview.classList.add(this.value + '-card');
+            
+            // 更新预览卡片的内容
+            const title = document.querySelector('.card-preview-content h3');
+            const subtitle = document.querySelector('.card-preview-content h4');
+            const description = document.querySelector('.card-preview-content p');
+            
+            switch(this.value) {
+                case 'member':
+                    title.textContent = 'VIP会员卡';
+                    subtitle.textContent = '尊享优质服务';
+                    description.textContent = '持卡可享受全场9折优惠及积分奖励';
+                    break;
+                case 'coupon':
+                    title.textContent = '优惠券';
+                    subtitle.textContent = '限时特惠';
+                    description.textContent = '凭券享受指定商品8折优惠';
+                    break;
+                case 'event':
+                    title.textContent = '活动邀请卡';
+                    subtitle.textContent = '啤酒品鉴会';
+                    description.textContent = '诚邀您参加我们的精酿啤酒品鉴活动';
+                    break;
+                case 'gift':
+                    title.textContent = '礼品卡';
+                    subtitle.textContent = '生日特别礼遇';
+                    description.textContent = '价值100元的消费金额，生日当月有效';
+                    break;
+            }
+        });
+    });
+    
+    // 为背景颜色选择器添加事件
+    document.querySelectorAll('.color-option').forEach(option => {
+        option.addEventListener('click', function() {
+            if (this.classList.contains('custom-color')) {
+                // 如果是自定义颜色选项
+                const color = prompt('请输入十六进制颜色代码（例如：#4f46e5）:', '#4f46e5');
+                if (color) {
+                    document.querySelector('.card-preview').style.backgroundColor = color;
+                }
+            } else {
+                // 获取背景颜色
+                const color = window.getComputedStyle(this).backgroundColor;
+                document.querySelector('.card-preview').style.backgroundColor = color;
+            }
+        });
+    });
+    
+    // 为文本输入框添加事件
+    document.querySelectorAll('.editor-input, .editor-textarea').forEach(input => {
+        input.addEventListener('input', function() {
+            const fieldName = this.previousElementSibling.textContent.trim();
+            const value = this.value;
+            
+            switch(fieldName) {
+                case '标题':
+                    document.querySelector('.card-preview-content h3').textContent = value;
+                    break;
+                case '副标题':
+                    document.querySelector('.card-preview-content h4').textContent = value;
+                    break;
+                case '说明文字':
+                    document.querySelector('.card-preview-content p').textContent = value;
+                    break;
+            }
+        });
+    });
+    
+    // 为保存设计按钮添加事件
+    document.querySelector('.editor-actions .btn-primary').addEventListener('click', function() {
+        console.log('保存卡片设计');
+        alert('卡片设计已保存');
+    });
+    
+    // 为预览按钮添加事件
+    document.querySelector('.editor-actions .btn:last-child').addEventListener('click', function() {
+        console.log('预览卡片设计');
+        alert('正在预览卡片设计');
+    });
+</script>
+
+<style>
+    .tools-container {
+        padding: 0;
+    }
+    
+    .tools-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    
+    .tools-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .tools-search {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .search-input {
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        width: 200px;
+    }
+    
+    .template-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .template-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .template-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .template-preview {
+        height: 150px;
+        overflow: hidden;
+        background-color: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .template-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .template-info {
+        padding: 15px;
+    }
+    
+    .template-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+        color: #1f2937;
+    }
+    
+    .template-info p {
+        margin: 0 0 15px 0;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    
+    .template-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .design-editor {
+        margin-top: 30px;
+    }
+    
+    .design-editor h3 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        color: #1f2937;
+    }
+    
+    .editor-container {
+        display: flex;
+        gap: 20px;
+        background-color: #f9fafb;
+        border-radius: 8px;
+        padding: 20px;
+    }
+    
+    .editor-sidebar {
+        flex: 1;
+        max-width: 300px;
+    }
+    
+    .editor-preview {
+        flex: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f3f4f6;
+        border-radius: 8px;
+        padding: 20px;
+    }
+    
+    .editor-section {
+        margin-bottom: 20px;
+    }
+    
+    .editor-section h4 {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+        color: #4b5563;
+    }
+    
+    .editor-options {
+        margin-bottom: 15px;
+    }
+    
+    .radio-option {
+        display: block;
+        margin-bottom: 8px;
+        cursor: pointer;
+    }
+    
+    .editor-select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+    }
+    
+    .color-picker {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .color-option {
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid #e5e7eb;
+    }
+    
+    .custom-color {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        font-size: 20px;
+        color: #6b7280;
+    }
+    
+    .form-group {
+        margin-bottom: 10px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    
+    .editor-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+    }
+    
+    .editor-textarea {
+        width: 100%;
+        height: 80px;
+        padding: 8px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        resize: vertical;
+    }
+    
+    .editor-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .btn-primary {
+        background-color: #4f46e5;
+        color: white;
+    }
+    
+    .card-preview {
+        width: 340px;
+        height: 215px;
+        background-color: #4f46e5;
+        border-radius: 10px;
+        color: white;
+        padding: 20px;
+        position: relative;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-preview-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .card-preview-content h3 {
+        margin: 0 0 5px 0;
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    .card-preview-content h4 {
+        margin: 0 0 15px 0;
+        font-size: 16px;
+        font-weight: 400;
+        opacity: 0.8;
+    }
+    
+    .card-preview-content p {
+        margin: 0;
+        font-size: 14px;
+        opacity: 0.9;
+    }
+    
+    .card-logo {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 40px;
+        opacity: 0.5;
+    }
+    
+    .card-footer {
+        margin-top: auto;
+        font-size: 12px;
+        opacity: 0.7;
+    }
+    
+    /* 卡片类型样式 */
+    .member-card {
+        background-color: #4f46e5;
+    }
+    
+    .coupon-card {
+        background-color: #10b981;
+    }
+    
+    .event-card {
+        background-color: #f59e0b;
+    }
+    
+    .gift-card {
+        background-color: #ef4444;
+    }
+    
+    @media (max-width: 768px) {
+        .tools-header {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .tools-search {
+            width: 100%;
+        }
+        
+        .search-input {
+            flex: 1;
+        }
+        
+        .editor-container {
+            flex-direction: column;
+        }
+        
+        .editor-sidebar {
+            max-width: none;
+        }
+    }
+</style> 

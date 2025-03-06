@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块加载调试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .module-list {
+            margin-bottom: 20px;
+        }
+        .module-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .module-item:hover {
+            background-color: #e0e0e0;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .log {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+        .log-item {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #4338CA;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>模块加载调试</h1>
+        
+        <div class="module-list">
+            <h2>模块列表</h2>
+            <div class="module-item" data-module="dashboard">门店总览 (dashboard)</div>
+            <div class="module-item" data-module="inventory">库存管理 (inventory)</div>
+            <div class="module-item" data-module="finance">财务管理 (finance)</div>
+            <div class="module-item" data-module="tools">工具模块 (tools)</div>
+            <div class="module-item" data-module="resources">资源中心 (resources)</div>
+        </div>
+        
+        <div>
+            <button id="clear-log">清除日志</button>
+            <button id="check-files">检查文件</button>
+        </div>
+        
+        <div class="log" id="log">
+            <div class="log-item">准备就绪，点击模块进行测试...</div>
+        </div>
+        
+        <div class="result" id="result">
+            <p>模块内容将显示在这里...</p>
+        </div>
+    </div>
+    
+    <script>
+        // 模块配置
+        const MODULES = {
+            dashboard: {
+                path: './modules/dashboard.html',
+                title: '门店总览'
+            },
+            inventory: {
+                path: './modules/inventory.html',
+                title: '库存管理'
+            },
+            finance: {
+                path: './modules/finance.html',
+                title: '财务管理'
+            },
+            tools: {
+                path: './modules/tools.html',
+                title: '工具模块'
+            },
+            resources: {
+                path: './modules/resources.html',
+                title: '资源中心'
+            }
+        };
+        
+        // 获取当前页面的基础路径
+        function getBasePath() {
+            const path = window.location.pathname;
+            return path.substring(0, path.lastIndexOf('/') + 1);
+        }
+        
+        // 日志函数
+        function log(message, type = 'info') {
+            const logContainer = document.getElementById('log');
+            const logItem = document.createElement('div');
+            logItem.className = `log-item ${type}`;
+            logItem.textContent = message;
+            logContainer.appendChild(logItem);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+        
+        // 加载模块
+        async function loadModule(moduleName) {
+            log(`开始加载模块: ${moduleName}`);
+            
+            try {
+                // 检查模块是否存在
+                if (!MODULES[moduleName]) {
+                    throw new Error(`模块 "${moduleName}" 不存在`);
+                }
+                
+                // 获取模块配置
+                const moduleConfig = MODULES[moduleName];
+                
+                // 构建完整路径
+                const basePath = getBasePath();
+                const fullPath = new URL(moduleConfig.path, window.location.href).href;
+                
+                log(`模块路径: ${moduleConfig.path}`);
+                log(`完整路径: ${fullPath}`);
+                
+                // 加载模块HTML
+                const response = await fetch(fullPath, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`无法加载模块: ${response.status} ${response.statusText}`);
+                }
+                
+                // 获取HTML内容
+                const html = await response.text();
+                log(`模块加载成功，内容长度: ${html.length}`, 'success');
+                
+                // 显示内容
+                document.getElementById('result').innerHTML = html;
+                
+            } catch (error) {
+                log(`加载失败: ${error.message}`, 'error');
+                document.getElementById('result').innerHTML = `
+                    <div style="color: red; padding: 20px; border: 1px solid red; border-radius: 4px;">
+                        <h3>错误</h3>
+                        <p>${error.message}</p>
+                        <p>请确保您通过Web服务器访问此页面，而不是直接从文件系统打开。</p>
+                        <p>详情请参阅 <a href="README-SERVER.md">README-SERVER.md</a></p>
+                    </div>
+                `;
+            }
+        }
+        
+        // 检查文件
+        async function checkFiles() {
+            log('开始检查模块文件...');
+            
+            for (const [moduleName, moduleConfig] of Object.entries(MODULES)) {
+                try {
+                    const response = await fetch(moduleConfig.path, { method: 'HEAD' });
+                    
+                    if (response.ok) {
+                        log(`模块 ${moduleName} 文件存在 (${moduleConfig.path})`, 'success');
+                    } else {
+                        log(`模块 ${moduleName} 文件不存在或无法访问 (${moduleConfig.path})`, 'error');
+                    }
+                } catch (error) {
+                    log(`检查模块 ${moduleName} 文件时出错: ${error.message}`, 'error');
+                }
+            }
+            
+            log('文件检查完成');
+        }
+        
+        // 事件监听
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模块点击事件
+            document.querySelectorAll('.module-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const moduleName = this.getAttribute('data-module');
+                    loadModule(moduleName);
+                });
+            });
+            
+            // 清除日志
+            document.getElementById('clear-log').addEventListener('click', function() {
+                document.getElementById('log').innerHTML = '<div class="log-item">日志已清除</div>';
+            });
+            
+            // 检查文件
+            document.getElementById('check-files').addEventListener('click', function() {
+                checkFiles();
+            });
+        });
+    </script>
+</body>
+</html> 

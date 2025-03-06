@@ -1,0 +1,657 @@
+<div class="card">
+    <div class="card-header">
+        <h2>文档资源</h2>
+    </div>
+    <div class="card-body">
+        <div class="resources-container">
+            <div class="resources-header">
+                <div class="resources-actions">
+                    <button class="btn"><i class="fas fa-upload"></i> 上传文档</button>
+                    <select class="document-type-filter">
+                        <option>全部类型</option>
+                        <option>Word文档</option>
+                        <option>Excel表格</option>
+                        <option>PDF文件</option>
+                        <option>演示文稿</option>
+                        <option>其他</option>
+                    </select>
+                    <select class="document-category-filter">
+                        <option>全部分类</option>
+                        <option>规章制度</option>
+                        <option>操作手册</option>
+                        <option>培训资料</option>
+                        <option>合同文档</option>
+                        <option>财务报表</option>
+                    </select>
+                </div>
+                <div class="resources-search">
+                    <input type="text" placeholder="搜索文档..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="document-categories">
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-book"></i></div>
+                    <div class="category-info">
+                        <h3>规章制度</h3>
+                        <p>15 个文档</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <div class="category-info">
+                        <h3>操作手册</h3>
+                        <p>23 个文档</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="category-info">
+                        <h3>培训资料</h3>
+                        <p>18 个文档</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-file-contract"></i></div>
+                    <div class="category-info">
+                        <h3>合同文档</h3>
+                        <p>12 个文档</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="category-info">
+                        <h3>财务报表</h3>
+                        <p>9 个文档</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="document-recent">
+                <div class="section-header">
+                    <h3>最近文档</h3>
+                    <button class="btn btn-sm">查看全部</button>
+                </div>
+                <div class="document-list">
+                    <div class="document-item">
+                        <div class="document-icon pdf"><i class="fas fa-file-pdf"></i></div>
+                        <div class="document-info">
+                            <h4>员工手册 2023版</h4>
+                            <p>上传于: 2023-06-15 | 大小: 2.4MB</p>
+                            <div class="document-tags">
+                                <span class="tag">规章制度</span>
+                                <span class="tag">人力资源</span>
+                            </div>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn-icon small"><i class="fas fa-download"></i></button>
+                            <button class="btn-icon small"><i class="fas fa-share-alt"></i></button>
+                            <button class="btn-icon small"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="document-item">
+                        <div class="document-icon word"><i class="fas fa-file-word"></i></div>
+                        <div class="document-info">
+                            <h4>酒水采购流程</h4>
+                            <p>上传于: 2023-06-14 | 大小: 1.2MB</p>
+                            <div class="document-tags">
+                                <span class="tag">操作手册</span>
+                                <span class="tag">采购</span>
+                            </div>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn-icon small"><i class="fas fa-download"></i></button>
+                            <button class="btn-icon small"><i class="fas fa-share-alt"></i></button>
+                            <button class="btn-icon small"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <div class="document-item">
+                        <div class="document-icon excel"><i class="fas fa-file-excel"></i></div>
+                        <div class="document-info">
+                            <h4>2023年Q2销售数据</h4>
+                            <p>上传于: 2023-06-13 | 大小: 3.5MB</p>
+                            <div class="document-tags">
+                                <span class="tag">财务报表</span>
+                                <span class="tag">销售</span>
+                            </div>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn-icon small"><i class="fas fa-download"></i></button>
+                            <button class="btn-icon small"><i class="fas fa-share-alt"></i></button>
+                            <button class="btn-icon small"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="document-all">
+                <div class="section-header">
+                    <h3>所有文档</h3>
+                    <div class="view-options">
+                        <button class="btn-icon small active" data-view="list"><i class="fas fa-list"></i></button>
+                        <button class="btn-icon small" data-view="grid"><i class="fas fa-th-large"></i></button>
+                    </div>
+                </div>
+                <div class="document-table">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>文档名称</th>
+                                <th>类型</th>
+                                <th>分类</th>
+                                <th>上传日期</th>
+                                <th>大小</th>
+                                <th>上传者</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="document-name">
+                                        <div class="document-icon-small pdf"><i class="fas fa-file-pdf"></i></div>
+                                        <span>员工手册 2023版</span>
+                                    </div>
+                                </td>
+                                <td>PDF文件</td>
+                                <td>规章制度</td>
+                                <td>2023-06-15</td>
+                                <td>2.4MB</td>
+                                <td>张经理</td>
+                                <td>
+                                    <button class="btn-icon small"><i class="fas fa-download"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-share-alt"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="document-name">
+                                        <div class="document-icon-small word"><i class="fas fa-file-word"></i></div>
+                                        <span>酒水采购流程</span>
+                                    </div>
+                                </td>
+                                <td>Word文档</td>
+                                <td>操作手册</td>
+                                <td>2023-06-14</td>
+                                <td>1.2MB</td>
+                                <td>李采购</td>
+                                <td>
+                                    <button class="btn-icon small"><i class="fas fa-download"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-share-alt"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="document-name">
+                                        <div class="document-icon-small excel"><i class="fas fa-file-excel"></i></div>
+                                        <span>2023年Q2销售数据</span>
+                                    </div>
+                                </td>
+                                <td>Excel表格</td>
+                                <td>财务报表</td>
+                                <td>2023-06-13</td>
+                                <td>3.5MB</td>
+                                <td>王财务</td>
+                                <td>
+                                    <button class="btn-icon small"><i class="fas fa-download"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-share-alt"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="document-name">
+                                        <div class="document-icon-small ppt"><i class="fas fa-file-powerpoint"></i></div>
+                                        <span>新员工培训PPT</span>
+                                    </div>
+                                </td>
+                                <td>演示文稿</td>
+                                <td>培训资料</td>
+                                <td>2023-06-12</td>
+                                <td>5.8MB</td>
+                                <td>赵培训</td>
+                                <td>
+                                    <button class="btn-icon small"><i class="fas fa-download"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-share-alt"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="document-name">
+                                        <div class="document-icon-small pdf"><i class="fas fa-file-pdf"></i></div>
+                                        <span>供应商合同模板</span>
+                                    </div>
+                                </td>
+                                <td>PDF文件</td>
+                                <td>合同文档</td>
+                                <td>2023-06-11</td>
+                                <td>1.7MB</td>
+                                <td>孙法务</td>
+                                <td>
+                                    <button class="btn-icon small"><i class="fas fa-download"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-share-alt"></i></button>
+                                    <button class="btn-icon small"><i class="fas fa-ellipsis-v"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="document-pagination">
+                    <button class="btn-icon small"><i class="fas fa-chevron-left"></i></button>
+                    <span class="page-info">第1页，共4页</span>
+                    <button class="btn-icon small"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Resources Documents 子模块加载完成');
+    
+    // 为上传文档按钮添加事件
+    document.querySelector('.resources-actions .btn').addEventListener('click', function() {
+        console.log('点击上传文档按钮');
+        alert('上传新文档');
+    });
+    
+    // 为文档类型筛选器添加事件
+    document.querySelector('.document-type-filter').addEventListener('change', function() {
+        const docType = this.value;
+        console.log('筛选文档类型:', docType);
+        alert('筛选文档类型: ' + docType);
+    });
+    
+    // 为文档分类筛选器添加事件
+    document.querySelector('.document-category-filter').addEventListener('change', function() {
+        const docCategory = this.value;
+        console.log('筛选文档分类:', docCategory);
+        alert('筛选文档分类: ' + docCategory);
+    });
+    
+    // 为分类卡片添加事件
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const category = this.querySelector('h3').textContent;
+            console.log('选择文档分类:', category);
+            alert('查看分类: ' + category);
+        });
+    });
+    
+    // 为查看全部按钮添加事件
+    document.querySelector('.section-header .btn-sm').addEventListener('click', function() {
+        console.log('点击查看全部按钮');
+        
+        // 滚动到所有文档部分
+        document.querySelector('.document-all').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // 为视图切换按钮添加事件
+    document.querySelectorAll('.view-options .btn-icon').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // 移除所有按钮的active类
+            document.querySelectorAll('.view-options .btn-icon').forEach(b => {
+                b.classList.remove('active');
+            });
+            
+            // 为当前按钮添加active类
+            this.classList.add('active');
+            
+            const viewType = this.dataset.view;
+            console.log('切换视图:', viewType);
+            
+            if (viewType === 'grid') {
+                alert('切换到网格视图 (功能开发中)');
+            } else {
+                alert('切换到列表视图');
+            }
+        });
+    });
+    
+    // 为下载按钮添加事件
+    document.querySelectorAll('.document-actions .fa-download, .data-table .fa-download').forEach(icon => {
+        icon.parentElement.addEventListener('click', function() {
+            let docName;
+            if (this.closest('.document-item')) {
+                docName = this.closest('.document-item').querySelector('h4').textContent;
+            } else if (this.closest('tr')) {
+                docName = this.closest('tr').querySelector('.document-name span').textContent;
+            }
+            
+            console.log('下载文档:', docName);
+            alert('下载文档: ' + docName);
+        });
+    });
+    
+    // 为分享按钮添加事件
+    document.querySelectorAll('.document-actions .fa-share-alt, .data-table .fa-share-alt').forEach(icon => {
+        icon.parentElement.addEventListener('click', function() {
+            let docName;
+            if (this.closest('.document-item')) {
+                docName = this.closest('.document-item').querySelector('h4').textContent;
+            } else if (this.closest('tr')) {
+                docName = this.closest('tr').querySelector('.document-name span').textContent;
+            }
+            
+            console.log('分享文档:', docName);
+            alert('分享文档: ' + docName);
+        });
+    });
+    
+    // 为更多操作按钮添加事件
+    document.querySelectorAll('.document-actions .fa-ellipsis-v, .data-table .fa-ellipsis-v').forEach(icon => {
+        icon.parentElement.addEventListener('click', function() {
+            let docName;
+            if (this.closest('.document-item')) {
+                docName = this.closest('.document-item').querySelector('h4').textContent;
+            } else if (this.closest('tr')) {
+                docName = this.closest('tr').querySelector('.document-name span').textContent;
+            }
+            
+            console.log('更多操作:', docName);
+            
+            // 显示操作菜单（这里简化为弹窗）
+            const options = ['编辑信息', '移动到', '删除', '版本历史'];
+            const option = prompt('选择操作:\n1. 编辑信息\n2. 移动到\n3. 删除\n4. 版本历史', '1');
+            
+            if (option) {
+                const index = parseInt(option) - 1;
+                if (index >= 0 && index < options.length) {
+                    alert(options[index] + ': ' + docName);
+                }
+            }
+        });
+    });
+    
+    // 为搜索按钮添加事件
+    document.querySelector('.resources-search .btn-icon').addEventListener('click', function() {
+        performSearch();
+    });
+    
+    // 为搜索输入框添加回车事件
+    document.querySelector('.resources-search .search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+    
+    // 搜索功能
+    function performSearch() {
+        const searchInput = document.querySelector('.resources-search .search-input');
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm) {
+            console.log('搜索文档:', searchTerm);
+            alert('搜索文档: ' + searchTerm);
+        } else {
+            alert('请输入搜索关键词');
+        }
+    }
+</script>
+
+<style>
+    .resources-container {
+        padding: 0;
+    }
+    
+    .resources-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    
+    .resources-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .resources-search {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .search-input {
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        width: 200px;
+    }
+    
+    .document-categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .category-card {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        background-color: #f9fafb;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .category-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .category-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background-color: #4f46e5;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-size: 18px;
+    }
+    
+    .category-info h3 {
+        margin: 0;
+        font-size: 16px;
+        color: #1f2937;
+    }
+    
+    .category-info p {
+        margin: 5px 0 0 0;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .section-header h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #1f2937;
+    }
+    
+    .document-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+    
+    .document-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background-color: white;
+    }
+    
+    .document-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-size: 24px;
+        color: white;
+    }
+    
+    .document-icon.pdf {
+        background-color: #ef4444;
+    }
+    
+    .document-icon.word {
+        background-color: #3b82f6;
+    }
+    
+    .document-icon.excel {
+        background-color: #10b981;
+    }
+    
+    .document-icon.ppt {
+        background-color: #f59e0b;
+    }
+    
+    .document-info {
+        flex: 1;
+    }
+    
+    .document-info h4 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+        color: #1f2937;
+    }
+    
+    .document-info p {
+        margin: 0 0 5px 0;
+        font-size: 12px;
+        color: #6b7280;
+    }
+    
+    .document-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .tag {
+        display: inline-block;
+        padding: 2px 8px;
+        background-color: #f3f4f6;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #4b5563;
+    }
+    
+    .document-actions {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .document-name {
+        display: flex;
+        align-items: center;
+    }
+    
+    .document-icon-small {
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        font-size: 14px;
+        color: white;
+    }
+    
+    .document-icon-small.pdf {
+        background-color: #ef4444;
+    }
+    
+    .document-icon-small.word {
+        background-color: #3b82f6;
+    }
+    
+    .document-icon-small.excel {
+        background-color: #10b981;
+    }
+    
+    .document-icon-small.ppt {
+        background-color: #f59e0b;
+    }
+    
+    .view-options {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .view-options .btn-icon.active {
+        background-color: #4f46e5;
+        color: white;
+    }
+    
+    .document-pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .page-info {
+        font-size: 14px;
+        color: #6b7280;
+    }
+    
+    @media (max-width: 768px) {
+        .resources-header {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .resources-actions {
+            flex-wrap: wrap;
+        }
+        
+        .resources-search {
+            width: 100%;
+        }
+        
+        .search-input {
+            flex: 1;
+        }
+        
+        .document-categories {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .document-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .document-icon {
+            margin-bottom: 10px;
+        }
+        
+        .document-actions {
+            margin-top: 10px;
+            align-self: flex-end;
+        }
+    }
+</style> 

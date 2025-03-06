@@ -1,0 +1,74 @@
+<!-- 库存模块 -->
+<div id="inventory" class="dashboard-section">
+    <div class="dashboard-tabs-container">
+        <div class="settings-tabs">
+            <ul class="tabs">
+                <li class="tab-item"><a href="#draft-beer" class="active">生啤库存</a></li>
+                <li class="tab-item"><a href="#canned-beer">易拉罐库存</a></li>
+                <li class="tab-item"><a href="#other-alcohol">其他酒水库存</a></li>
+                <li class="tab-item"><a href="#soft-drinks">软饮库存</a></li>
+                <li class="tab-item"><a href="#materials">物料库存</a></li>
+            </ul>
+        </div>
+        
+        <div class="tab-content">
+            <!-- 生啤库存标签页 -->
+            <div id="draft-beer" class="tab-pane active">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 易拉罐库存标签页 -->
+            <div id="canned-beer" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 其他酒水库存标签页 -->
+            <div id="other-alcohol" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 软饮库存标签页 -->
+            <div id="soft-drinks" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 物料库存标签页 -->
+            <div id="materials" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当模块加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Inventory 模块加载完成');
+        
+        // 如果存在模块加载器，则加载默认子模块
+        if (window.moduleLoader) {
+            // 加载默认子模块（生啤库存）
+            window.moduleLoader.loadSubModule('inventory', 'draft-beer');
+        }
+    });
+</script> 

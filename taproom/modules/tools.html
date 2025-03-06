@@ -1,0 +1,74 @@
+<!-- 工具模块 -->
+<div id="tools" class="dashboard-section">
+    <div class="dashboard-tabs-container">
+        <div class="settings-tabs">
+            <ul class="tabs">
+                <li class="tab-item"><a href="#drink-menu" class="active">酒单设计</a></li>
+                <li class="tab-item"><a href="#food-menu">餐单设计</a></li>
+                <li class="tab-item"><a href="#card-design">卡片设计</a></li>
+                <li class="tab-item"><a href="#poster-design">海报设计</a></li>
+                <li class="tab-item"><a href="#other-tools">店长工具</a></li>
+            </ul>
+        </div>
+        
+        <div class="tab-content">
+            <!-- 酒单设计标签页 -->
+            <div id="drink-menu" class="tab-pane active">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 餐单设计标签页 -->
+            <div id="food-menu" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 卡片设计标签页 -->
+            <div id="card-design" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 海报设计标签页 -->
+            <div id="poster-design" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 其他工具标签页 -->
+            <div id="other-tools" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当模块加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Tools 模块加载完成');
+        
+        // 如果存在模块加载器，则加载默认子模块
+        if (window.moduleLoader) {
+            // 加载默认子模块（酒单设计）
+            window.moduleLoader.loadSubModule('tools', 'drink-menu');
+        }
+    });
+</script> 

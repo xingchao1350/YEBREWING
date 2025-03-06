@@ -1,0 +1,110 @@
+<div class="card">
+    <div class="card-header">
+        <h2>酒单设计</h2>
+    </div>
+    <div class="card-body">
+        <div class="tools-container">
+            <div class="tools-header">
+                <div class="tools-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 新建酒单</button>
+                    <select class="tools-filter">
+                        <option>全部模板</option>
+                        <option>简约风格</option>
+                        <option>复古风格</option>
+                        <option>现代风格</option>
+                        <option>自定义</option>
+                    </select>
+                </div>
+                <div class="tools-search">
+                    <input type="text" placeholder="搜索酒单..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="tools-templates">
+                <div class="template-grid">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/drink-menu-1.jpg" alt="酒单模板1">
+                        </div>
+                        <div class="template-info">
+                            <h3>简约风格酒单</h3>
+                            <p>简洁大方的设计，适合各类酒吧</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/drink-menu-2.jpg" alt="酒单模板2">
+                        </div>
+                        <div class="template-info">
+                            <h3>复古风格酒单</h3>
+                            <p>怀旧复古设计，适合特色酒吧</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/drink-menu-3.jpg" alt="酒单模板3">
+                        </div>
+                        <div class="template-info">
+                            <h3>现代风格酒单</h3>
+                            <p>时尚现代设计，适合高端酒吧</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Tools Drink Menu 子模块加载完成');
+    
+    // 为新建酒单按钮添加事件
+    document.querySelector('.tools-actions .btn').addEventListener('click', function() {
+        console.log('点击新建酒单按钮');
+        alert('新建酒单');
+    });
+    
+    // 为使用模板按钮添加事件
+    document.querySelectorAll('.template-actions .btn-sm:first-child').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.template-card');
+            const title = card.querySelector('h3').textContent;
+            console.log('使用模板:', title);
+            alert('使用模板: ' + title);
+        });
+    });
+    
+    // 为收藏按钮添加事件
+    document.querySelectorAll('.template-actions .btn-outline').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.template-card');
+            const title = card.querySelector('h3').textContent;
+            console.log('收藏模板:', title);
+            
+            // 切换收藏状态
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                alert('已收藏: ' + title);
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                alert('取消收藏: ' + title);
+            }
+        });
+    });
+</script> 

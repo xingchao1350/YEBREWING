@@ -1,0 +1,172 @@
+<div class="card">
+    <div class="card-header">
+        <h2>易拉罐库存</h2>
+    </div>
+    <div class="card-body">
+        <div class="inventory-container">
+            <div class="inventory-header">
+                <div class="inventory-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 添加库存</button>
+                    <select class="inventory-filter">
+                        <option>全部门店</option>
+                        <option>东四咖啡</option>
+                        <option>白塔寺店</option>
+                    </select>
+                </div>
+                <div class="inventory-search">
+                    <input type="text" placeholder="搜索易拉罐..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="inventory-table">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>产品名称</th>
+                            <th>品牌</th>
+                            <th>规格</th>
+                            <th>当前库存</th>
+                            <th>最低库存</th>
+                            <th>状态</th>
+                            <th>最后更新</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>经典拉格</td>
+                            <td>京A精酿</td>
+                            <td>330ml</td>
+                            <td>48</td>
+                            <td>24</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-15</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>工人淡色艾尔</td>
+                            <td>京A精酿</td>
+                            <td>330ml</td>
+                            <td>36</td>
+                            <td>24</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-14</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>飞行猴子IPA</td>
+                            <td>京A精酿</td>
+                            <td>330ml</td>
+                            <td>12</td>
+                            <td>24</td>
+                            <td><span class="status-badge warning">警告</span></td>
+                            <td>2023-06-13</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>小麦白啤</td>
+                            <td>熊猫精酿</td>
+                            <td>330ml</td>
+                            <td>6</td>
+                            <td>12</td>
+                            <td><span class="status-badge danger">紧急</span></td>
+                            <td>2023-06-12</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>黑熊世涛</td>
+                            <td>熊猫精酿</td>
+                            <td>330ml</td>
+                            <td>24</td>
+                            <td>12</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-11</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="inventory-pagination">
+                <button class="btn-icon small"><i class="fas fa-chevron-left"></i></button>
+                <span class="page-info">第1页，共2页</span>
+                <button class="btn-icon small"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Inventory Canned Beer 子模块加载完成');
+    
+    // 为添加库存按钮添加事件
+    document.querySelector('.inventory-actions .btn').addEventListener('click', function() {
+        console.log('点击添加库存按钮');
+        alert('添加易拉罐库存');
+    });
+    
+    // 为编辑按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-edit').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const name = row.cells[0].textContent;
+            const brand = row.cells[1].textContent;
+            console.log('编辑库存:', name, brand);
+            alert('编辑库存: ' + name + ' (' + brand + ')');
+        });
+    });
+    
+    // 为删除按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-trash').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const name = row.cells[0].textContent;
+            const brand = row.cells[1].textContent;
+            console.log('删除库存:', name, brand);
+            if (confirm('确定要删除 ' + name + ' (' + brand + ') 吗？')) {
+                console.log('确认删除:', name, brand);
+                row.remove();
+            }
+        });
+    });
+    
+    // 为搜索按钮添加事件
+    document.querySelector('.inventory-search .btn-icon').addEventListener('click', function() {
+        const searchInput = document.querySelector('.inventory-search .search-input');
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm) {
+            console.log('搜索易拉罐:', searchTerm);
+            alert('搜索: ' + searchTerm);
+        } else {
+            alert('请输入搜索关键词');
+        }
+    });
+    
+    // 为搜索输入框添加回车事件
+    document.querySelector('.inventory-search .search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            const searchTerm = this.value.trim();
+            if (searchTerm) {
+                console.log('搜索易拉罐:', searchTerm);
+                alert('搜索: ' + searchTerm);
+            } else {
+                alert('请输入搜索关键词');
+            }
+        }
+    });
+</script> 

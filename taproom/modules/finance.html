@@ -1,0 +1,84 @@
+<!-- 财务模块 -->
+<div id="finance" class="dashboard-section">
+    <div class="dashboard-tabs-container">
+        <div class="settings-tabs">
+            <ul class="tabs">
+                <li class="tab-item"><a href="#overview" class="active">发起报销</a></li>
+                <li class="tab-item"><a href="#income">收入管理</a></li>
+                <li class="tab-item"><a href="#expenses">支出管理</a></li>
+                <li class="tab-item"><a href="#dongsi">东四咖啡合作</a></li>
+                <li class="tab-item"><a href="#baitasi">白塔寺合作</a></li>
+                <li class="tab-item"><a href="#reports">财务报表</a></li>
+            </ul>
+        </div>
+        
+        <div class="tab-content">
+            <!-- 发起报销标签页 -->
+            <div id="overview" class="tab-pane active">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 收入管理标签页 -->
+            <div id="income" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 支出管理标签页 -->
+            <div id="expenses" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 东四咖啡合作标签页 -->
+            <div id="dongsi" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 白塔寺合作标签页 -->
+            <div id="baitasi" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 财务报表标签页 -->
+            <div id="reports" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当模块加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Finance 模块加载完成');
+        
+        // 如果存在模块加载器，则加载默认子模块
+        if (window.moduleLoader) {
+            // 加载默认子模块（发起报销）
+            window.moduleLoader.loadSubModule('finance', 'overview');
+        }
+    });
+</script> 

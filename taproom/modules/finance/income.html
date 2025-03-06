@@ -1,0 +1,381 @@
+<div class="card">
+    <div class="card-header">
+        <h2>收入管理</h2>
+    </div>
+    <div class="card-body">
+        <div class="finance-container">
+            <div class="finance-header">
+                <div class="finance-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 添加收入</button>
+                    <select class="finance-filter">
+                        <option>全部门店</option>
+                        <option>东四咖啡</option>
+                        <option>白塔寺店</option>
+                    </select>
+                    <select class="date-filter">
+                        <option>本月</option>
+                        <option>上月</option>
+                        <option>本季度</option>
+                        <option>上季度</option>
+                        <option>本年度</option>
+                        <option>自定义</option>
+                    </select>
+                </div>
+                <div class="finance-search">
+                    <input type="text" placeholder="搜索收入记录..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="income-summary">
+                <div class="summary-card">
+                    <div class="summary-title">总收入</div>
+                    <div class="summary-value">¥125,680</div>
+                    <div class="summary-change positive">+8.5% 较上月</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">饮品收入</div>
+                    <div class="summary-value">¥78,450</div>
+                    <div class="summary-change positive">+12.3% 较上月</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">食品收入</div>
+                    <div class="summary-value">¥35,230</div>
+                    <div class="summary-change positive">+5.7% 较上月</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">其他收入</div>
+                    <div class="summary-value">¥12,000</div>
+                    <div class="summary-change negative">-2.1% 较上月</div>
+                </div>
+            </div>
+            
+            <div class="income-chart">
+                <div class="chart-header">
+                    <h3>收入趋势</h3>
+                    <div class="chart-actions">
+                        <select class="chart-period">
+                            <option>按日</option>
+                            <option selected>按周</option>
+                            <option>按月</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <div class="placeholder-text">收入趋势图表</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="income-table">
+                <div class="table-header">
+                    <h3>收入明细</h3>
+                    <div class="table-actions">
+                        <button class="btn btn-sm"><i class="fas fa-download"></i> 导出</button>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>收入类型</th>
+                            <th>描述</th>
+                            <th>门店</th>
+                            <th>金额</th>
+                            <th>支付方式</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2023-06-15</td>
+                            <td>饮品收入</td>
+                            <td>日常销售</td>
+                            <td>东四咖啡</td>
+                            <td class="positive">¥5,280</td>
+                            <td>微信支付</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-14</td>
+                            <td>食品收入</td>
+                            <td>日常销售</td>
+                            <td>白塔寺店</td>
+                            <td class="positive">¥3,150</td>
+                            <td>支付宝</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-13</td>
+                            <td>饮品收入</td>
+                            <td>日常销售</td>
+                            <td>东四咖啡</td>
+                            <td class="positive">¥4,820</td>
+                            <td>微信支付</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-12</td>
+                            <td>其他收入</td>
+                            <td>活动收入</td>
+                            <td>白塔寺店</td>
+                            <td class="positive">¥3,800</td>
+                            <td>现金</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-11</td>
+                            <td>饮品收入</td>
+                            <td>日常销售</td>
+                            <td>东四咖啡</td>
+                            <td class="positive">¥5,120</td>
+                            <td>微信支付</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-10</td>
+                            <td>食品收入</td>
+                            <td>日常销售</td>
+                            <td>白塔寺店</td>
+                            <td class="positive">¥2,980</td>
+                            <td>支付宝</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-pagination">
+                    <button class="btn-icon small"><i class="fas fa-chevron-left"></i></button>
+                    <span class="page-info">第1页，共5页</span>
+                    <button class="btn-icon small"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Finance Income 子模块加载完成');
+    
+    // 为添加收入按钮添加事件
+    document.querySelector('.finance-actions .btn').addEventListener('click', function() {
+        console.log('点击添加收入按钮');
+        alert('添加收入记录');
+    });
+    
+    // 为图表周期选择器添加事件
+    document.querySelector('.chart-period').addEventListener('change', function() {
+        const period = this.value;
+        console.log('选择图表周期:', period);
+        
+        // 模拟更新图表
+        const chartPlaceholder = document.querySelector('.chart-placeholder .placeholder-text');
+        chartPlaceholder.textContent = `收入趋势图表 (${period})`;
+    });
+    
+    // 为导出按钮添加事件
+    document.querySelector('.table-actions .btn').addEventListener('click', function() {
+        console.log('点击导出按钮');
+        alert('导出收入明细');
+    });
+    
+    // 为编辑按钮添加事件
+    document.querySelectorAll('.income-table .btn-icon .fa-edit').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const date = row.cells[0].textContent;
+            const type = row.cells[1].textContent;
+            const amount = row.cells[4].textContent;
+            console.log('编辑收入记录:', date, type, amount);
+            alert(`编辑收入记录: ${date} ${type} ${amount}`);
+        });
+    });
+    
+    // 为删除按钮添加事件
+    document.querySelectorAll('.income-table .btn-icon .fa-trash').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const date = row.cells[0].textContent;
+            const type = row.cells[1].textContent;
+            const amount = row.cells[4].textContent;
+            console.log('删除收入记录:', date, type, amount);
+            
+            if (confirm(`确定要删除收入记录: ${date} ${type} ${amount}？`)) {
+                console.log('确认删除收入记录');
+                row.remove();
+            }
+        });
+    });
+    
+    // 模拟初始化图表
+    setTimeout(function() {
+        console.log('初始化收入趋势图表');
+        const chartPlaceholder = document.querySelector('.chart-placeholder .placeholder-text');
+        chartPlaceholder.textContent = '收入趋势图表 (按周)';
+    }, 500);
+</script>
+
+<style>
+    .income-summary {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .summary-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .summary-title {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    
+    .summary-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 5px;
+    }
+    
+    .summary-change {
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    .summary-change.positive {
+        color: #10b981;
+    }
+    
+    .summary-change.negative {
+        color: #ef4444;
+    }
+    
+    .income-chart {
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .chart-header h3 {
+        margin: 0;
+        color: #1f2937;
+    }
+    
+    .chart-container {
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f9fafb;
+        border-radius: 4px;
+    }
+    
+    .chart-placeholder {
+        color: #9ca3af;
+        font-size: 16px;
+    }
+    
+    .income-table {
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .table-header h3 {
+        margin: 0;
+        color: #1f2937;
+    }
+    
+    .table-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15px;
+    }
+    
+    .page-info {
+        margin: 0 10px;
+        color: #6b7280;
+    }
+    
+    .positive {
+        color: #10b981;
+    }
+    
+    .negative {
+        color: #ef4444;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    .status-badge.completed {
+        background-color: #dcfce7;
+        color: #16a34a;
+    }
+    
+    .status-badge.pending {
+        background-color: #fef3c7;
+        color: #d97706;
+    }
+    
+    @media (max-width: 768px) {
+        .income-summary {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style> 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 野鹅微醺门店管理系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <svg class="logo-img" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="50" height="50" rx="10" fill="#4F46E5" opacity="0.8"/>
+                        <path d="M15 25C15 19.4772 19.4772 15 25 15C30.5228 15 35 19.4772 35 25C35 30.5228 30.5228 35 25 35C19.4772 35 15 30.5228 15 25Z" fill="white"/>
+                        <path d="M20 20L30 30M30 20L20 30" stroke="#4F46E5" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span>YE-TAPROOM</span>
+                </div>
+                <h1>门店管理系统</h1>
+                <p>请登录以继续访问</p>
+            </div>
+            
+            <div class="login-form">
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> 邮箱</label>
+                    <input type="email" id="email" placeholder="请输入邮箱地址" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> 密码</label>
+                    <div class="password-input-container">
+                        <input type="password" id="password" placeholder="请输入密码" required>
+                        <button type="button" class="toggle-password" id="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error-message" id="password-error"></div>
+                </div>
+                
+                <div class="form-group remember-me">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember-me">
+                        <span class="checkmark"></span>
+                        记住我
+                    </label>
+                    <a href="#" class="forgot-password">忘记密码?</a>
+                </div>
+                
+                <button type="button" id="login-button" class="login-button">
+                    <span>登录</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                
+                <div class="login-message" id="login-message"></div>
+            </div>
+            
+            <div class="login-footer">
+                <p>内部系统 - 仅限授权人员访问</p>
+                <p>&copy; 2023 野鹅微醺. 保留所有权利.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/login.js"></script>
+</body>
+</html> 

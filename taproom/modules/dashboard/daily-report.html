@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日报管理</title>
+    <style>
+        .daily-report-container {
+            padding: 20px;
+        }
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .report-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #111827;
+        }
+        .report-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-primary {
+            background-color: #6366F1;
+            color: white;
+        }
+        .report-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .report-list th, .report-list td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .report-list th {
+            background-color: #F9FAFB;
+            font-weight: 600;
+            color: #4B5563;
+        }
+        .report-list tr:hover {
+            background-color: #F3F4F6;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status-pending {
+            background-color: #FBBF24;
+            color: white;
+        }
+        .status-approved {
+            background-color: #34D399;
+            color: white;
+        }
+        .status-rejected {
+            background-color: #EF4444;
+            color: white;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .btn-icon:hover {
+            background-color: #F3F4F6;
+        }
+    </style>
+</head>
+<body>
+    <div class="daily-report-container">
+        <div class="report-header">
+            <h1 class="report-title">日报管理</h1>
+            <div class="report-actions">
+                <button class="btn btn-primary" id="create-report">
+                    <i class="fas fa-plus"></i> 新建日报
+                </button>
+            </div>
+        </div>
+        
+        <table class="report-list">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>门店</th>
+                    <th>提交人</th>
+                    <th>销售额</th>
+                    <th>客流量</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="report-list-body">
+                <!-- 示例数据 -->
+                <tr>
+                    <td>2023-06-01</td>
+                    <td>东四店</td>
+                    <td>张经理</td>
+                    <td>¥5,280</td>
+                    <td>78</td>
+                    <td>
+                        <span class="status-badge status-approved">已审核</span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-icon view-report" title="查看详情">
+                                <i class="fas fa-eye" style="color: #6366F1;"></i>
+                            </button>
+                            <button class="btn-icon edit-report" title="编辑">
+                                <i class="fas fa-edit" style="color: #10B981;"></i>
+                            </button>
+                            <button class="btn-icon delete-report" title="删除">
+                                <i class="fas fa-trash-alt" style="color: #EF4444;"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2023-05-31</td>
+                    <td>白塔寺店</td>
+                    <td>李店长</td>
+                    <td>¥4,120</td>
+                    <td>65</td>
+                    <td>
+                        <span class="status-badge status-pending">待审核</span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-icon view-report" title="查看详情">
+                                <i class="fas fa-eye" style="color: #6366F1;"></i>
+                            </button>
+                            <button class="btn-icon edit-report" title="编辑">
+                                <i class="fas fa-edit" style="color: #10B981;"></i>
+                            </button>
+                            <button class="btn-icon delete-report" title="删除">
+                                <i class="fas fa-trash-alt" style="color: #EF4444;"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 新建日报按钮点击事件
+            document.getElementById('create-report').addEventListener('click', function() {
+                alert('新建日报功能正在开发中...');
+            });
+            
+            // 为操作按钮添加事件
+            document.querySelectorAll('.view-report').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    alert('查看日报详情功能正在开发中...');
+                });
+            });
+            
+            document.querySelectorAll('.edit-report').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    alert('编辑日报功能正在开发中...');
+                });
+            });
+            
+            document.querySelectorAll('.delete-report').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (confirm('确定要删除这份日报吗？此操作不可撤销。')) {
+                        alert('删除日报功能正在开发中...');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

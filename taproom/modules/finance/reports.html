@@ -1,0 +1,441 @@
+<div class="card">
+    <div class="card-header">
+        <h2>财务报表</h2>
+    </div>
+    <div class="card-body">
+        <div class="finance-container">
+            <div class="finance-header">
+                <div class="finance-actions">
+                    <select class="report-type">
+                        <option>利润表</option>
+                        <option>资产负债表</option>
+                        <option>现金流量表</option>
+                        <option>销售分析</option>
+                        <option>成本分析</option>
+                    </select>
+                    <select class="finance-filter">
+                        <option>全部门店</option>
+                        <option>东四咖啡</option>
+                        <option>白塔寺店</option>
+                    </select>
+                    <select class="date-filter">
+                        <option>本月</option>
+                        <option>上月</option>
+                        <option>本季度</option>
+                        <option>上季度</option>
+                        <option>本年度</option>
+                        <option>自定义</option>
+                    </select>
+                </div>
+                <div class="finance-export">
+                    <button class="btn"><i class="fas fa-download"></i> 导出报表</button>
+                    <button class="btn"><i class="fas fa-print"></i> 打印</button>
+                </div>
+            </div>
+            
+            <div class="report-container">
+                <div class="report-header">
+                    <h3>利润表</h3>
+                    <div class="report-period">2023年6月</div>
+                </div>
+                
+                <div class="report-content">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>项目</th>
+                                <th>本期金额 (¥)</th>
+                                <th>上期金额 (¥)</th>
+                                <th>变动 (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="section-header">
+                                <td colspan="4">收入</td>
+                            </tr>
+                            <tr>
+                                <td>饮品收入</td>
+                                <td>78,450</td>
+                                <td>69,850</td>
+                                <td class="positive">+12.3%</td>
+                            </tr>
+                            <tr>
+                                <td>食品收入</td>
+                                <td>35,230</td>
+                                <td>33,330</td>
+                                <td class="positive">+5.7%</td>
+                            </tr>
+                            <tr>
+                                <td>其他收入</td>
+                                <td>12,000</td>
+                                <td>12,250</td>
+                                <td class="negative">-2.1%</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td>收入合计</td>
+                                <td>125,680</td>
+                                <td>115,430</td>
+                                <td class="positive">+8.5%</td>
+                            </tr>
+                            
+                            <tr class="section-header">
+                                <td colspan="4">支出</td>
+                            </tr>
+                            <tr>
+                                <td>原材料</td>
+                                <td>35,680</td>
+                                <td>33,950</td>
+                                <td class="negative">+5.1%</td>
+                            </tr>
+                            <tr>
+                                <td>人力成本</td>
+                                <td>28,500</td>
+                                <td>27,950</td>
+                                <td class="negative">+2.0%</td>
+                            </tr>
+                            <tr>
+                                <td>租金</td>
+                                <td>8,500</td>
+                                <td>8,500</td>
+                                <td>0.0%</td>
+                            </tr>
+                            <tr>
+                                <td>水电费</td>
+                                <td>3,200</td>
+                                <td>3,100</td>
+                                <td class="negative">+3.2%</td>
+                            </tr>
+                            <tr>
+                                <td>其他支出</td>
+                                <td>2,570</td>
+                                <td>2,650</td>
+                                <td class="positive">-3.0%</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td>支出合计</td>
+                                <td>78,450</td>
+                                <td>76,150</td>
+                                <td class="negative">+3.2%</td>
+                            </tr>
+                            
+                            <tr class="grand-total">
+                                <td>净利润</td>
+                                <td>47,230</td>
+                                <td>39,280</td>
+                                <td class="positive">+20.2%</td>
+                            </tr>
+                            <tr>
+                                <td>利润率</td>
+                                <td>37.6%</td>
+                                <td>34.0%</td>
+                                <td class="positive">+3.6%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="report-charts">
+                    <div class="chart-row">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4>收入构成</h4>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <div class="placeholder-text">收入构成图表</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4>支出构成</h4>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <div class="placeholder-text">支出构成图表</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-card full-width">
+                            <div class="chart-header">
+                                <h4>月度利润趋势</h4>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <div class="placeholder-text">月度利润趋势图表</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="report-notes">
+                    <h4>报表说明</h4>
+                    <ul>
+                        <li>本报表数据截止至2023年6月30日</li>
+                        <li>收入数据包含所有已完成交易</li>
+                        <li>支出数据包含所有已审批支出</li>
+                        <li>利润率 = 净利润 / 收入合计 × 100%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Finance Reports 子模块加载完成');
+    
+    // 为报表类型选择器添加事件
+    document.querySelector('.report-type').addEventListener('change', function() {
+        const reportType = this.value;
+        console.log('选择报表类型:', reportType);
+        
+        // 更新报表标题
+        const reportHeader = document.querySelector('.report-header h3');
+        reportHeader.textContent = reportType;
+        
+        // 这里可以添加加载不同报表内容的逻辑
+        alert(`加载${reportType}数据`);
+    });
+    
+    // 为门店筛选器添加事件
+    document.querySelector('.finance-filter').addEventListener('change', function() {
+        const store = this.value;
+        console.log('选择门店:', store);
+        
+        // 更新报表数据
+        alert(`加载${store}的报表数据`);
+    });
+    
+    // 为日期筛选器添加事件
+    document.querySelector('.date-filter').addEventListener('change', function() {
+        const period = this.value;
+        console.log('选择日期:', period);
+        
+        // 更新报表周期显示
+        const reportPeriod = document.querySelector('.report-period');
+        
+        switch(period) {
+            case '本月':
+                reportPeriod.textContent = '2023年6月';
+                break;
+            case '上月':
+                reportPeriod.textContent = '2023年5月';
+                break;
+            case '本季度':
+                reportPeriod.textContent = '2023年第2季度';
+                break;
+            case '上季度':
+                reportPeriod.textContent = '2023年第1季度';
+                break;
+            case '本年度':
+                reportPeriod.textContent = '2023年度';
+                break;
+            case '自定义':
+                // 这里可以添加日期选择器逻辑
+                alert('请选择自定义日期范围');
+                break;
+        }
+        
+        // 更新报表数据
+        alert(`加载${period}的报表数据`);
+    });
+    
+    // 为导出按钮添加事件
+    document.querySelector('.finance-export .btn:first-child').addEventListener('click', function() {
+        const reportType = document.querySelector('.report-type').value;
+        const period = document.querySelector('.report-period').textContent;
+        console.log('导出报表:', reportType, period);
+        alert(`导出${reportType} (${period})`);
+    });
+    
+    // 为打印按钮添加事件
+    document.querySelector('.finance-export .btn:last-child').addEventListener('click', function() {
+        const reportType = document.querySelector('.report-type').value;
+        const period = document.querySelector('.report-period').textContent;
+        console.log('打印报表:', reportType, period);
+        alert(`打印${reportType} (${period})`);
+    });
+    
+    // 模拟初始化图表
+    setTimeout(function() {
+        console.log('初始化报表图表');
+        document.querySelectorAll('.chart-placeholder .placeholder-text').forEach((placeholder, index) => {
+            const chartTypes = ['收入构成图表', '支出构成图表', '月度利润趋势图表'];
+            placeholder.textContent = chartTypes[index] + ' 已初始化';
+        });
+    }, 500);
+</script>
+
+<style>
+    .finance-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    
+    .finance-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .finance-export {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .report-container {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .report-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .report-header h3 {
+        margin: 0;
+        color: #1f2937;
+        font-size: 20px;
+    }
+    
+    .report-period {
+        font-size: 16px;
+        color: #6b7280;
+    }
+    
+    .report-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    
+    .report-table th,
+    .report-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .report-table th {
+        background-color: #f9fafb;
+        font-weight: 600;
+        color: #4b5563;
+    }
+    
+    .section-header td {
+        background-color: #f3f4f6;
+        font-weight: 600;
+        color: #4b5563;
+        padding: 8px 10px;
+    }
+    
+    .total-row td {
+        font-weight: 600;
+        border-top: 2px solid #e5e7eb;
+        border-bottom: 2px solid #e5e7eb;
+    }
+    
+    .grand-total td {
+        font-weight: 700;
+        font-size: 16px;
+        background-color: #f9fafb;
+    }
+    
+    .positive {
+        color: #10b981;
+    }
+    
+    .negative {
+        color: #ef4444;
+    }
+    
+    .report-charts {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .chart-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .chart-card {
+        flex: 1;
+        background-color: #f9fafb;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .chart-card.full-width {
+        width: 100%;
+    }
+    
+    .chart-header {
+        margin-bottom: 10px;
+    }
+    
+    .chart-header h4 {
+        margin: 0;
+        color: #4b5563;
+        font-size: 16px;
+    }
+    
+    .chart-container {
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .chart-placeholder {
+        color: #9ca3af;
+        font-size: 14px;
+    }
+    
+    .report-notes {
+        background-color: #f9fafb;
+        border-radius: 8px;
+        padding: 15px;
+    }
+    
+    .report-notes h4 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #4b5563;
+    }
+    
+    .report-notes ul {
+        margin: 0;
+        padding-left: 20px;
+        color: #6b7280;
+    }
+    
+    .report-notes li {
+        margin-bottom: 5px;
+    }
+    
+    @media (max-width: 768px) {
+        .finance-header {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .chart-row {
+            flex-direction: column;
+        }
+    }
+</style> 

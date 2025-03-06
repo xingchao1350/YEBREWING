@@ -1,0 +1,115 @@
+<div class="card">
+    <div class="card-header">
+        <h2>排班安排</h2>
+    </div>
+    <div class="card-body">
+        <div class="schedule-container">
+            <div class="schedule-header">
+                <div class="schedule-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 新建排班</button>
+                    <select class="schedule-filter">
+                        <option>全部门店</option>
+                        <option>门店1</option>
+                        <option>门店2</option>
+                    </select>
+                </div>
+                <div class="schedule-date-nav">
+                    <button class="btn btn-icon"><i class="fas fa-chevron-left"></i></button>
+                    <span class="current-date">2023年6月</span>
+                    <button class="btn btn-icon"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="schedule-grid">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>员工</th>
+                            <th>周一</th>
+                            <th>周二</th>
+                            <th>周三</th>
+                            <th>周四</th>
+                            <th>周五</th>
+                            <th>周六</th>
+                            <th>周日</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>张三</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift off">休息</td>
+                            <td class="shift evening">晚班</td>
+                            <td class="shift evening">晚班</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift off">休息</td>
+                        </tr>
+                        <tr>
+                            <td>李四</td>
+                            <td class="shift evening">晚班</td>
+                            <td class="shift evening">晚班</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift off">休息</td>
+                            <td class="shift evening">晚班</td>
+                            <td class="shift evening">晚班</td>
+                        </tr>
+                        <tr>
+                            <td>王五</td>
+                            <td class="shift off">休息</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift evening">晚班</td>
+                            <td class="shift evening">晚班</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift off">休息</td>
+                        </tr>
+                        <tr>
+                            <td>赵六</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift off">休息</td>
+                            <td class="shift morning">早班</td>
+                            <td class="shift off">休息</td>
+                            <td class="shift evening">晚班</td>
+                            <td class="shift evening">晚班</td>
+                            <td class="shift morning">早班</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Dashboard Schedule 子模块加载完成');
+    
+    // 这里可以添加子模块特定的初始化代码
+    
+    // 为排班表添加交互功能
+    document.querySelectorAll('.schedule-table td.shift').forEach(cell => {
+        cell.addEventListener('click', function() {
+            console.log('点击了排班单元格:', this.textContent);
+            
+            // 显示编辑排班的弹窗（模拟）
+            alert('编辑排班: ' + this.textContent);
+        });
+    });
+    
+    // 为日期导航按钮添加事件
+    document.querySelectorAll('.schedule-date-nav button').forEach(button => {
+        button.addEventListener('click', function() {
+            const isNext = this.querySelector('.fa-chevron-right');
+            const dateSpan = document.querySelector('.current-date');
+            
+            if (isNext) {
+                console.log('下一个月');
+                dateSpan.textContent = '2023年7月';
+            } else {
+                console.log('上一个月');
+                dateSpan.textContent = '2023年5月';
+            }
+        });
+    });
+</script> 

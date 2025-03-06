@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块加载测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        .module-list {
+            margin-bottom: 20px;
+        }
+        .module-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .module-item:hover {
+            background-color: #e0e0e0;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 200px;
+        }
+        .log {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+        .log-item {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #4338CA;
+        }
+        .loader {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4F46E5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>模块加载测试</h1>
+        
+        <div class="module-list">
+            <h2>模块列表</h2>
+            <div class="module-item" data-module="dashboard">门店总览 (dashboard)</div>
+            <div class="module-item" data-module="inventory">库存管理 (inventory)</div>
+            <div class="module-item" data-module="finance">财务管理 (finance)</div>
+            <div class="module-item" data-module="tools">工具模块 (tools)</div>
+            <div class="module-item" data-module="resources">资源中心 (resources)</div>
+        </div>
+        
+        <div>
+            <button id="clear-log">清除日志</button>
+            <button id="check-files">检查文件</button>
+            <button id="direct-load">直接加载</button>
+        </div>
+        
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+        </div>
+        
+        <div class="log" id="log">
+            <div class="log-item">准备就绪，点击模块进行测试...</div>
+        </div>
+        
+        <div class="result" id="result">
+            <p>模块内容将显示在这里...</p>
+        </div>
+    </div>
+    
+    <script>
+        // 日志函数
+        function log(message, type = 'info') {
+            const logContainer = document.getElementById('log');
+            const logItem = document.createElement('div');
+            logItem.className = `log-item${type ? ' ' + type : ''}`;
+            logItem.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logContainer.appendChild(logItem);
+            logContainer.scrollTop = logContainer.scrollHeight;
+            console.log(`[LOG] ${message}`);
+        }
+        
+        // 检查文件
+        async function checkFiles() {
+            const modules = [
+                './modules/dashboard.html',
+                './modules/inventory.html',
+                './modules/finance.html',
+                './modules/tools.html',
+                './modules/resources.html'
+            ];
+            
+            log('开始检查模块文件...');
+            
+            for (const path of modules) {
+                try {
+                    const response = await fetch(path, { method: 'HEAD' });
+                    
+                    if (response.ok) {
+                        log(`模块文件存在: ${path}`, 'success');
+                    } else {
+                        log(`模块文件不存在或无法访问: ${path} (${response.status})`, 'error');
+                    }
+                } catch (error) {
+                    log(`检查模块文件出错: ${path} - ${error.message}`, 'error');
+                }
+            }
+            
+            log('文件检查完成');
+        }
+        
+        // 直接加载模块
+        async function directLoad() {
+            const moduleName = 'dashboard';
+            const path = `./modules/${moduleName}.html`;
+            
+            log(`直接加载模块: ${path}`);
+            
+            // 显示加载指示器
+            document.getElementById('loader').style.display = 'flex';
+            
+            try {
+                const response = await fetch(path, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`无法加载模块: ${response.status} ${response.statusText}`);
+                }
+                
+                // 获取HTML内容
+                const html = await response.text();
+                log(`模块加载成功，内容长度: ${html.length}`, 'success');
+                
+                // 显示内容
+                document.getElementById('result').innerHTML = html;
+                
+            } catch (error) {
+                log(`加载失败: ${error.message}`, 'error');
+                document.getElementById('result').innerHTML = `
+                    <div style="color: red; padding: 20px; border: 1px solid red; border-radius: 4px;">
+                        <h3>错误</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            } finally {
+                // 隐藏加载指示器
+                document.getElementById('loader').style.display = 'none';
+            }
+        }
+        
+        // 加载模块
+        async function loadModule(moduleName) {
+            const path = `./modules/${moduleName}.html`;
+            
+            log(`开始加载模块: ${moduleName}`);
+            log(`模块路径: ${path}`);
+            
+            // 显示加载指示器
+            document.getElementById('loader').style.display = 'flex';
+            
+            try {
+                const response = await fetch(path, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`无法加载模块: ${response.status} ${response.statusText}`);
+                }
+                
+                // 获取HTML内容
+                const html = await response.text();
+                log(`模块加载成功，内容长度: ${html.length}`, 'success');
+                
+                // 显示内容
+                document.getElementById('result').innerHTML = html;
+                
+            } catch (error) {
+                log(`加载失败: ${error.message}`, 'error');
+                document.getElementById('result').innerHTML = `
+                    <div style="color: red; padding: 20px; border: 1px solid red; border-radius: 4px;">
+                        <h3>错误</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            } finally {
+                // 隐藏加载指示器
+                document.getElementById('loader').style.display = 'none';
+            }
+        }
+        
+        // 事件监听
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模块点击事件
+            document.querySelectorAll('.module-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const moduleName = this.getAttribute('data-module');
+                    loadModule(moduleName);
+                });
+            });
+            
+            // 清除日志
+            document.getElementById('clear-log').addEventListener('click', function() {
+                document.getElementById('log').innerHTML = '<div class="log-item">日志已清除</div>';
+            });
+            
+            // 检查文件
+            document.getElementById('check-files').addEventListener('click', function() {
+                checkFiles();
+            });
+            
+            // 直接加载
+            document.getElementById('direct-load').addEventListener('click', function() {
+                directLoad();
+            });
+            
+            // 自动检查文件
+            setTimeout(checkFiles, 500);
+        });
+    </script>
+</body>
+</html> 

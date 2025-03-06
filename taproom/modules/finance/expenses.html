@@ -1,0 +1,452 @@
+<div class="card">
+    <div class="card-header">
+        <h2>支出管理</h2>
+    </div>
+    <div class="card-body">
+        <div class="finance-container">
+            <div class="finance-header">
+                <div class="finance-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 添加支出</button>
+                    <select class="finance-filter">
+                        <option>全部门店</option>
+                        <option>东四咖啡</option>
+                        <option>白塔寺店</option>
+                    </select>
+                    <select class="date-filter">
+                        <option>本月</option>
+                        <option>上月</option>
+                        <option>本季度</option>
+                        <option>上季度</option>
+                        <option>本年度</option>
+                        <option>自定义</option>
+                    </select>
+                </div>
+                <div class="finance-search">
+                    <input type="text" placeholder="搜索支出记录..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="expenses-summary">
+                <div class="summary-card">
+                    <div class="summary-title">总支出</div>
+                    <div class="summary-value">¥78,450</div>
+                    <div class="summary-change negative">+3.2% 较上月</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">原材料</div>
+                    <div class="summary-value">¥35,680</div>
+                    <div class="summary-change negative">+5.1% 较上月</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">人力成本</div>
+                    <div class="summary-value">¥28,500</div>
+                    <div class="summary-change negative">+2.0% 较上月</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">其他支出</div>
+                    <div class="summary-value">¥14,270</div>
+                    <div class="summary-change positive">-1.5% 较上月</div>
+                </div>
+            </div>
+            
+            <div class="expenses-chart">
+                <div class="chart-header">
+                    <h3>支出分类</h3>
+                    <div class="chart-actions">
+                        <select class="chart-type">
+                            <option>饼图</option>
+                            <option>柱状图</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <div class="placeholder-text">支出分类图表</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="expenses-table">
+                <div class="table-header">
+                    <h3>支出明细</h3>
+                    <div class="table-actions">
+                        <button class="btn btn-sm"><i class="fas fa-download"></i> 导出</button>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>支出类型</th>
+                            <th>描述</th>
+                            <th>门店</th>
+                            <th>金额</th>
+                            <th>支付方式</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2023-06-15</td>
+                            <td>原材料</td>
+                            <td>啤酒采购</td>
+                            <td>东四咖啡</td>
+                            <td class="negative">¥5,280</td>
+                            <td>银行转账</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-14</td>
+                            <td>原材料</td>
+                            <td>食材采购</td>
+                            <td>白塔寺店</td>
+                            <td class="negative">¥3,150</td>
+                            <td>微信支付</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-12</td>
+                            <td>人力成本</td>
+                            <td>员工工资</td>
+                            <td>东四咖啡</td>
+                            <td class="negative">¥12,500</td>
+                            <td>银行转账</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-12</td>
+                            <td>人力成本</td>
+                            <td>员工工资</td>
+                            <td>白塔寺店</td>
+                            <td class="negative">¥16,000</td>
+                            <td>银行转账</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-10</td>
+                            <td>其他支出</td>
+                            <td>水电费</td>
+                            <td>东四咖啡</td>
+                            <td class="negative">¥2,800</td>
+                            <td>银行转账</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-08</td>
+                            <td>其他支出</td>
+                            <td>设备维修</td>
+                            <td>白塔寺店</td>
+                            <td class="negative">¥1,500</td>
+                            <td>微信支付</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-05</td>
+                            <td>原材料</td>
+                            <td>酒水采购</td>
+                            <td>白塔寺店</td>
+                            <td class="negative">¥4,200</td>
+                            <td>银行转账</td>
+                            <td><span class="status-badge pending">待审批</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-check"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-times"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-pagination">
+                    <button class="btn-icon small"><i class="fas fa-chevron-left"></i></button>
+                    <span class="page-info">第1页，共4页</span>
+                    <button class="btn-icon small"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Finance Expenses 子模块加载完成');
+    
+    // 为添加支出按钮添加事件
+    document.querySelector('.finance-actions .btn').addEventListener('click', function() {
+        console.log('点击添加支出按钮');
+        alert('添加支出记录');
+    });
+    
+    // 为图表类型选择器添加事件
+    document.querySelector('.chart-type').addEventListener('change', function() {
+        const type = this.value;
+        console.log('选择图表类型:', type);
+        
+        // 模拟更新图表
+        const chartPlaceholder = document.querySelector('.chart-placeholder .placeholder-text');
+        chartPlaceholder.textContent = `支出分类图表 (${type})`;
+    });
+    
+    // 为导出按钮添加事件
+    document.querySelector('.table-actions .btn').addEventListener('click', function() {
+        console.log('点击导出按钮');
+        alert('导出支出明细');
+    });
+    
+    // 为编辑按钮添加事件
+    document.querySelectorAll('.expenses-table .btn-icon .fa-edit').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const date = row.cells[0].textContent;
+            const type = row.cells[1].textContent;
+            const amount = row.cells[4].textContent;
+            console.log('编辑支出记录:', date, type, amount);
+            alert(`编辑支出记录: ${date} ${type} ${amount}`);
+        });
+    });
+    
+    // 为删除按钮添加事件
+    document.querySelectorAll('.expenses-table .btn-icon .fa-trash').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const date = row.cells[0].textContent;
+            const type = row.cells[1].textContent;
+            const amount = row.cells[4].textContent;
+            console.log('删除支出记录:', date, type, amount);
+            
+            if (confirm(`确定要删除支出记录: ${date} ${type} ${amount}？`)) {
+                console.log('确认删除支出记录');
+                row.remove();
+            }
+        });
+    });
+    
+    // 为审批按钮添加事件
+    document.querySelectorAll('.expenses-table .btn-icon .fa-check').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const date = row.cells[0].textContent;
+            const type = row.cells[1].textContent;
+            const amount = row.cells[4].textContent;
+            console.log('审批支出记录:', date, type, amount);
+            
+            if (confirm(`确定要审批支出记录: ${date} ${type} ${amount}？`)) {
+                console.log('确认审批支出记录');
+                const statusCell = row.cells[6].querySelector('.status-badge');
+                statusCell.textContent = '已完成';
+                statusCell.className = 'status-badge completed';
+                
+                // 更新按钮
+                const btnCell = row.cells[7];
+                btnCell.innerHTML = `
+                    <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                `;
+                
+                alert(`支出记录已审批: ${date} ${type} ${amount}`);
+            }
+        });
+    });
+    
+    // 为拒绝按钮添加事件
+    document.querySelectorAll('.expenses-table .btn-icon .fa-times').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const date = row.cells[0].textContent;
+            const type = row.cells[1].textContent;
+            const amount = row.cells[4].textContent;
+            console.log('拒绝支出记录:', date, type, amount);
+            
+            if (confirm(`确定要拒绝支出记录: ${date} ${type} ${amount}？`)) {
+                console.log('确认拒绝支出记录');
+                const statusCell = row.cells[6].querySelector('.status-badge');
+                statusCell.textContent = '已拒绝';
+                statusCell.className = 'status-badge rejected';
+                
+                // 更新按钮
+                const btnCell = row.cells[7];
+                btnCell.innerHTML = `
+                    <button class="btn-icon small"><i class="fas fa-redo"></i></button>
+                    <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                `;
+                
+                alert(`支出记录已拒绝: ${date} ${type} ${amount}`);
+            }
+        });
+    });
+    
+    // 模拟初始化图表
+    setTimeout(function() {
+        console.log('初始化支出分类图表');
+        const chartPlaceholder = document.querySelector('.chart-placeholder .placeholder-text');
+        chartPlaceholder.textContent = '支出分类图表 (饼图)';
+    }, 500);
+</script>
+
+<style>
+    .expenses-summary {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .summary-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .summary-title {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    
+    .summary-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 5px;
+    }
+    
+    .summary-change {
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    .summary-change.positive {
+        color: #10b981;
+    }
+    
+    .summary-change.negative {
+        color: #ef4444;
+    }
+    
+    .expenses-chart {
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .chart-header h3 {
+        margin: 0;
+        color: #1f2937;
+    }
+    
+    .chart-container {
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f9fafb;
+        border-radius: 4px;
+    }
+    
+    .chart-placeholder {
+        color: #9ca3af;
+        font-size: 16px;
+    }
+    
+    .expenses-table {
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .table-header h3 {
+        margin: 0;
+        color: #1f2937;
+    }
+    
+    .table-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15px;
+    }
+    
+    .page-info {
+        margin: 0 10px;
+        color: #6b7280;
+    }
+    
+    .positive {
+        color: #10b981;
+    }
+    
+    .negative {
+        color: #ef4444;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
+    .status-badge.completed {
+        background-color: #dcfce7;
+        color: #16a34a;
+    }
+    
+    .status-badge.pending {
+        background-color: #fef3c7;
+        color: #d97706;
+    }
+    
+    .status-badge.rejected {
+        background-color: #fee2e2;
+        color: #dc2626;
+    }
+    
+    @media (max-width: 768px) {
+        .expenses-summary {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style> 

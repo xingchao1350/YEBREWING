@@ -1,0 +1,180 @@
+<div class="card">
+    <div class="card-header">
+        <h2>财务概览</h2>
+    </div>
+    <div class="card-body">
+        <div class="finance-container">
+            <div class="finance-header">
+                <div class="finance-actions">
+                    <select class="finance-filter">
+                        <option>全部门店</option>
+                        <option>东四咖啡</option>
+                        <option>白塔寺店</option>
+                    </select>
+                    <select class="finance-period">
+                        <option>本月</option>
+                        <option>上月</option>
+                        <option>本季度</option>
+                        <option>上季度</option>
+                        <option>本年度</option>
+                        <option>上年度</option>
+                    </select>
+                </div>
+                <div class="finance-export">
+                    <button class="btn"><i class="fas fa-download"></i> 导出报表</button>
+                </div>
+            </div>
+            
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="stat-info">
+                        <div class="stat-value">¥125,680</div>
+                        <div class="stat-label">总收入</div>
+                    </div>
+                    <div class="stat-change positive">+8.5%</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <div class="stat-info">
+                        <div class="stat-value">¥78,450</div>
+                        <div class="stat-label">总支出</div>
+                    </div>
+                    <div class="stat-change negative">+3.2%</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-info">
+                        <div class="stat-value">¥47,230</div>
+                        <div class="stat-label">净利润</div>
+                    </div>
+                    <div class="stat-change positive">+12.4%</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-percentage"></i></div>
+                    <div class="stat-info">
+                        <div class="stat-value">37.6%</div>
+                        <div class="stat-label">利润率</div>
+                    </div>
+                    <div class="stat-change positive">+3.8%</div>
+                </div>
+            </div>
+            
+            <div class="finance-charts-container">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>收入与支出</h3>
+                    </div>
+                    <div class="chart-placeholder">
+                        <div class="placeholder-text">收入与支出图表</div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>支出分类</h3>
+                    </div>
+                    <div class="chart-placeholder">
+                        <div class="placeholder-text">支出分类图表</div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>利润趋势</h3>
+                    </div>
+                    <div class="chart-placeholder">
+                        <div class="placeholder-text">利润趋势图表</div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>现金流</h3>
+                    </div>
+                    <div class="chart-placeholder">
+                        <div class="placeholder-text">现金流图表</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-transactions">
+                <h3>最近交易</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>类型</th>
+                            <th>描述</th>
+                            <th>金额</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2023-06-15</td>
+                            <td>收入</td>
+                            <td>日常销售</td>
+                            <td class="positive">+¥5,280</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-14</td>
+                            <td>支出</td>
+                            <td>原材料采购</td>
+                            <td class="negative">-¥2,150</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-12</td>
+                            <td>支出</td>
+                            <td>员工工资</td>
+                            <td class="negative">-¥8,500</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-10</td>
+                            <td>收入</td>
+                            <td>活动收入</td>
+                            <td class="positive">+¥3,800</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                        </tr>
+                        <tr>
+                            <td>2023-06-08</td>
+                            <td>支出</td>
+                            <td>水电费</td>
+                            <td class="negative">-¥1,200</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="view-more">
+                    <a href="#" class="btn-link">查看更多交易 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Finance Overview 子模块加载完成');
+    
+    // 这里可以添加子模块特定的初始化代码
+    // 例如初始化图表等
+    
+    // 模拟初始化图表
+    setTimeout(function() {
+        console.log('初始化财务图表');
+        document.querySelectorAll('.chart-placeholder .placeholder-text').forEach((placeholder, index) => {
+            const chartTypes = ['收入与支出图表', '支出分类图表', '利润趋势图表', '现金流图表'];
+            placeholder.textContent = chartTypes[index] + '已初始化';
+        });
+    }, 1000);
+    
+    // 为导出按钮添加事件
+    document.querySelector('.finance-export .btn').addEventListener('click', function() {
+        console.log('点击导出报表按钮');
+        alert('导出财务报表');
+    });
+</script> 

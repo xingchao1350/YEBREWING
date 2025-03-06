@@ -1,0 +1,789 @@
+<div class="card">
+    <div class="card-header">
+        <h2>海报设计</h2>
+    </div>
+    <div class="card-body">
+        <div class="tools-container">
+            <div class="tools-header">
+                <div class="tools-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 新建海报</button>
+                    <select class="tools-filter">
+                        <option>全部类型</option>
+                        <option>活动海报</option>
+                        <option>促销海报</option>
+                        <option>节日海报</option>
+                        <option>品牌海报</option>
+                    </select>
+                </div>
+                <div class="tools-search">
+                    <input type="text" placeholder="搜索海报..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="tools-templates">
+                <div class="template-grid">
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/poster-1.jpg" alt="活动海报模板">
+                        </div>
+                        <div class="template-info">
+                            <h3>啤酒节海报</h3>
+                            <p>适合啤酒节、品鉴会等活动</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/poster-2.jpg" alt="促销海报模板">
+                        </div>
+                        <div class="template-info">
+                            <h3>周末特惠海报</h3>
+                            <p>适合周末促销、限时折扣等</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/poster-3.jpg" alt="节日海报模板">
+                        </div>
+                        <div class="template-info">
+                            <h3>节日庆典海报</h3>
+                            <p>适合各类节日庆典活动</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="template-card">
+                        <div class="template-preview">
+                            <img src="assets/templates/poster-4.jpg" alt="品牌海报模板">
+                        </div>
+                        <div class="template-info">
+                            <h3>品牌形象海报</h3>
+                            <p>适合品牌宣传、形象展示</p>
+                            <div class="template-actions">
+                                <button class="btn btn-sm">使用模板</button>
+                                <button class="btn btn-sm btn-outline"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="poster-editor">
+                <h3>海报编辑器</h3>
+                <div class="editor-container">
+                    <div class="editor-sidebar">
+                        <div class="editor-section">
+                            <h4>海报尺寸</h4>
+                            <div class="editor-options">
+                                <select class="editor-select">
+                                    <option>A4 (210mm × 297mm)</option>
+                                    <option>A3 (297mm × 420mm)</option>
+                                    <option>方形 (500mm × 500mm)</option>
+                                    <option>自定义尺寸</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-section">
+                            <h4>背景</h4>
+                            <div class="editor-options">
+                                <div class="form-group">
+                                    <label>背景类型</label>
+                                    <select class="editor-select">
+                                        <option>纯色背景</option>
+                                        <option>图片背景</option>
+                                        <option>渐变背景</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>背景颜色</label>
+                                    <div class="color-picker">
+                                        <div class="color-option" style="background-color: #4f46e5;"></div>
+                                        <div class="color-option" style="background-color: #10b981;"></div>
+                                        <div class="color-option" style="background-color: #f59e0b;"></div>
+                                        <div class="color-option" style="background-color: #ef4444;"></div>
+                                        <div class="color-option" style="background-color: #6b7280;"></div>
+                                        <div class="color-option custom-color">+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-section">
+                            <h4>文本内容</h4>
+                            <div class="editor-options">
+                                <div class="form-group">
+                                    <label>标题</label>
+                                    <input type="text" class="editor-input" value="精酿啤酒节">
+                                </div>
+                                <div class="form-group">
+                                    <label>副标题</label>
+                                    <input type="text" class="editor-input" value="品味精酿，畅享夏日">
+                                </div>
+                                <div class="form-group">
+                                    <label>活动时间</label>
+                                    <input type="text" class="editor-input" value="2023年7月15日-16日">
+                                </div>
+                                <div class="form-group">
+                                    <label>活动地点</label>
+                                    <input type="text" class="editor-input" value="东四咖啡 · 精酿吧">
+                                </div>
+                                <div class="form-group">
+                                    <label>其他信息</label>
+                                    <textarea class="editor-textarea">限时优惠：买二送一
+提前预约可享受VIP品鉴体验</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-section">
+                            <h4>元素</h4>
+                            <div class="editor-options">
+                                <div class="element-list">
+                                    <div class="element-item">
+                                        <i class="fas fa-image"></i>
+                                        <span>添加图片</span>
+                                    </div>
+                                    <div class="element-item">
+                                        <i class="fas fa-shapes"></i>
+                                        <span>添加形状</span>
+                                    </div>
+                                    <div class="element-item">
+                                        <i class="fas fa-font"></i>
+                                        <span>添加文本</span>
+                                    </div>
+                                    <div class="element-item">
+                                        <i class="fas fa-qrcode"></i>
+                                        <span>添加二维码</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-actions">
+                            <button class="btn btn-primary">保存设计</button>
+                            <button class="btn">预览</button>
+                            <button class="btn">导出</button>
+                        </div>
+                    </div>
+                    
+                    <div class="editor-preview">
+                        <div class="poster-preview">
+                            <div class="poster-content">
+                                <h2 class="poster-title">精酿啤酒节</h2>
+                                <h3 class="poster-subtitle">品味精酿，畅享夏日</h3>
+                                <div class="poster-details">
+                                    <div class="poster-detail">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>2023年7月15日-16日</span>
+                                    </div>
+                                    <div class="poster-detail">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>东四咖啡 · 精酿吧</span>
+                                    </div>
+                                </div>
+                                <div class="poster-info">
+                                    <p>限时优惠：买二送一</p>
+                                    <p>提前预约可享受VIP品鉴体验</p>
+                                </div>
+                                <div class="poster-footer">
+                                    <div class="poster-logo">
+                                        <i class="fas fa-beer"></i>
+                                    </div>
+                                    <div class="poster-qrcode">
+                                        <div class="qrcode-placeholder"></div>
+                                        <span>扫码预约</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-designs">
+                <h3>最近设计</h3>
+                <div class="recent-grid">
+                    <div class="recent-card">
+                        <div class="recent-preview">
+                            <img src="assets/templates/recent-poster-1.jpg" alt="最近设计1">
+                        </div>
+                        <div class="recent-info">
+                            <h4>夏季啤酒节海报</h4>
+                            <p>最后编辑: 2023-06-15</p>
+                            <div class="recent-actions">
+                                <button class="btn btn-sm">编辑</button>
+                                <button class="btn btn-sm btn-outline">导出</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent-card">
+                        <div class="recent-preview">
+                            <img src="assets/templates/recent-poster-2.jpg" alt="最近设计2">
+                        </div>
+                        <div class="recent-info">
+                            <h4>周末特惠海报</h4>
+                            <p>最后编辑: 2023-06-10</p>
+                            <div class="recent-actions">
+                                <button class="btn btn-sm">编辑</button>
+                                <button class="btn btn-sm btn-outline">导出</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Tools Poster Design 子模块加载完成');
+    
+    // 为新建海报按钮添加事件
+    document.querySelector('.tools-actions .btn').addEventListener('click', function() {
+        console.log('点击新建海报按钮');
+        alert('新建海报');
+    });
+    
+    // 为使用模板按钮添加事件
+    document.querySelectorAll('.template-actions .btn-sm:first-child').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.template-card');
+            const title = card.querySelector('h3').textContent;
+            console.log('使用模板:', title);
+            alert('使用模板: ' + title);
+        });
+    });
+    
+    // 为收藏按钮添加事件
+    document.querySelectorAll('.template-actions .btn-outline').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.template-card');
+            const title = card.querySelector('h3').textContent;
+            console.log('收藏模板:', title);
+            
+            // 切换收藏状态
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                alert('已收藏: ' + title);
+            } else {
+                icon.classList.remove('fas');
+                icon.classList.add('far');
+                alert('取消收藏: ' + title);
+            }
+        });
+    });
+    
+    // 为背景颜色选择器添加事件
+    document.querySelectorAll('.color-option').forEach(option => {
+        option.addEventListener('click', function() {
+            if (this.classList.contains('custom-color')) {
+                // 如果是自定义颜色选项
+                const color = prompt('请输入十六进制颜色代码（例如：#4f46e5）:', '#4f46e5');
+                if (color) {
+                    document.querySelector('.poster-preview').style.backgroundColor = color;
+                }
+            } else {
+                // 获取背景颜色
+                const color = window.getComputedStyle(this).backgroundColor;
+                document.querySelector('.poster-preview').style.backgroundColor = color;
+            }
+        });
+    });
+    
+    // 为文本输入框添加事件
+    document.querySelectorAll('.editor-input, .editor-textarea').forEach(input => {
+        input.addEventListener('input', function() {
+            const fieldName = this.previousElementSibling.textContent.trim();
+            const value = this.value;
+            
+            switch(fieldName) {
+                case '标题':
+                    document.querySelector('.poster-title').textContent = value;
+                    break;
+                case '副标题':
+                    document.querySelector('.poster-subtitle').textContent = value;
+                    break;
+                case '活动时间':
+                    document.querySelector('.poster-detail:first-child span').textContent = value;
+                    break;
+                case '活动地点':
+                    document.querySelector('.poster-detail:last-child span').textContent = value;
+                    break;
+                case '其他信息':
+                    // 将文本按行分割并创建段落
+                    const infoContainer = document.querySelector('.poster-info');
+                    infoContainer.innerHTML = '';
+                    value.split('\n').forEach(line => {
+                        if (line.trim()) {
+                            const p = document.createElement('p');
+                            p.textContent = line;
+                            infoContainer.appendChild(p);
+                        }
+                    });
+                    break;
+            }
+        });
+    });
+    
+    // 为元素项添加事件
+    document.querySelectorAll('.element-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const elementType = this.querySelector('span').textContent;
+            console.log('添加元素:', elementType);
+            alert('添加元素: ' + elementType);
+        });
+    });
+    
+    // 为保存设计按钮添加事件
+    document.querySelector('.editor-actions .btn-primary').addEventListener('click', function() {
+        console.log('保存海报设计');
+        alert('海报设计已保存');
+    });
+    
+    // 为预览按钮添加事件
+    document.querySelector('.editor-actions .btn:nth-child(2)').addEventListener('click', function() {
+        console.log('预览海报设计');
+        alert('正在预览海报设计');
+    });
+    
+    // 为导出按钮添加事件
+    document.querySelector('.editor-actions .btn:last-child').addEventListener('click', function() {
+        console.log('导出海报设计');
+        alert('正在导出海报设计');
+    });
+    
+    // 为最近设计的编辑按钮添加事件
+    document.querySelectorAll('.recent-actions .btn:first-child').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.recent-card');
+            const title = card.querySelector('h4').textContent;
+            console.log('编辑海报:', title);
+            alert('编辑海报: ' + title);
+        });
+    });
+    
+    // 为最近设计的导出按钮添加事件
+    document.querySelectorAll('.recent-actions .btn-outline').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.recent-card');
+            const title = card.querySelector('h4').textContent;
+            console.log('导出海报:', title);
+            alert('导出海报: ' + title);
+        });
+    });
+</script>
+
+<style>
+    .tools-container {
+        padding: 0;
+    }
+    
+    .tools-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    
+    .tools-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .tools-search {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .search-input {
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        width: 200px;
+    }
+    
+    .template-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .template-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .template-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .template-preview {
+        height: 150px;
+        overflow: hidden;
+        background-color: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .template-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .template-info {
+        padding: 15px;
+    }
+    
+    .template-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+        color: #1f2937;
+    }
+    
+    .template-info p {
+        margin: 0 0 15px 0;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    
+    .template-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .poster-editor {
+        margin-top: 30px;
+    }
+    
+    .poster-editor h3 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        color: #1f2937;
+    }
+    
+    .editor-container {
+        display: flex;
+        gap: 20px;
+        background-color: #f9fafb;
+        border-radius: 8px;
+        padding: 20px;
+    }
+    
+    .editor-sidebar {
+        flex: 1;
+        max-width: 300px;
+    }
+    
+    .editor-preview {
+        flex: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f3f4f6;
+        border-radius: 8px;
+        padding: 20px;
+    }
+    
+    .editor-section {
+        margin-bottom: 20px;
+    }
+    
+    .editor-section h4 {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+        color: #4b5563;
+    }
+    
+    .editor-options {
+        margin-bottom: 15px;
+    }
+    
+    .editor-select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+    }
+    
+    .color-picker {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .color-option {
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid #e5e7eb;
+    }
+    
+    .custom-color {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        font-size: 20px;
+        color: #6b7280;
+    }
+    
+    .form-group {
+        margin-bottom: 10px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    
+    .editor-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+    }
+    
+    .editor-textarea {
+        width: 100%;
+        height: 80px;
+        padding: 8px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        resize: vertical;
+    }
+    
+    .element-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .element-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    
+    .element-item:hover {
+        background-color: #f3f4f6;
+    }
+    
+    .element-item i {
+        font-size: 20px;
+        margin-bottom: 5px;
+        color: #4b5563;
+    }
+    
+    .element-item span {
+        font-size: 12px;
+        color: #6b7280;
+    }
+    
+    .editor-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .btn-primary {
+        background-color: #4f46e5;
+        color: white;
+    }
+    
+    .poster-preview {
+        width: 400px;
+        height: 566px; /* A4比例 */
+        background-color: #4f46e5;
+        border-radius: 8px;
+        color: white;
+        padding: 30px;
+        position: relative;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    
+    .poster-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .poster-title {
+        margin: 40px 0 10px 0;
+        font-size: 36px;
+        font-weight: 700;
+    }
+    
+    .poster-subtitle {
+        margin: 0 0 40px 0;
+        font-size: 20px;
+        font-weight: 400;
+        opacity: 0.9;
+    }
+    
+    .poster-details {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .poster-detail {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 16px;
+    }
+    
+    .poster-info {
+        margin-bottom: 40px;
+    }
+    
+    .poster-info p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+    
+    .poster-footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    
+    .poster-logo {
+        font-size: 40px;
+        opacity: 0.8;
+    }
+    
+    .poster-qrcode {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .qrcode-placeholder {
+        width: 80px;
+        height: 80px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 4px;
+    }
+    
+    .poster-qrcode span {
+        font-size: 12px;
+    }
+    
+    .recent-designs {
+        margin-top: 30px;
+    }
+    
+    .recent-designs h3 {
+        margin: 0 0 15px 0;
+        font-size: 18px;
+        color: #1f2937;
+    }
+    
+    .recent-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .recent-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .recent-preview {
+        height: 150px;
+        overflow: hidden;
+        background-color: #f3f4f6;
+    }
+    
+    .recent-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .recent-info {
+        padding: 15px;
+    }
+    
+    .recent-info h4 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+        color: #1f2937;
+    }
+    
+    .recent-info p {
+        margin: 0 0 15px 0;
+        font-size: 12px;
+        color: #6b7280;
+    }
+    
+    .recent-actions {
+        display: flex;
+        gap: 10px;
+    }
+    
+    @media (max-width: 768px) {
+        .tools-header {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .tools-search {
+            width: 100%;
+        }
+        
+        .search-input {
+            flex: 1;
+        }
+        
+        .editor-container {
+            flex-direction: column;
+        }
+        
+        .editor-sidebar {
+            max-width: none;
+        }
+        
+        .poster-preview {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1.414; /* A4比例 */
+        }
+    }
+</style>

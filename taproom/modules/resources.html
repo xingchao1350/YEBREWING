@@ -1,0 +1,64 @@
+<!-- 资源模块 -->
+<div id="resources" class="dashboard-section">
+    <div class="dashboard-tabs-container">
+        <div class="settings-tabs">
+            <ul class="tabs">
+                <li class="tab-item"><a href="#documents" class="active">门店档案</a></li>
+                <li class="tab-item"><a href="#training">员工资源</a></li>
+                <li class="tab-item"><a href="#templates">品牌资源</a></li>
+                <li class="tab-item"><a href="#media">行业资源</a></li>
+            </ul>
+        </div>
+        
+        <div class="tab-content">
+            <!-- 门店档案标签页 -->
+            <div id="documents" class="tab-pane active">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 员工资源标签页 -->
+            <div id="training" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 品牌资源标签页 -->
+            <div id="templates" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 行业资源标签页 -->
+            <div id="media" class="tab-pane">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当模块加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Resources 模块加载完成');
+        
+        // 如果存在模块加载器，则加载默认子模块
+        if (window.moduleLoader) {
+            // 加载默认子模块（门店档案）
+            window.moduleLoader.loadSubModule('resources', 'documents');
+        }
+    });
+</script> 

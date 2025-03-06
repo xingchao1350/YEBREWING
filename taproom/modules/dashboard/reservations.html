@@ -1,0 +1,364 @@
+<div class="card">
+    <div class="card-header">
+        <h2>预订管理</h2>
+    </div>
+    <div class="card-body">
+        <div class="reservations-container">
+            <div class="reservations-header">
+                <div class="reservations-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 添加预订</button>
+                    <select class="reservations-filter">
+                        <option>全部门店</option>
+                        <option>东四咖啡</option>
+                        <option>白塔寺店</option>
+                    </select>
+                    <select class="reservations-status">
+                        <option>全部状态</option>
+                        <option>待确认</option>
+                        <option>已确认</option>
+                        <option>已完成</option>
+                        <option>已取消</option>
+                    </select>
+                </div>
+                <div class="reservations-search">
+                    <input type="text" placeholder="搜索预订..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="reservations-date-filter">
+                <div class="date-filter-item active">
+                    <span>今天</span>
+                </div>
+                <div class="date-filter-item">
+                    <span>明天</span>
+                </div>
+                <div class="date-filter-item">
+                    <span>本周</span>
+                </div>
+                <div class="date-filter-item">
+                    <span>本月</span>
+                </div>
+                <div class="date-filter-item">
+                    <span>自定义</span>
+                </div>
+            </div>
+            
+            <div class="reservations-table">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>预订编号</th>
+                            <th>客户姓名</th>
+                            <th>联系电话</th>
+                            <th>预订日期</th>
+                            <th>预订时间</th>
+                            <th>人数</th>
+                            <th>门店</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>R-2023-0615</td>
+                            <td>张三</td>
+                            <td>138****1234</td>
+                            <td>2023-06-15</td>
+                            <td>19:00</td>
+                            <td>4</td>
+                            <td>东四咖啡</td>
+                            <td><span class="status-badge pending">待确认</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-check"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-times"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R-2023-0615</td>
+                            <td>李四</td>
+                            <td>139****5678</td>
+                            <td>2023-06-15</td>
+                            <td>20:00</td>
+                            <td>2</td>
+                            <td>白塔寺店</td>
+                            <td><span class="status-badge confirmed">已确认</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-check-double"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-times"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R-2023-0616</td>
+                            <td>王五</td>
+                            <td>135****9012</td>
+                            <td>2023-06-16</td>
+                            <td>18:30</td>
+                            <td>6</td>
+                            <td>东四咖啡</td>
+                            <td><span class="status-badge confirmed">已确认</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-check-double"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-times"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R-2023-0617</td>
+                            <td>赵六</td>
+                            <td>136****3456</td>
+                            <td>2023-06-17</td>
+                            <td>19:30</td>
+                            <td>8</td>
+                            <td>白塔寺店</td>
+                            <td><span class="status-badge pending">待确认</span></td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-check"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-times"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R-2023-0614</td>
+                            <td>孙七</td>
+                            <td>137****7890</td>
+                            <td>2023-06-14</td>
+                            <td>20:00</td>
+                            <td>3</td>
+                            <td>东四咖啡</td>
+                            <td><span class="status-badge completed">已完成</span></td>
+                            <td>
+                                <button class="btn-icon small disabled"><i class="fas fa-check-double"></i></button>
+                                <button class="btn-icon small disabled"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-redo"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="reservations-pagination">
+                <button class="btn-icon small"><i class="fas fa-chevron-left"></i></button>
+                <span class="page-info">第1页，共3页</span>
+                <button class="btn-icon small"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Dashboard Reservations 子模块加载完成');
+    
+    // 为添加预订按钮添加事件
+    document.querySelector('.reservations-actions .btn').addEventListener('click', function() {
+        console.log('点击添加预订按钮');
+        alert('添加新预订');
+    });
+    
+    // 为日期筛选项添加事件
+    document.querySelectorAll('.date-filter-item').forEach(item => {
+        item.addEventListener('click', function() {
+            // 移除所有项的active类
+            document.querySelectorAll('.date-filter-item').forEach(i => {
+                i.classList.remove('active');
+            });
+            
+            // 为当前项添加active类
+            this.classList.add('active');
+            
+            const filterText = this.querySelector('span').textContent;
+            console.log('选择日期筛选:', filterText);
+            
+            // 如果选择自定义，则显示日期选择器（这里仅模拟）
+            if (filterText === '自定义') {
+                alert('请选择日期范围');
+            }
+        });
+    });
+    
+    // 为确认按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-check').forEach(icon => {
+        const btn = icon.parentElement;
+        btn.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const reservationId = row.cells[0].textContent;
+            const customerName = row.cells[1].textContent;
+            console.log('确认预订:', reservationId, customerName);
+            
+            if (confirm(`确认预订 ${reservationId} (${customerName})?`)) {
+                const statusCell = row.cells[7].querySelector('.status-badge');
+                statusCell.textContent = '已确认';
+                statusCell.className = 'status-badge confirmed';
+                
+                // 更新按钮
+                const btnCell = row.cells[8];
+                btnCell.innerHTML = `
+                    <button class="btn-icon small"><i class="fas fa-check-double"></i></button>
+                    <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon small"><i class="fas fa-times"></i></button>
+                `;
+                
+                // 为新按钮添加事件（这里简化处理）
+                alert(`预订 ${reservationId} 已确认`);
+            }
+        });
+    });
+    
+    // 为完成按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-check-double').forEach(icon => {
+        const btn = icon.parentElement;
+        if (!btn.classList.contains('disabled')) {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const reservationId = row.cells[0].textContent;
+                const customerName = row.cells[1].textContent;
+                console.log('完成预订:', reservationId, customerName);
+                
+                if (confirm(`标记预订 ${reservationId} (${customerName}) 为已完成?`)) {
+                    const statusCell = row.cells[7].querySelector('.status-badge');
+                    statusCell.textContent = '已完成';
+                    statusCell.className = 'status-badge completed';
+                    
+                    // 更新按钮
+                    const btnCell = row.cells[8];
+                    btnCell.innerHTML = `
+                        <button class="btn-icon small disabled"><i class="fas fa-check-double"></i></button>
+                        <button class="btn-icon small disabled"><i class="fas fa-edit"></i></button>
+                        <button class="btn-icon small"><i class="fas fa-redo"></i></button>
+                    `;
+                    
+                    // 为新按钮添加事件（这里简化处理）
+                    alert(`预订 ${reservationId} 已完成`);
+                }
+            });
+        }
+    });
+    
+    // 为编辑按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-edit').forEach(icon => {
+        const btn = icon.parentElement;
+        if (!btn.classList.contains('disabled')) {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const reservationId = row.cells[0].textContent;
+                const customerName = row.cells[1].textContent;
+                console.log('编辑预订:', reservationId, customerName);
+                alert(`编辑预订: ${reservationId} (${customerName})`);
+            });
+        }
+    });
+    
+    // 为取消按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-times').forEach(icon => {
+        const btn = icon.parentElement;
+        btn.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const reservationId = row.cells[0].textContent;
+            const customerName = row.cells[1].textContent;
+            console.log('取消预订:', reservationId, customerName);
+            
+            if (confirm(`确定要取消预订 ${reservationId} (${customerName}) 吗？`)) {
+                const statusCell = row.cells[7].querySelector('.status-badge');
+                statusCell.textContent = '已取消';
+                statusCell.className = 'status-badge cancelled';
+                
+                // 更新按钮
+                const btnCell = row.cells[8];
+                btnCell.innerHTML = `
+                    <button class="btn-icon small disabled"><i class="fas fa-check"></i></button>
+                    <button class="btn-icon small disabled"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon small"><i class="fas fa-redo"></i></button>
+                `;
+                
+                alert(`预订 ${reservationId} 已取消`);
+            }
+        });
+    });
+    
+    // 为恢复按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-redo').forEach(icon => {
+        const btn = icon.parentElement;
+        btn.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const reservationId = row.cells[0].textContent;
+            const customerName = row.cells[1].textContent;
+            console.log('恢复预订:', reservationId, customerName);
+            
+            if (confirm(`确定要恢复预订 ${reservationId} (${customerName}) 吗？`)) {
+                const statusCell = row.cells[7].querySelector('.status-badge');
+                statusCell.textContent = '待确认';
+                statusCell.className = 'status-badge pending';
+                
+                // 更新按钮
+                const btnCell = row.cells[8];
+                btnCell.innerHTML = `
+                    <button class="btn-icon small"><i class="fas fa-check"></i></button>
+                    <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon small"><i class="fas fa-times"></i></button>
+                `;
+                
+                alert(`预订 ${reservationId} 已恢复为待确认状态`);
+            }
+        });
+    });
+</script>
+
+<style>
+    .reservations-date-filter {
+        display: flex;
+        margin: 15px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .date-filter-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s;
+    }
+    
+    .date-filter-item:hover {
+        background-color: #f9fafb;
+    }
+    
+    .date-filter-item.active {
+        border-bottom-color: #4f46e5;
+        color: #4f46e5;
+        font-weight: 600;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    
+    .status-badge.pending {
+        background-color: #fef3c7;
+        color: #d97706;
+    }
+    
+    .status-badge.confirmed {
+        background-color: #dcfce7;
+        color: #16a34a;
+    }
+    
+    .status-badge.completed {
+        background-color: #dbeafe;
+        color: #2563eb;
+    }
+    
+    .status-badge.cancelled {
+        background-color: #fee2e2;
+        color: #dc2626;
+    }
+    
+    .btn-icon.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+</style> 

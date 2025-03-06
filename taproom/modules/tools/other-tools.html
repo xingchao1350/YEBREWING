@@ -1,0 +1,576 @@
+<div class="card">
+    <div class="card-header">
+        <h1 class="tools-title">店长工具</h1>
+    </div>
+    <div class="card-body">
+        <div class="tools-container">
+            <div class="tools-header">
+                <div class="tools-search">
+                    <input type="text" placeholder="搜索工具..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>成本计算器</h3>
+                        <p>计算产品成本和利润率</p>
+                        <button class="btn btn-sm">使用工具</button>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>销售分析</h3>
+                        <p>分析销售数据和趋势</p>
+                        <button class="btn btn-sm">使用工具</button>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>排班工具</h3>
+                        <p>管理员工排班和工作时间</p>
+                        <button class="btn btn-sm">使用工具</button>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>二维码生成器</h3>
+                        <p>生成菜单、支付等二维码</p>
+                        <button class="btn btn-sm">使用工具</button>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>价格标签生成器</h3>
+                        <p>生成产品价格标签</p>
+                        <button class="btn btn-sm">使用工具</button>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="tool-info">
+                        <h3>发票生成器</h3>
+                        <p>生成和管理发票</p>
+                        <button class="btn btn-sm">使用工具</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-detail" id="cost-calculator" style="display: none;">
+                <div class="tool-detail-header">
+                    <h3>成本计算器</h3>
+                    <button class="btn-icon close-tool"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="tool-detail-content">
+                    <div class="form-group">
+                        <label>产品名称</label>
+                        <input type="text" class="form-control" placeholder="输入产品名称">
+                    </div>
+                    <div class="form-group">
+                        <label>原材料成本 (¥)</label>
+                        <input type="number" class="form-control" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>人工成本 (¥)</label>
+                        <input type="number" class="form-control" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>其他成本 (¥)</label>
+                        <input type="number" class="form-control" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>销售价格 (¥)</label>
+                        <input type="number" class="form-control" placeholder="0.00">
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary">计算</button>
+                        <button class="btn">重置</button>
+                    </div>
+                    <div class="calculation-result">
+                        <div class="result-item">
+                            <span class="result-label">总成本:</span>
+                            <span class="result-value">¥0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">利润:</span>
+                            <span class="result-value">¥0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">利润率:</span>
+                            <span class="result-value">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tool-detail" id="qr-generator" style="display: none;">
+                <div class="tool-detail-header">
+                    <h3>二维码生成器</h3>
+                    <button class="btn-icon close-tool"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="tool-detail-content">
+                    <div class="form-group">
+                        <label>二维码类型</label>
+                        <select class="form-control">
+                            <option>URL链接</option>
+                            <option>文本信息</option>
+                            <option>联系方式</option>
+                            <option>WiFi信息</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>内容</label>
+                        <input type="text" class="form-control" placeholder="输入URL或文本内容">
+                    </div>
+                    <div class="form-group">
+                        <label>二维码尺寸</label>
+                        <select class="form-control">
+                            <option>小 (200x200)</option>
+                            <option selected>中 (300x300)</option>
+                            <option>大 (400x400)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>颜色</label>
+                        <div class="color-picker">
+                            <div class="color-option" style="background-color: #000000;"></div>
+                            <div class="color-option" style="background-color: #4f46e5;"></div>
+                            <div class="color-option" style="background-color: #10b981;"></div>
+                            <div class="color-option" style="background-color: #ef4444;"></div>
+                            <div class="color-option custom-color">+</div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary">生成二维码</button>
+                        <button class="btn">重置</button>
+                    </div>
+                    <div class="qr-preview">
+                        <div class="qr-placeholder">
+                            <span>预览区域</span>
+                        </div>
+                        <div class="qr-actions">
+                            <button class="btn btn-sm">下载</button>
+                            <button class="btn btn-sm">打印</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Tools Other Tools 子模块加载完成');
+    
+    // 为工具卡片添加点击事件
+    document.querySelectorAll('.tool-card .btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const toolCard = this.closest('.tool-card');
+            const toolName = toolCard.querySelector('h3').textContent;
+            console.log('使用工具:', toolName);
+            
+            // 隐藏所有工具详情
+            document.querySelectorAll('.tool-detail').forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // 显示对应的工具详情
+            if (toolName === '成本计算器') {
+                document.getElementById('cost-calculator').style.display = 'block';
+            } else if (toolName === '二维码生成器') {
+                document.getElementById('qr-generator').style.display = 'block';
+            } else {
+                alert('工具 "' + toolName + '" 正在开发中，敬请期待！');
+            }
+        });
+    });
+    
+    // 为关闭按钮添加事件
+    document.querySelectorAll('.close-tool').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const toolDetail = this.closest('.tool-detail');
+            toolDetail.style.display = 'none';
+        });
+    });
+    
+    // 成本计算器功能
+    const costCalculator = document.getElementById('cost-calculator');
+    if (costCalculator) {
+        const calculateBtn = costCalculator.querySelector('.btn-primary');
+        const resetBtn = costCalculator.querySelector('.btn:not(.btn-primary)');
+        const inputs = costCalculator.querySelectorAll('input[type="number"]');
+        const resultItems = costCalculator.querySelectorAll('.result-value');
+        
+        calculateBtn.addEventListener('click', function() {
+            const materialCost = parseFloat(inputs[0].value) || 0;
+            const laborCost = parseFloat(inputs[1].value) || 0;
+            const otherCost = parseFloat(inputs[2].value) || 0;
+            const sellingPrice = parseFloat(inputs[3].value) || 0;
+            
+            const totalCost = materialCost + laborCost + otherCost;
+            const profit = sellingPrice - totalCost;
+            const profitMargin = sellingPrice > 0 ? (profit / sellingPrice * 100) : 0;
+            
+            resultItems[0].textContent = '¥' + totalCost.toFixed(2);
+            resultItems[1].textContent = '¥' + profit.toFixed(2);
+            resultItems[2].textContent = profitMargin.toFixed(2) + '%';
+            
+            // 根据利润为正负设置颜色
+            if (profit > 0) {
+                resultItems[1].style.color = '#10b981';
+                resultItems[2].style.color = '#10b981';
+            } else if (profit < 0) {
+                resultItems[1].style.color = '#ef4444';
+                resultItems[2].style.color = '#ef4444';
+            } else {
+                resultItems[1].style.color = '';
+                resultItems[2].style.color = '';
+            }
+        });
+        
+        resetBtn.addEventListener('click', function() {
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            
+            resultItems[0].textContent = '¥0.00';
+            resultItems[1].textContent = '¥0.00';
+            resultItems[2].textContent = '0%';
+            resultItems[1].style.color = '';
+            resultItems[2].style.color = '';
+        });
+    }
+    
+    // 二维码生成器功能
+    const qrGenerator = document.getElementById('qr-generator');
+    if (qrGenerator) {
+        const generateBtn = qrGenerator.querySelector('.btn-primary');
+        const resetBtn = qrGenerator.querySelector('.btn:not(.btn-primary)');
+        const contentInput = qrGenerator.querySelector('input[type="text"]');
+        const qrPlaceholder = qrGenerator.querySelector('.qr-placeholder');
+        const downloadBtn = qrGenerator.querySelector('.qr-actions .btn:first-child');
+        const printBtn = qrGenerator.querySelector('.qr-actions .btn:last-child');
+        
+        generateBtn.addEventListener('click', function() {
+            const content = contentInput.value.trim();
+            if (!content) {
+                alert('请输入二维码内容');
+                return;
+            }
+            
+            // 模拟生成二维码
+            qrPlaceholder.innerHTML = `
+                <div style="width: 200px; height: 200px; background-color: #f3f4f6; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                    <span>二维码: ${content}</span>
+                </div>
+            `;
+            
+            // 启用下载和打印按钮
+            downloadBtn.disabled = false;
+            printBtn.disabled = false;
+        });
+        
+        resetBtn.addEventListener('click', function() {
+            contentInput.value = '';
+            qrPlaceholder.innerHTML = '<span>预览区域</span>';
+            
+            // 禁用下载和打印按钮
+            downloadBtn.disabled = true;
+            printBtn.disabled = true;
+        });
+        
+        downloadBtn.addEventListener('click', function() {
+            if (contentInput.value.trim()) {
+                alert('下载二维码');
+            }
+        });
+        
+        printBtn.addEventListener('click', function() {
+            if (contentInput.value.trim()) {
+                alert('打印二维码');
+            }
+        });
+        
+        // 初始禁用下载和打印按钮
+        downloadBtn.disabled = true;
+        printBtn.disabled = true;
+    }
+    
+    // 为搜索按钮添加事件
+    document.querySelector('.tools-search .btn-icon').addEventListener('click', function() {
+        const searchInput = document.querySelector('.tools-search .search-input');
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        
+        if (searchTerm) {
+            console.log('搜索工具:', searchTerm);
+            
+            // 搜索工具
+            document.querySelectorAll('.tool-card').forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        } else {
+            // 如果搜索词为空，显示所有工具
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.style.display = 'flex';
+            });
+            alert('请输入搜索关键词');
+        }
+    });
+    
+    // 为搜索输入框添加回车事件
+    document.querySelector('.tools-search .search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.querySelector('.tools-search .btn-icon').click();
+        }
+    });
+</script>
+
+<style>
+    .tools-container {
+        padding: 0;
+    }
+    
+    .tools-header {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+    
+    .tools-search {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .search-input {
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        width: 200px;
+    }
+    
+    .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    
+    .tool-card {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background-color: white;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .tool-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .tool-icon {
+        width: 60px;
+        height: 60px;
+        background-color: #f3f4f6;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        color: #4f46e5;
+        font-size: 24px;
+    }
+    
+    .tool-info {
+        flex: 1;
+    }
+    
+    .tool-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 18px;
+        color: #1f2937;
+    }
+    
+    .tool-info p {
+        margin: 0 0 15px 0;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    
+    .tool-detail {
+        margin-top: 30px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background-color: white;
+        overflow: hidden;
+    }
+    
+    .tool-detail-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background-color: #f9fafb;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .tool-detail-header h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #1f2937;
+    }
+    
+    .tool-detail-content {
+        padding: 20px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+    }
+    
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .btn-primary {
+        background-color: #4f46e5;
+        color: white;
+    }
+    
+    .calculation-result {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #f9fafb;
+        border-radius: 4px;
+    }
+    
+    .result-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    .result-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .result-label {
+        font-weight: 600;
+        color: #4b5563;
+    }
+    
+    .result-value {
+        font-weight: 600;
+    }
+    
+    .color-picker {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .color-option {
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: 1px solid #e5e7eb;
+    }
+    
+    .custom-color {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        font-size: 20px;
+        color: #6b7280;
+    }
+    
+    .qr-preview {
+        margin-top: 20px;
+        text-align: center;
+    }
+    
+    .qr-placeholder {
+        width: 200px;
+        height: 200px;
+        background-color: #f3f4f6;
+        border: 1px dashed #e5e7eb;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        color: #9ca3af;
+    }
+    
+    .qr-actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    @media (max-width: 768px) {
+        .tools-header {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .tools-search {
+            width: 100%;
+        }
+        
+        .search-input {
+            flex: 1;
+        }
+    }
+</style> 

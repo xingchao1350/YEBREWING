@@ -1,0 +1,213 @@
+<div class="card">
+    <div class="card-header">
+        <h2>其他酒水库存</h2>
+    </div>
+    <div class="card-body">
+        <div class="inventory-container">
+            <div class="inventory-header">
+                <div class="inventory-actions">
+                    <button class="btn"><i class="fas fa-plus"></i> 添加库存</button>
+                    <select class="inventory-filter">
+                        <option>全部门店</option>
+                        <option>东四咖啡</option>
+                        <option>白塔寺店</option>
+                    </select>
+                    <select class="category-filter">
+                        <option>全部类别</option>
+                        <option>威士忌</option>
+                        <option>鸡尾酒</option>
+                        <option>葡萄酒</option>
+                        <option>白酒</option>
+                        <option>其他</option>
+                    </select>
+                </div>
+                <div class="inventory-search">
+                    <input type="text" placeholder="搜索酒水..." class="search-input">
+                    <button class="btn btn-icon"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="inventory-table">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>产品名称</th>
+                            <th>品牌</th>
+                            <th>类别</th>
+                            <th>规格</th>
+                            <th>当前库存</th>
+                            <th>最低库存</th>
+                            <th>状态</th>
+                            <th>最后更新</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>单一麦芽12年</td>
+                            <td>格兰菲迪</td>
+                            <td>威士忌</td>
+                            <td>700ml</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-15</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>黑方</td>
+                            <td>尊尼获加</td>
+                            <td>威士忌</td>
+                            <td>700ml</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td><span class="status-badge warning">警告</span></td>
+                            <td>2023-06-14</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>金酒</td>
+                            <td>孟买蓝宝石</td>
+                            <td>鸡尾酒</td>
+                            <td>750ml</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td><span class="status-badge danger">紧急</span></td>
+                            <td>2023-06-13</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>赤霞珠</td>
+                            <td>长城</td>
+                            <td>葡萄酒</td>
+                            <td>750ml</td>
+                            <td>6</td>
+                            <td>3</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-12</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>青花瓷</td>
+                            <td>汾酒</td>
+                            <td>白酒</td>
+                            <td>500ml</td>
+                            <td>4</td>
+                            <td>2</td>
+                            <td><span class="status-badge normal">正常</span></td>
+                            <td>2023-06-11</td>
+                            <td>
+                                <button class="btn-icon small"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon small"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="inventory-pagination">
+                <button class="btn-icon small"><i class="fas fa-chevron-left"></i></button>
+                <span class="page-info">第1页，共2页</span>
+                <button class="btn-icon small"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 当子模块加载完成后执行
+    console.log('Inventory Other Alcohol 子模块加载完成');
+    
+    // 为添加库存按钮添加事件
+    document.querySelector('.inventory-actions .btn').addEventListener('click', function() {
+        console.log('点击添加库存按钮');
+        alert('添加其他酒水库存');
+    });
+    
+    // 为编辑按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-edit').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const name = row.cells[0].textContent;
+            const brand = row.cells[1].textContent;
+            const category = row.cells[2].textContent;
+            console.log('编辑库存:', name, brand, category);
+            alert('编辑库存: ' + name + ' (' + brand + ', ' + category + ')');
+        });
+    });
+    
+    // 为删除按钮添加事件
+    document.querySelectorAll('.btn-icon .fa-trash').forEach(btn => {
+        btn.parentElement.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const name = row.cells[0].textContent;
+            const brand = row.cells[1].textContent;
+            console.log('删除库存:', name, brand);
+            if (confirm('确定要删除 ' + name + ' (' + brand + ') 吗？')) {
+                console.log('确认删除:', name, brand);
+                row.remove();
+            }
+        });
+    });
+    
+    // 为类别筛选器添加事件
+    document.querySelector('.category-filter').addEventListener('change', function() {
+        const category = this.value;
+        console.log('筛选类别:', category);
+        
+        if (category === '全部类别') {
+            // 显示所有行
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                row.style.display = '';
+            });
+        } else {
+            // 只显示匹配类别的行
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                const rowCategory = row.cells[2].textContent;
+                if (rowCategory === category) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    });
+    
+    // 为搜索按钮添加事件
+    document.querySelector('.inventory-search .btn-icon').addEventListener('click', function() {
+        const searchInput = document.querySelector('.inventory-search .search-input');
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        if (searchTerm) {
+            console.log('搜索酒水:', searchTerm);
+            
+            // 简单的客户端搜索实现
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                const brand = row.cells[1].textContent.toLowerCase();
+                const category = row.cells[2].textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || brand.includes(searchTerm) || category.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        } else {
+            // 如果搜索词为空，显示所有行
+            document.querySelectorAll('.data-table tbody tr').forEach(row => {
+                row.style.display = '';
+            });
+            alert('请输入搜索关键词');
+        }
+    });
+</script> 

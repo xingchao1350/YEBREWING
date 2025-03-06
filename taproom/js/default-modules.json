@@ -1,0 +1,241 @@
+[
+  {
+    "id": "module-dashboard",
+    "name": "门店总览",
+    "icon": "fas fa-tachometer-alt",
+    "order": 1,
+    "enabled": true,
+    "path": "modules/dashboard.html",
+    "template": "default",
+    "subModules": [
+      {
+        "id": "submodule-overview",
+        "name": "总览数据",
+        "order": 1,
+        "enabled": true,
+        "path": "modules/dashboard/overview.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-schedule",
+        "name": "排班安排",
+        "order": 2,
+        "enabled": true,
+        "path": "modules/dashboard/schedule.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-calendar",
+        "name": "活动日历",
+        "order": 3,
+        "enabled": true,
+        "path": "modules/dashboard/calendar.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-reservations",
+        "name": "预订管理",
+        "order": 4,
+        "enabled": true,
+        "path": "modules/dashboard/reservations.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-daily-report",
+        "name": "日报管理",
+        "order": 5,
+        "enabled": true,
+        "path": "modules/dashboard/daily-report.html",
+        "template": "default"
+      }
+    ]
+  },
+  {
+    "id": "module-inventory",
+    "name": "库存",
+    "icon": "fas fa-boxes",
+    "order": 2,
+    "enabled": true,
+    "path": "modules/inventory.html",
+    "template": "default",
+    "subModules": [
+      {
+        "id": "submodule-inventory-overview",
+        "name": "库存概览",
+        "order": 1,
+        "enabled": true,
+        "path": "modules/inventory/overview.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-inventory-management",
+        "name": "库存管理",
+        "order": 2,
+        "enabled": true,
+        "path": "modules/inventory/management.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-inventory-reports",
+        "name": "库存报表",
+        "order": 3,
+        "enabled": true,
+        "path": "modules/inventory/reports.html",
+        "template": "default"
+      }
+    ]
+  },
+  {
+    "id": "module-finance",
+    "name": "财务",
+    "icon": "fas fa-money-bill-alt",
+    "order": 3,
+    "enabled": true,
+    "path": "modules/finance.html",
+    "template": "default",
+    "subModules": [
+      {
+        "id": "submodule-finance-overview",
+        "name": "发起报销",
+        "order": 1,
+        "enabled": true,
+        "path": "modules/finance/overview.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-finance-income",
+        "name": "收入管理",
+        "order": 2,
+        "enabled": true,
+        "path": "modules/finance/income.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-finance-expenses",
+        "name": "支出管理",
+        "order": 3,
+        "enabled": true,
+        "path": "modules/finance/expenses.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-finance-dongsi",
+        "name": "东四咖啡合作",
+        "order": 4,
+        "enabled": true,
+        "path": "modules/finance/dongsi.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-finance-baitasi",
+        "name": "白塔寺合作",
+        "order": 5,
+        "enabled": true,
+        "path": "modules/finance/baitasi.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-finance-reports",
+        "name": "财务报表",
+        "order": 6,
+        "enabled": true,
+        "path": "modules/finance/reports.html",
+        "template": "default"
+      }
+    ]
+  },
+  {
+    "id": "module-tools",
+    "name": "工具",
+    "icon": "fas fa-tools",
+    "order": 4,
+    "enabled": true,
+    "path": "modules/tools.html",
+    "template": "default",
+    "subModules": [
+      {
+        "id": "submodule-tools-drink-menu",
+        "name": "酒单设计",
+        "order": 1,
+        "enabled": true,
+        "path": "modules/tools/drink-menu.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-tools-food-menu",
+        "name": "餐单设计",
+        "order": 2,
+        "enabled": true,
+        "path": "modules/tools/food-menu.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-tools-card-design",
+        "name": "卡片设计",
+        "order": 3,
+        "enabled": true,
+        "path": "modules/tools/card-design.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-tools-poster-design",
+        "name": "海报设计",
+        "order": 4,
+        "enabled": true,
+        "path": "modules/tools/poster-design.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-tools-other",
+        "name": "店长工具",
+        "order": 5,
+        "enabled": true,
+        "path": "modules/tools/other-tools.html",
+        "template": "default"
+      }
+    ]
+  },
+  {
+    "id": "module-resources",
+    "name": "资源",
+    "icon": "fas fa-folder",
+    "order": 5,
+    "enabled": true,
+    "path": "modules/resources.html",
+    "template": "default",
+    "subModules": [
+      {
+        "id": "submodule-resources-training",
+        "name": "员工资源",
+        "order": 1,
+        "enabled": true,
+        "path": "modules/resources/training.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-resources-templates",
+        "name": "品牌资源",
+        "order": 2,
+        "enabled": true,
+        "path": "modules/resources/templates.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-resources-media",
+        "name": "行业资源",
+        "order": 3,
+        "enabled": true,
+        "path": "modules/resources/media.html",
+        "template": "default"
+      },
+      {
+        "id": "submodule-resources-documents",
+        "name": "门店档案",
+        "order": 4,
+        "enabled": true,
+        "path": "modules/resources/documents.html",
+        "template": "default"
+      }
+    ]
+  }
+] 

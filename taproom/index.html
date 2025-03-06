@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>野鹅微醺门店管理系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/module-loader.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 调试信息样式 */
+        #debug-panel {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            max-height: 200px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 10px;
+            overflow-y: auto;
+            z-index: 9999;
+            display: none;
+        }
+        #debug-panel.visible {
+            display: block;
+        }
+        .debug-entry {
+            margin-bottom: 5px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+        }
+        .debug-error {
+            color: #ff6b6b;
+        }
+        .debug-success {
+            color: #51cf66;
+        }
+        .debug-toggle {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<script src="js/logout.js"></script>
+<body>
+    <div class="container">
+        <!-- 添加菜单按钮 -->
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+        
+        <!-- 侧边栏 -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="assets/logo.png" alt="YE-TAPROOM Logo" class="logo-img">
+                <span>YE-TAPROOM</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#dashboard" data-module="dashboard"><i class="fas fa-tachometer-alt"></i> <span>门店总览</span></a>
+                </li>
+                <li>
+                    <a href="#inventory" data-module="inventory"><i class="fas fa-boxes"></i> <span>库存</span></a>
+                </li>
+                <li>
+                    <a href="#finance" data-module="finance"><i class="fas fa-money-bill-alt"></i> <span>财务</span></a>
+                </li>
+                <li>
+                    <a href="#tools" data-module="tools"><i class="fas fa-tools"></i> <span>工具</span></a>
+                </li>
+                <li>
+                    <a href="#resources" data-module="resources"><i class="fas fa-folder"></i> <span>资源</span></a>
+                </li>
+                <li>
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        <span>设置</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- 用户信息移到侧边栏底部 -->
+            <div class="user-info">
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                
+                <div class="user" id="user-profile-link" style="cursor: pointer;">
+                    <div class="avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div>
+                        <div class="name">加载中</div>
+                        <div class="role">请稍候</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <a href="#logout"><i class="fas fa-sign-out-alt"></i> <span>退出</span></a>
+            </div>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <!-- 内容将通过JavaScript动态加载 -->
+            <div id="content-container"></div>
+        </main>
+                        </div>
+                        
+    <!-- 加载指示器 -->
+    <div class="loader" id="page-loader">
+        <div class="spinner"></div>
+        <p>加载中...</p>
+                                    </div>
+                                    
+    <!-- 调试面板 -->
+    <button class="debug-toggle" id="debug-toggle">调试</button>
+    <div id="debug-panel"></div>
+    
+    <script>
+        // 调试工具
+        window.debugLog = function(message, type = 'info') {
+            const panel = document.getElementById('debug-panel');
+            const entry = document.createElement('div');
+            entry.className = `debug-entry${type ? ' debug-' + type : ''}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            panel.appendChild(entry);
+            panel.scrollTop = panel.scrollHeight;
+            console.log(`[DEBUG] ${message}`);
+        };
+        
+        // 显示/隐藏调试面板
+        document.getElementById('debug-toggle').addEventListener('click', function() {
+            const panel = document.getElementById('debug-panel');
+            panel.classList.toggle('visible');
+        });
+        
+        // 全局错误处理
+        window.addEventListener('error', function(event) {
+            window.debugLog(`错误: ${event.message} (${event.filename}:${event.lineno})`, 'error');
+        });
+        
+        // 检查模块文件是否存在
+        async function checkModuleFiles() {
+            const modules = [
+                './modules/dashboard.html',
+                './modules/inventory.html',
+                './modules/finance.html',
+                './modules/tools.html',
+                './modules/resources.html'
+            ];
+            
+            window.debugLog('开始检查模块文件...');
+            
+            for (const path of modules) {
+                try {
+                    const response = await fetch(path, { method: 'HEAD' });
+                    if (response.ok) {
+                        window.debugLog(`模块文件存在: ${path}`, 'success');
+                    } else {
+                        window.debugLog(`模块文件不存在或无法访问: ${path} (${response.status})`, 'error');
+                    }
+                } catch (error) {
+                    window.debugLog(`检查模块文件出错: ${path} - ${error.message}`, 'error');
+                }
+            }
+            
+            window.debugLog('模块文件检查完成');
+        }
+        
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            window.debugLog('页面加载完成');
+            
+            // 检查模块文件
+            checkModuleFiles();
+            
+            // 手动加载默认模块（以防自动加载失败）
+            setTimeout(function() {
+                const contentContainer = document.getElementById('content-container');
+                if (!contentContainer.innerHTML.trim()) {
+                    window.debugLog('内容容器为空，尝试手动加载默认模块', 'info');
+                    // 如果moduleLoader中的loadModule函数存在，则调用它
+                    if (typeof moduleLoader !== 'undefined' && typeof moduleLoader.loadModule === 'function') {
+                        moduleLoader.loadModule('dashboard');
+                    } else if (typeof loadModule === 'function') {
+                        loadModule('dashboard');
+                    } else {
+                        window.debugLog('loadModule函数不存在，无法加载模块', 'error');
+                    }
+                }
+                
+                // 确保初始化所有子模块内的标签页
+                if (typeof moduleLoader !== 'undefined' && typeof moduleLoader.initSubModuleTabs === 'function') {
+                    setTimeout(() => {
+                        moduleLoader.initSubModuleTabs();
+                        window.debugLog('初始化所有子模块内的标签页', 'success');
+                    }, 1000);
+                }
+            }, 2000);
+        });
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js"></script>
+    <script src="js/module-loader.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html> 

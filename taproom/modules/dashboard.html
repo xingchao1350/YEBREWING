@@ -1,0 +1,65 @@
+<!-- 门店总览模块 -->
+<div id="dashboard" class="dashboard-section">
+    <div class="dashboard-tabs-container">
+        <div class="settings-tabs">
+            <ul class="tabs">
+                <li class="tab-item"><a href="#overview" class="active">总览数据</a></li>
+                <li class="tab-item"><a href="#schedule">排班安排</a></li>
+                <li class="tab-item"><a href="#calendar">活动日历</a></li>
+                <li class="tab-item"><a href="#reservations">预订管理</a></li>
+                <li class="tab-item"><a href="#daily-report">日报管理</a></li>
+            </ul>
+        </div>
+        
+        <div class="tab-content">
+            <!-- 总览数据标签页 -->
+            <div id="overview" class="tab-pane active" data-default-submodule="dashboard/overview.html">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 排班安排标签页 -->
+            <div id="schedule" class="tab-pane" data-default-submodule="dashboard/schedule.html">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 活动日历标签页 -->
+            <div id="calendar" class="tab-pane" data-default-submodule="dashboard/calendar.html">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 预订管理标签页 -->
+            <div id="reservations" class="tab-pane" data-default-submodule="dashboard/reservations.html">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+            
+            <!-- 日报管理标签页 -->
+            <div id="daily-report" class="tab-pane" data-default-submodule="dashboard/daily-report.html">
+                <!-- 内容将通过模块加载器动态加载 -->
+                <div class="loading-placeholder">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    console.log('Dashboard 模块加载完成');
+</script> 
