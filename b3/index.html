@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>野鹅微醺 - 酒单生成器</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="mobile-tabs">
+            <button class="tab-btn active" data-tab="input">编辑</button>
+            <button class="tab-btn" data-tab="preview">预览</button>
+        </div>
+        
+        <div class="input-section active">
+            <div class="control-panel">
+                <!-- 1. 文件操作 -->
+                <div class="panel-section">
+                    <h3>文件操作</h3>
+                    <div class="file-operations">
+                        <button onclick="saveMenuData()" class="operation-btn">保存菜单(.bm)</button>
+                        <button onclick="loadMenuData()" class="operation-btn">加载菜单</button>
+                        <button onclick="loadLastMenu()" class="operation-btn">加载上次菜单</button>
+                        <input type="file" id="fileInput" accept=".bm" style="display: none;" onchange="handleFileSelect(this)">
+                    </div>
+                </div>
+
+                <!-- 2. 背景设置 -->
+                <div class="panel-section">
+                    <h3>背景设置</h3>
+                    <div class="control-group">
+                        <div class="input-group">
+                            <label>选择背景：</label>
+                            <input type="file" id="bgImageInput" accept="image/*" onchange="handleBgImageSelect(this)">
+                        </div>
+                        <div class="button-group">
+                            <button onclick="resetBgImage()" class="small-btn">重置背景</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 样式设置 -->
+                <div class="panel-section">
+                    <h3>样式设置</h3>
+                    <div class="control-group">
+                        <div class="input-group">
+                            <label>中文字体：</label>
+                            <select id="fontSelect" onchange="updatePreviewRealtime()">
+                                <option value="'Microsoft YaHei'">微软雅黑</option>
+                                <option value="'SimHei'">黑体</option>
+                                <option value="'SimSun'">宋体</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>英文字体：</label>
+                            <select id="enFontSelect" onchange="updatePreviewRealtime()">
+                                <option value="Arial">Arial</option>
+                                <option value="'Times New Roman'">Times New Roman</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Helvetica">Helvetica</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                        </div>
+                        <div class="size-controls">
+                            <div class="input-group">
+                                <label>中文酒名大小：</label>
+                                <input type="number" 
+                                       id="contentSize" 
+                                       value="20" 
+                                       min="12" 
+                                       max="48" 
+                                       onchange="updateFontSizes()" 
+                                       oninput="updateFontSizes()">
+                            </div>
+                            <div class="input-group">
+                                <label>英文酒名大小：</label>
+                                <input type="number" 
+                                       id="enContentSize" 
+                                       value="16" 
+                                       min="10" 
+                                       max="36" 
+                                       onchange="updateFontSizes()" 
+                                       oninput="updateFontSizes()">
+                            </div>
+                            <div class="input-group">
+                                <label>参数列大小：</label>
+                                <input type="number" 
+                                       id="paramSize" 
+                                       value="18" 
+                                       min="10" 
+                                       max="36" 
+                                       onchange="updateFontSizes()" 
+                                       oninput="updateFontSizes()">
+                            </div>
+                        </div>
+                        <div class="color-controls">
+                            <div class="input-group">
+                                <label>主要文字：</label>
+                                <input type="color" id="mainColor" value="#ffffff" onchange="updateColors()">
+                            </div>
+                            <div class="input-group">
+                                <label>次要文字：</label>
+                                <input type="color" id="subColor" value="#d3cbcb" onchange="updateColors()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. 内容编辑 -->
+                <div class="panel-section">
+                    <h3>内容编辑</h3>
+                    <div class="input-form">
+                        <div class="input-group">
+                            <label>编号：</label>
+                            <select id="number" onchange="onNumberSelect()">
+                                <option value="">选择编号</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>中文酒名：</label>
+                            <input type="text" id="name" placeholder="中文酒名" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label>英文酒名：</label>
+                            <input type="text" id="nameEn" placeholder="英文酒名" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label>价格(RMB)：</label>
+                            <input type="text" id="price" placeholder="例如: 45 或 45/50" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label>酒精度(ABV)：</label>
+                            <input type="number" id="abv" placeholder="ABV" step="0.1" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label>容量(ml)：</label>
+                            <input type="text" id="volume" placeholder="例如: 330 或 330/473" oninput="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="isDailyBeer" onchange="updatePreviewRealtime()" />
+                                是否酒花日用酒
+                            </label>
+                        </div>
+                        <div class="button-group">
+                            <button onclick="addRow()" id="addButton">添加</button>
+                            <button onclick="updateSelectedItem()" id="updateButton" disabled>更新</button>
+                            <button onclick="cancelEdit()" id="cancelButton" disabled>取消</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. 生成图片 -->
+                <div class="panel-section">
+                    <button onclick="generateImage()" class="generate-btn">生成图片</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="preview-section">
+            <div id="menu-preview" class="menu-preview">
+                <img src="bg.png" id="bgImage" class="background-image" alt="background">
+                <div class="menu-content">
+                    <div class="header-labels">
+                        <div class="spacer"></div>
+                        <div class="right-labels">
+                            <span class="label-abv">ABV</span>
+                            <span class="label-ml">ml</span>
+                            <span class="label-rmb">RMB</span>
+                        </div>
+                    </div>
+                    <div class="header-divider"></div>
+                    <div id="menu-items" class="menu-items">
+                        <!-- Items will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loading-indicator" class="loading-indicator">
+        <div class="spinner"></div>
+        <p>正在生成图片...</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
