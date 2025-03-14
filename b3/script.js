@@ -578,7 +578,6 @@ function createMenuItem(item) {
     }
     
     div.innerHTML = `
-        <div class="number">${formatNumber(parseInt(item.number))}</div>
         <div class="name">
             ${item.name}
             <div class="english">${item.nameEn}</div>

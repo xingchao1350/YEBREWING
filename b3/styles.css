@@ -301,8 +301,8 @@ input, select {
 /* 菜单项样式 */
 .menu-item {
     display: grid;
-    grid-template-columns: 60px 1fr 100px 100px 100px;
-    padding: 6px 5px 6px 10px;
+    grid-template-columns: 1fr 100px 100px 100px;
+    padding: 6px 10px 6px 20px;
     border-bottom: 1px solid white;
     align-items: center;
     cursor: pointer;
@@ -318,27 +318,34 @@ input, select {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* 酒花日用酒整行样式 */
+.menu-item.daily-beer {
+    background-color: rgba(144, 238, 144, 0.3); /* 浅绿色背景，半透明 */
+}
+
 /* 菜单项编号样式 */
 .menu-item .number {
-    font-size: calc(var(--content-size, 20px) * 1.3);
-    font-weight: bold;
-    color: var(--main-color);
-    font-family: var(--en-font);
+    display: none; /* 完全隐藏编号列 */
 }
 
 /* 酒花日用酒编号样式 */
 .menu-item.daily-beer .number {
-    background-color: rgba(144, 238, 144, 0.3); /* 浅绿色背景，半透明 */
-    border-radius: 4px;
-    padding: 2px 5px;
+    display: none; /* 完全隐藏编号列 */
 }
 
 /* 菜单项名称样式 */
 .menu-item .name {
-    padding-left: 20px;
+    padding-left: 0; /* 移除左侧内边距 */
     font-size: var(--content-size, 20px);
     color: var(--main-color);
     font-family: var(--cn-font);
+}
+
+/* 酒花日用酒名称样式 */
+.menu-item.daily-beer .name {
+    background-color: transparent; /* 移除名称区域的背景色 */
+    border-radius: 0;
+    padding: 0;
 }
 
 .menu-item .name .english {
