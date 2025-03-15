@@ -29,6 +29,7 @@ function updatePreviewRealtime() {
     const abv = document.getElementById('abv').value;
     const volume = document.getElementById('volume').value;
     const isDailyBeer = document.getElementById('isDailyBeer').checked;
+    const isHidden = document.getElementById('isHidden').checked;
 
     if (selectedItemIndex === -1) {  // 只在新增模式下显示预览
         if (number && name && nameEn && price && abv && volume) {
@@ -39,7 +40,8 @@ function updatePreviewRealtime() {
                 price,
                 abv,
                 volume,
-                isDailyBeer
+                isDailyBeer,
+                isHidden
             };
         } else {
             previewItem = null;
@@ -57,6 +59,7 @@ function addRow() {
     const abv = document.getElementById('abv').value;
     const volume = document.getElementById('volume').value;
     const isDailyBeer = document.getElementById('isDailyBeer').checked;
+    const isHidden = document.getElementById('isHidden').checked;
 
     if (!number || !name || !nameEn || !price || !abv || !volume) {
         alert('请填写所有字段');
@@ -74,7 +77,8 @@ function addRow() {
             price, 
             abv, 
             volume,
-            isDailyBeer
+            isDailyBeer,
+            isHidden
         };
     } else {
         // 如果是新编号，添加新项
@@ -89,7 +93,8 @@ function addRow() {
             price, 
             abv, 
             volume,
-            isDailyBeer
+            isDailyBeer,
+            isHidden
         });
     }
 
@@ -105,6 +110,7 @@ function clearInputs() {
     document.getElementById('abv').value = '';
     document.getElementById('volume').value = '';
     document.getElementById('isDailyBeer').checked = false;
+    document.getElementById('isHidden').checked = false;
     previewItem = null;
     selectedItemIndex = -1;
     updatePreview();
@@ -123,6 +129,7 @@ function selectItem(index) {
     document.getElementById('abv').value = item.abv;
     document.getElementById('volume').value = item.volume;
     document.getElementById('isDailyBeer').checked = item.isDailyBeer || false;
+    document.getElementById('isHidden').checked = item.isHidden || false;
     
     updatePreview();
     updateButtons();
@@ -138,6 +145,7 @@ function updateSelectedItem() {
     const abv = document.getElementById('abv').value;
     const volume = document.getElementById('volume').value;
     const isDailyBeer = document.getElementById('isDailyBeer').checked;
+    const isHidden = document.getElementById('isHidden').checked;
 
     if (!number || !name || !nameEn || !price || !abv || !volume) {
         alert('请填写所有字段');
@@ -161,7 +169,8 @@ function updateSelectedItem() {
         price,
         abv,
         volume,
-        isDailyBeer
+        isDailyBeer,
+        isHidden
     };
 
     updatePreview();
@@ -575,6 +584,11 @@ function createMenuItem(item) {
     // 如果是酒花日用酒，添加daily-beer类
     if (item.isDailyBeer) {
         div.classList.add('daily-beer');
+    }
+    
+    // 如果是隐藏行，添加hidden类
+    if (item.isHidden) {
+        div.classList.add('hidden');
     }
     
     // 添加拖拽相关属性

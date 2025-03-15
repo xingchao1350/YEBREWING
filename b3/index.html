@@ -162,11 +162,13 @@
                             <label>容量(ml)：</label>
                             <input type="text" id="volume" placeholder="例如: 330 或 330/473" oninput="updatePreviewRealtime()" />
                         </div>
-                        <div class="input-group checkbox-group">
-                            <label>
-                                <input type="checkbox" id="isDailyBeer" onchange="updatePreviewRealtime()" />
-                                是否酒花日用酒
-                            </label>
+                        <div class="input-group">
+                            <label for="isDailyBeer">是否酒花日用酒</label>
+                            <input type="checkbox" id="isDailyBeer" onchange="updatePreviewRealtime()" />
+                        </div>
+                        <div class="input-group">
+                            <label for="isHidden">隐藏此行</label>
+                            <input type="checkbox" id="isHidden" onchange="updatePreviewRealtime()" />
                         </div>
                         <div class="button-group">
                             <button onclick="addRow()" id="addButton">添加</button>

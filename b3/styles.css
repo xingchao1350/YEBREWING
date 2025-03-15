@@ -654,3 +654,14 @@ input, select {
     width: auto;
     margin-right: 8px;
 }
+
+/* 隐藏行样式 */
+.menu-item.hidden {
+    display: none;
+}
+
+/* 拖拽时的样式 */
+.menu-item.dragging {
+    opacity: 0.5;
+    border: 2px dashed var(--main-color);
+}
