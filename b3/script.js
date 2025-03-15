@@ -577,6 +577,10 @@ function createMenuItem(item) {
         div.classList.add('daily-beer');
     }
     
+    // 添加拖拽相关属性
+    div.draggable = true;
+    div.dataset.number = item.number;
+    
     div.innerHTML = `
         <div class="name">
             ${item.name}
@@ -586,6 +590,13 @@ function createMenuItem(item) {
         <div class="volume">${item.volume}</div>
         <div class="price">${item.price}</div>
     `;
+    
+    // 添加拖拽事件
+    div.addEventListener('dragstart', handleDragStart);
+    div.addEventListener('dragover', handleDragOver);
+    div.addEventListener('drop', handleDrop);
+    div.addEventListener('dragend', handleDragEnd);
+    
     return div;
 }
 
@@ -700,6 +711,7 @@ function loadLastMenu() {
                     bgImage.src = data.background;
                 }
             }
+            
         }
         
         clearInputs();
@@ -709,4 +721,80 @@ function loadLastMenu() {
         alert('加载上次菜单失败：' + error.message);
         console.error('加载失败：', error);
     }
+}
+// 拖拽相关变量
+let draggedItem = null;
+
+// 拖拽开始事件处理
+function handleDragStart(e) {
+    draggedItem = this;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+    this.classList.add('dragging');
+}
+
+// 拖拽经过事件处理
+function handleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+}
+
+// 放置事件处理
+function handleDrop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    
+    if (draggedItem !== this) {
+        // 获取拖拽项和目标项的编号
+        const draggedNumber = draggedItem.dataset.number;
+        const targetNumber = this.dataset.number;
+        
+        // 找到对应的菜单项索引
+        const draggedIndex = menuItems.findIndex(item => item.number === draggedNumber);
+        const targetIndex = menuItems.findIndex(item => item.number === targetNumber);
+        
+        if (draggedIndex !== -1 && targetIndex !== -1) {
+            // 重新排序菜单项
+            reorderMenuItems(draggedIndex, targetIndex);
+        }
+    }
+    
+    return false;
+}
+
+// 拖拽结束事件处理
+function handleDragEnd() {
+    this.classList.remove('dragging');
+    return false;
+}
+
+// 重新排序菜单项并更新编号
+function reorderMenuItems(fromIndex, toIndex) {
+    // 获取要移动的项
+    const itemToMove = menuItems[fromIndex];
+    
+    // 从数组中移除该项
+    menuItems.splice(fromIndex, 1);
+    
+    // 在新位置插入该项
+    menuItems.splice(toIndex, 0, itemToMove);
+    
+    // 更新所有项的编号
+    updateItemNumbers();
+    
+    // 更新预览
+    updatePreview();
+    
+    // 清除选中状态
+    selectedItemIndex = -1;
+    updateButtons();
+}
+
+// 更新所有项的编号
+function updateItemNumbers() {
+    // 按照当前顺序重新分配编号
+    menuItems.forEach((item, index) => {
+        item.number = formatNumber(index + 1);
+    });
 }
