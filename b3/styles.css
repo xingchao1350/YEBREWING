@@ -265,7 +265,7 @@ input, select {
     display: flex;
     justify-content: flex-end;
     padding: 0 15px 0 0;
-    margin-bottom: 5px;  /* 从10px减少到5px */
+    margin-bottom: 2px;  /* 从10px减少到5px */
     font-size: calc(var(--content-size) * 0.9);
     color: var(--main-color);
 }
